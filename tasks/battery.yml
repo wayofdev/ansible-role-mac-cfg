@@ -48,40 +48,40 @@
   when: "acwake and (pmset_current.stdout | string ) != ( acwake | ternary(1,0) | string ) and 'acwake' in pmset_cap.stdout"
 
 - name: "Get current display sleep delay"
-  become: true
   shell: "systemsetup -getdisplaysleep | awk -F ': ' '{print $2}'"
   when: sleep_display
   register: getcdisplaysleep_current
   changed_when: false
+  become: true
 
 - name: "Set display sleep time to {{ sleep_display }}"
-  become: yes
   command: "systemsetup -setdisplaysleep {{ sleep_display }}"
   when: sleep_display and ( getcdisplaysleep_current.stdout | string ) != ( sleep_display | string )
+  become: true
 
 - name: "Get current computer sleep delay"
-  become: true
   shell: "systemsetup -getcomputersleep | awk -F ': ' '{print $2}'"
   when: sleep_computer
   register: getcomputersleep_current
   changed_when: false
+  become: true
 
 - name: "Set computer sleep time to {{ sleep_computer }}"
-  become: yes
   command: "systemsetup -setcomputersleep {{ sleep_computer }}"
   when: sleep_computer and ( getcomputersleep_current.stdout | string ) != ( sleep_computer | string )
+  become: true
 
 - name: "Get current harddisk sleep delay"
-  become: true
   shell: "systemsetup -getharddisksleep | awk -F ': ' '{print $2}'"
   when: sleep_harddisk
   register: getharddisksleep_current
   changed_when: false
+  become: true
 
 - name: "Set harddisk sleep time to {{ sleep_harddisk }}"
-  become: yes
   command: "systemsetup -setharddisksleep {{ sleep_harddisk }}"
   when: sleep_harddisk and ( getharddisksleep_current.stdout | string ) != ( sleep_harddisk | string )
+  become: true
 
 - name: Get current pmset 'powernap' value
   shell: "pmset -g | grep \"^\\s*powernap.*\" | awk -F \" \" '{ print $2 }'"
@@ -89,9 +89,9 @@
   changed_when: false
 
 - name: "Set powernap mode to {{ powernap }}"
-  become: true
   command: "pmset -a powernap {{ powernap | ternary(1,0) }}"
   when: "powernap and ( pmset_current.stdout | string ) != ( powernap | ternary(1,0) | string ) and 'powernap' in pmset_cap.stdout"
+  become: true
 
 - name: Get current pmset 'ttyskeepawake' value
   shell: "pmset -g | grep \"^\\s*ttyskeepawake.*\" | awk -F \" \" '{ print $2 }'"
@@ -109,6 +109,6 @@
   changed_when: false
 
 - name: "Set destroyfvkeyonstandby mode to {{ destroyfvkeyonstandby }}"
-  become: true
   command: "pmset -a destroyfvkeyonstandby {{ destroyfvkeyonstandby | ternary(1,0) }}"
   when: "destroyfvkeyonstandby and ( pmset_current.stdout | string ) != ( destroyfvkeyonstandby | ternary(1,0) | string ) and 'destroyfvkeyonstandby' in pmset_cap.stdout"
+  become: true
