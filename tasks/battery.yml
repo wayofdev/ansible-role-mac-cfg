@@ -28,7 +28,8 @@
 
 - name: "Set hibernation mode to {{ hibernatemode }}"
   ansible.builtin.command: "pmset -a hibernatemode {{ hibernatemode }}"
-  when: "hibernatemode in [0, 3, 25] and (pmset_current.stdout | string ) != ( hibernatemode | string ) and 'hibernatemode' in pmset_cap.stdout"
+  when: "hibernatemode in [0, 3, 25] and (pmset_current.stdout | string ) != ( hibernatemode | string )
+    and 'hibernatemode' in pmset_cap.stdout"
   become: true
 
 - name: "Get current display sleep delay"
@@ -82,7 +83,8 @@
 
 - name: "Set powernap mode to {{ powernap }}"
   ansible.builtin.command: "pmset -a powernap {{ powernap | ternary(1,0) }}"
-  when: "powernap and ( pmset_current.stdout | string ) != ( powernap | ternary(1,0) | string ) and 'powernap' in pmset_cap.stdout"
+  when: "powernap and ( pmset_current.stdout | string ) != ( powernap | ternary(1,0) | string )
+    and 'powernap' in pmset_cap.stdout"
   become: true
 
 - name: Get current pmset 'lidwake' value
@@ -94,7 +96,8 @@
 
 - name: "Set lidwake mode to {{ lidwake }}"
   ansible.builtin.command: "pmset -a lidwake {{ lidwake | ternary(1,0) }}"
-  when: "lidwake and ( pmset_current.stdout | string ) != ( lidwake | ternary(1,0) | string ) and 'lidwake' in pmset_cap.stdout"
+  when: "lidwake and ( pmset_current.stdout | string ) != ( lidwake | ternary(1,0) | string )
+    and 'lidwake' in pmset_cap.stdout"
   become: true
 
 - name: Get current pmset 'acwake' value
@@ -106,7 +109,8 @@
 
 - name: "Set acwake mode to {{ acwake }}"
   ansible.builtin.command: "pmset -a acwake {{ acwake | ternary(1,0) }}"
-  when: "acwake and (pmset_current.stdout | string ) != ( acwake | ternary(1,0) | string ) and 'acwake' in pmset_cap.stdout"
+  when: "acwake and (pmset_current.stdout | string ) != ( acwake | ternary(1,0) | string )
+    and 'acwake' in pmset_cap.stdout"
   become: true
 
 - name: Get current pmset 'ttyskeepawake' value
@@ -118,7 +122,8 @@
 
 - name: "Set ttyskeepawake mode to {{ ttyskeepawake }}"
   ansible.builtin.command: "pmset -a ttyskeepawake {{ ttyskeepawake | ternary(1,0) }}"
-  when: "ttyskeepawake and ( pmset_current.stdout | string ) != ( ttyskeepawake | ternary(1,0) | string ) and 'ttyskeepawake' in pmset_cap.stdout"
+  when: "ttyskeepawake and ( pmset_current.stdout | string ) != ( ttyskeepawake | ternary(1,0) | string )
+    and 'ttyskeepawake' in pmset_cap.stdout"
   become: true
 
 - name: Get current pmset 'destroyfvkeyonstandby' value
@@ -130,5 +135,6 @@
 
 - name: "Set destroyfvkeyonstandby mode to {{ destroyfvkeyonstandby }}"
   ansible.builtin.command: "pmset -a destroyfvkeyonstandby {{ destroyfvkeyonstandby | ternary(1,0) }}"
-  when: "destroyfvkeyonstandby and ( pmset_current.stdout | string ) != ( destroyfvkeyonstandby | ternary(1,0) | string ) and 'destroyfvkeyonstandby' in pmset_cap.stdout"
+  when: "destroyfvkeyonstandby and ( pmset_current.stdout | string ) != ( destroyfvkeyonstandby | ternary(1,0) | string )
+    and 'destroyfvkeyonstandby' in pmset_cap.stdout"
   become: true

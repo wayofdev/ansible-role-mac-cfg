@@ -50,9 +50,3 @@
     type: bool
     value: true
     state: present
-
-# https://github.com/claco/ansible/commit/34573922350fe18b4f02d2e4fb7cf8decbce2c0a
-# https://github.com/ansible/ansible/issues/24028
-# Add input sources - Latvian and Russian - Phonetic
-# defaults write com.apple.HIToolbox AppleEnabledInputSources -array-add '<dict><key>InputSourceKind</key><string>Keyboard Layout</string><key>KeyboardLayout ID</key><integer>19457</integer><key>KeyboardLayout Name</key><string>Russian - Phonetic</string></dict>'
-# defaults write com.apple.HIToolbox AppleEnabledInputSources -array-add '<dict><key>InputSourceKind</key><string>Keyboard Layout</string><key>KeyboardLayout ID</key><integer>30765</integer><key>KeyboardLayout Name</key><string>Latvian</string></dict>'

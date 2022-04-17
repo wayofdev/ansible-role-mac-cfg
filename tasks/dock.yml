@@ -64,14 +64,3 @@
     owner: "{{ remote_regular_user }}"
     group: staff
     state: link
-
-- name: Add Watch Simulator to Launchpad
-  ansible.builtin.file:
-    src: "/Applications/Xcode.app/Contents/Developer/Applications/Simulator (Watch).app"
-    dest: "/Applications/Simulator (Watch).app"
-    owner: "{{ remote_regular_user }}"
-    group: staff
-    state: link
-
-# Reset Launchpad, but keep the desktop wallpaper intact
-# find "${HOME}/Library/Application Support/Dock" -name "*-*.db" -maxdepth 1 -delete
