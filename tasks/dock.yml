@@ -1,0 +1,77 @@
+---
+
+# https://macos-defaults.com/misc/enable-spring-load-actions-on-all-items.html#set-to-false-default-value
+- name: Enable spring loading for all Dock items
+  community.general.osx_defaults:
+    domain: com.apple.dock
+    key: "enable-spring-load-actions-on-all-items"
+    type: bool
+    value: true
+    state: present
+
+- name: Don’t show recent applications in Dock
+  community.general.osx_defaults:
+    domain: com.apple.dock
+    key: "show-recents"
+    type: bool
+    value: false
+    state: present
+
+- name: Enable spring loading for all Dock items
+  community.general.osx_defaults:
+    domain: com.apple.dock
+    key: "show-recents"
+    type: bool
+    value: false
+    state: present
+
+- name: Bottom left screen corner → Start screen saver (corner)
+  community.general.osx_defaults:
+    domain: com.apple.dock
+    key: "wvous-bl-corner"
+    type: int
+    value: 5
+    state: present
+
+- name: Bottom left screen corner → Start screen saver (modifier)
+  community.general.osx_defaults:
+    domain: com.apple.dock
+    key: "wvous-bl-modifier"
+    type: int
+    value: 0
+    state: present
+
+- name: Bottom right screen corner → Launchpad (corner)
+  community.general.osx_defaults:
+    domain: com.apple.dock
+    key: "wvous-br-corner"
+    type: int
+    value: 11
+    state: present
+
+- name: Bottom right screen corner → Launchpad (modifier)
+  community.general.osx_defaults:
+    domain: com.apple.dock
+    key: "wvous-br-modifier"
+    type: int
+    value: 0
+    state: present
+
+- name: Add iOS Simulator to Launchpad
+  ansible.builtin.file:
+    src: "/Applications/Xcode.app/Contents/Developer/Applications/Simulator.app"
+    dest: "/Applications/Simulator.app"
+    owner: "{{ remote_regular_user }}"
+    group: staff
+    state: link
+
+- name: Add Watch Simulator to Launchpad
+  ansible.builtin.file:
+    src: "/Applications/Xcode.app/Contents/Developer/Applications/Simulator (Watch).app"
+    dest: "/Applications/Simulator (Watch).app"
+    owner: "{{ remote_regular_user }}"
+    group: staff
+    state: link
+
+# Reset Launchpad, but keep the desktop wallpaper intact
+# find "${HOME}/Library/Application Support/Dock" -name "*-*.db" -maxdepth 1 -delete

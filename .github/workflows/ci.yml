@@ -1,0 +1,98 @@
+---
+
+name: ci
+
+on:  # yamllint disable-line rule:truthy
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+  workflow_dispatch:
+    inputs:
+      shouldPublishImage:
+        description: 'Should publish image to Ansible Galaxy? (yes/no)'
+        required: false
+        default: 'no'
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the codebase.
+        uses: actions/checkout@v2
+
+      - name: Set up Python 3.
+        uses: actions/setup-python@v3
+        with:
+          python-version: '3.x'
+
+      - name: Install test dependencies.
+        run: |
+          ansible-galaxy install -r requirements.yml
+          pip3 install yamllint
+          pip3 install ansible-lint
+
+      - name: Run yamllint.
+        run: yamllint .
+
+      - name: Run ansible lint.
+        working-directory: tests
+        run: ansible-lint test.yml -c ../.ansible-lint
+
+      - name: Verify syntax
+        working-directory: tests
+        run: ansible-playbook test.yml --syntax-check
+
+  integration:
+    name: Integration.
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os:
+          - macos-11
+
+    steps:
+      - name: Check out the codebase.
+        uses: actions/checkout@v2
+      - uses: actions/setup-python@v3
+        with:
+          python-version: 3.9
+
+      - name: Install dependencies.
+        run: |
+          set -eux
+          pip install ansible
+          ansible-galaxy install -r requirements.yml
+
+      - name: Test the playbook.
+        run: ansible-playbook tests/test.yml
+        env:
+          ANSIBLE_FORCE_COLOR: '1'
+
+      - name: Idempotence check.
+        run: |
+          idempotence=$(mktemp)
+          ansible-playbook tests/test.yml | tee -a ${idempotence}
+          tail ${idempotence} \
+            | grep -q 'changed=0.*failed=0' \
+            && (echo 'Idempotence test: pass' && exit 0) \
+            || (echo 'Idempotence test: fail' && exit 1)
+        env:
+          ANSIBLE_FORCE_COLOR: '1'
+
+  publish:
+    if: github.event.inputs.shouldPublishImage == 'yes' || github.ref == 'refs/heads/master'
+    needs:
+      - lint
+      - integration
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: galaxy
+        uses: robertdebock/galaxy-action@1.2.0
+        with:
+          galaxy_api_key: ${{ secrets.GALAXY_API_KEY }}

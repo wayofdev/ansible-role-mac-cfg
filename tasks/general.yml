@@ -1,0 +1,49 @@
+---
+
+# On macOS, this module uses scutil to set HostName, ComputerName, and LocalHostName
+- name: Using scutil to set HostName, ComputerName, and LocalHostName.
+  ansible.builtin.hostname:
+    name: "mbpro-{{ remote_regular_user }}"
+
+- name: Write new hostname to SMB server.
+  community.general.osx_defaults:
+    domain: /Library/Preferences/SystemConfiguration/com.apple.smb.server
+    key: NetBIOSName
+    type: string
+    value: "mbpro-{{ remote_regular_user }}"
+    state: present
+  become: true
+
+- name: Expand save panel by default
+  community.general.osx_defaults:
+    domain: NSGlobalDomain
+    key: NSNavPanelExpandedStateForSaveMode # NSNavPanelExpandedStateForSaveMode2
+    type: bool
+    value: true
+    state: present
+
+- name: Expand print panel by default
+  community.general.osx_defaults:
+    domain: NSGlobalDomain
+    key: PMPrintingExpandedStateForPrint # PMPrintingExpandedStateForPrint2
+    type: bool
+    value: true
+    state: present
+
+- name: Automatically quit printer app once the print jobs complete
+  community.general.osx_defaults:
+    domain: com.apple.print.PrintingPrefs
+    key: "Quit When Finished"
+    type: bool
+    value: true
+    state: present
+
+- name: Reveal IP address, hostname, OS version, etc. when clicking the clock in the login window (only).
+  community.general.osx_defaults:
+    domain: /Library/Preferences/com.apple.loginwindow
+    key: AdminHostInfo
+    type: string
+    value: HostName
+    state: present
+  become: true
+

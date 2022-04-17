@@ -1,0 +1,40 @@
+---
+
+- include_tasks: dock.yml
+  tags:
+    - dock
+    - configuredock
+
+- include_tasks: battery.yml
+  tags:
+    - battery
+    - batterysaving
+    - configurebattery
+
+- include_tasks: finder.yml
+  tags:
+    - finder
+    - configurefinder
+
+- include_tasks: general.yml
+  tags:
+    - general
+    - configuregeneral
+
+- include_tasks: input.yml
+  tags:
+    - mouse
+    - trackpad
+    - keyboard
+    - configurekeyboard
+    - configureinput
+
+- include_tasks: lang.yml
+  tags:
+    - lang
+    - configurelang
+
+- include_tasks: screen.yml
+  tags:
+    - screen
+    - configurescreen

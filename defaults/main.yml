@@ -1,0 +1,73 @@
+---
+
+# https://www.dssw.co.uk/reference/pmset.html
+
+# Restart automatically if the computer freezes
+restart_on_freeze: true
+
+# Set standby delay in seconds, default = 3600, 24 hours = 86400, disabled = false
+standbydelay: 86400
+
+# Set hibernate mode:
+# hibernatemode = 0 (binary 0000) by default on supported desktops. The system will not back memory up to
+#   persistent storage. The system must wake from the contents of memory; the system will lose context on
+#   power loss. This is, historically, plain old sleep.
+#
+# hibernatemode = 3 (binary 0011) by default on supported portables. The system will store a copy of mem-ory memory
+#   ory to persistent storage (the disk), and will power memory during sleep. The system will wake from
+#   memory, unless a power loss forces it to restore from disk image.
+#
+# hibernatemode = 25 (binary 0001 1001) is only settable via pmset. The system will store a copy of mem-ory memory
+#   ory to persistent storage (the disk), and will remove power to memory. The system will restore from
+#   disk image. If you want "hibernation" - slower sleeps, slower wakes, and better battery life, you
+#   should use this setting.
+hibernatemode: 3
+
+# Automatically illuminate built-in MacBook keyboard in low light
+bezel_dim: true
+
+# Turn off keyboard illumination when computer is not used for x seconds
+bezel_dim_delay: 300
+
+# Set display sleep time delay in minutes
+sleep_display: "Never"
+
+# Set computer sleep time delay in minutes
+sleep_computer: "Never"
+
+# Set hard disk sleep time delay in minutes
+sleep_harddisk: "Never"
+
+# https://support.apple.com/en-gb/guide/mac-help/mh40773/mac
+#
+# Power Nap, available on Mac computers with flash memory, lets some Mac computers stay up to date
+# even while they’re sleeping. When your Mac goes to sleep, Power Nap activates periodically to update information.
+# The information that’s updated depends on whether your Mac is running on battery power (a Mac notebook computer)
+# or plugged into a power adapter (a Mac notebook computer or Mac desktop computer).
+# When your Mac is asleep and using battery power, Power Nap:
+# * Checks for new messages in Mail
+# * Updates events in Calendar
+# * Updates other iCloud events
+# When your Mac is plugged into a power adapter, Power Nap can also do activities such as
+# downloading software updates and performing Time Machine backups.
+#
+# Set usage of PowerNap
+powernap: true
+
+# wake the machine when the laptop lid is opened
+lidwake: true
+
+# Wake the machine when power source (AC/battery) is changed
+acwake: false
+
+# display sleep will use an intermediate half-brightness state between full brightness and fully off
+halfdim: true
+
+# prevent idle system sleep when any tty (e.g. remote login session) is 'active'. A tty is 'inactive'
+# only when its idle time exceeds the system sleep timer.
+ttyskeepawake: true
+
+# Destroy File Vault Key when going to standby mode. By default, File vault keys are retained even
+# when system goes to standby. If the keys are destroyed, user will be prompted to enter the
+# password while coming out of standby mode.
+destroyfvkeyonstandby: false
