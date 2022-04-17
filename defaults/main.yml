@@ -5,9 +5,6 @@
 # Restart automatically if the computer freezes
 restart_on_freeze: true
 
-# Set standby delay in seconds, default = 3600, 24 hours = 86400, disabled = false
-standbydelay: 86400
-
 # Set hibernate mode:
 # hibernatemode = 0 (binary 0000) by default on supported desktops. The system will not back memory up to
 #   persistent storage. The system must wake from the contents of memory; the system will lose context on
@@ -22,12 +19,6 @@ standbydelay: 86400
 #   disk image. If you want "hibernation" - slower sleeps, slower wakes, and better battery life, you
 #   should use this setting.
 hibernatemode: 3
-
-# Automatically illuminate built-in MacBook keyboard in low light
-bezel_dim: true
-
-# Turn off keyboard illumination when computer is not used for x seconds
-bezel_dim_delay: 300
 
 # Set display sleep time delay in minutes
 sleep_display: "Never"
@@ -59,9 +50,6 @@ lidwake: true
 
 # Wake the machine when power source (AC/battery) is changed
 acwake: false
-
-# display sleep will use an intermediate half-brightness state between full brightness and fully off
-halfdim: true
 
 # prevent idle system sleep when any tty (e.g. remote login session) is 'active'. A tty is 'inactive'
 # only when its idle time exceeds the system sleep timer.

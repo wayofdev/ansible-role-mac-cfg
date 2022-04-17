@@ -1,7 +1,7 @@
 ---
 
 galaxy_info:
-  role_name: osx-config
+  role_name: osxconfig
   author: lotyp
   description: Ansible role to configure MacOS using builtin terminal utilities.
   company: wayofdev
