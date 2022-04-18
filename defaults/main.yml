@@ -59,3 +59,9 @@ ttyskeepawake: true
 # when system goes to standby. If the keys are destroyed, user will be prompted to enter the
 # password while coming out of standby mode.
 destroyfvkeyonstandby: false
+
+# On macOS, this module uses scutil to set HostName, ComputerName, and LocalHostName
+change_hostname: true
+
+# This mac-book's hostname
+hostname: mbpro-{{ remote_regular_user }}

@@ -1,17 +1,18 @@
 ---
 
-# On macOS, this module uses scutil to set HostName, ComputerName, and LocalHostName
 - name: Using scutil to set HostName, ComputerName, and LocalHostName.
   ansible.builtin.hostname:
-    name: "mbpro-{{ remote_regular_user }}"
+    name: {{ hostname }}
+  when: change_hostname
 
 - name: Write new hostname to SMB server.
   community.general.osx_defaults:
     domain: /Library/Preferences/SystemConfiguration/com.apple.smb.server
     key: NetBIOSName
     type: string
-    value: "mbpro-{{ remote_regular_user }}"
+    value: {{ hostname }}
     state: present
+  when: change_hostname
   become: true
 
 - name: Expand save panel by default
