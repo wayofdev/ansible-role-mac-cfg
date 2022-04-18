@@ -2,7 +2,7 @@
 
 - name: Using scutil to set HostName, ComputerName, and LocalHostName.
   ansible.builtin.hostname:
-    name: {{ hostname }}
+    name: "{{ hostname }}"
   when: change_hostname
 
 - name: Write new hostname to SMB server.
@@ -10,7 +10,7 @@
     domain: /Library/Preferences/SystemConfiguration/com.apple.smb.server
     key: NetBIOSName
     type: string
-    value: {{ hostname }}
+    value: "{{ hostname }}"
     state: present
   when: change_hostname
   become: true
