@@ -70,8 +70,8 @@
   community.general.osx_defaults:
     domain: com.apple.AppleMultitouchMouse
     key: MouseOneFingerDoubleTapGesture
-    type: bool
-    value: true
+    type: int
+    value: 1
     state: present
 
 - name: Bluetooth Magic mouse should run in two button mode
