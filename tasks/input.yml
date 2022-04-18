@@ -37,7 +37,7 @@
     value: false
     state: present
 
-- name: Do not disable smart dashes, but set them as simple one's, instead of smart.
+- name: Do not disable smart quotes, but set them as simple one's, instead of smart.
   community.general.osx_defaults:
     domain: NSGlobalDomain
     key: NSUserQuotesArray
@@ -45,8 +45,8 @@
     value:
       - '"'
       - '"'
-      - "'"
-      - "'"
+      - "\'"
+      - "\'"
 
 ### Mouse
 
