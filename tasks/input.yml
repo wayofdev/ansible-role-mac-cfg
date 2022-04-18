@@ -86,8 +86,8 @@
   community.general.osx_defaults:
     domain: com.apple.driver.AppleBluetoothMultitouch.mouse
     key: MouseOneFingerDoubleTapGesture
-    type: bool
-    value: true
+    type: int
+    value: 1
     state: present
 
 ### Trackpad
