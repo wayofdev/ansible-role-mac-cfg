@@ -43,10 +43,10 @@
     key: NSUserQuotesArray
     type: array
     value:
-      - '"'
-      - '"'
-      - "\\'"
-      - "\\'"
+      - '\U0022'
+      - '\U0022'
+      - '\U0027'
+      - '\U0027'
 
 ### Mouse
 
