@@ -7,8 +7,7 @@
 
 - name: "Get current restart-on-freeze status."
   ansible.builtin.shell: >
-    set -o pipefail && \
-      systemsetup -getrestartfreeze | awk -F ': ' '{print $2}'
+    systemsetup -getrestartfreeze | awk -F ': ' '{print $2}'
   when: restart_on_freeze
   register: getrestartfreeze_current
   changed_when: false
@@ -21,8 +20,7 @@
 
 - name: "Get current pmset 'hibernation' value"
   ansible.builtin.shell: >
-    set -o pipefail && \
-      pmset -g | grep "^\\s*hibernatemode.*" | awk -F " " '{ print $2 }'
+    pmset -g | grep "^\\s*hibernatemode.*" | awk -F " " '{ print $2 }'
   register: pmset_current
   changed_when: false
 
@@ -34,8 +32,7 @@
 
 - name: "Get current display sleep delay"
   ansible.builtin.shell: >
-    set -o pipefail && \
-      systemsetup -getdisplaysleep | awk -F ': ' '{print $2}'
+    systemsetup -getdisplaysleep | awk -F ': ' '{print $2}'
   when: sleep_display
   register: getcdisplaysleep_current
   changed_when: false
@@ -48,8 +45,7 @@
 
 - name: "Get current computer sleep delay"
   ansible.builtin.shell: >
-    set -o pipefail && \
-      systemsetup -getcomputersleep | awk -F ': ' '{print $2}'
+    systemsetup -getcomputersleep | awk -F ': ' '{print $2}'
   when: sleep_computer
   register: getcomputersleep_current
   changed_when: false
@@ -62,8 +58,7 @@
 
 - name: "Get current harddisk sleep delay"
   ansible.builtin.shell: >
-    set -o pipefail && \
-      systemsetup -getharddisksleep | awk -F ': ' '{print $2}'
+    systemsetup -getharddisksleep | awk -F ': ' '{print $2}'
   when: sleep_harddisk
   register: getharddisksleep_current
   changed_when: false
@@ -76,8 +71,7 @@
 
 - name: Get current pmset 'powernap' value
   ansible.builtin.shell: >
-    set -o pipefail && \
-      pmset -g | grep "^\\s*powernap.*" | awk -F " " '{ print $2 }'
+    pmset -g | grep "^\\s*powernap.*" | awk -F " " '{ print $2 }'
   register: pmset_current
   changed_when: false
 
@@ -89,8 +83,7 @@
 
 - name: Get current pmset 'lidwake' value
   ansible.builtin.shell: >
-    set -o pipefail && \
-      pmset -g | grep "^\\s*lidwake.*" | awk -F " " '{ print $2 }'
+    pmset -g | grep "^\\s*lidwake.*" | awk -F " " '{ print $2 }'
   register: pmset_current
   changed_when: false
 
@@ -102,8 +95,7 @@
 
 - name: Get current pmset 'acwake' value
   ansible.builtin.shell: >
-    set -o pipefail && \
-      pmset -g | grep "^\\s*acwake.*" | awk -F " " '{ print $2 }'
+    pmset -g | grep "^\\s*acwake.*" | awk -F " " '{ print $2 }'
   register: pmset_current
   changed_when: false
 
@@ -115,8 +107,7 @@
 
 - name: Get current pmset 'ttyskeepawake' value
   ansible.builtin.shell: >
-    set -o pipefail && \
-      pmset -g | grep "^\\s*ttyskeepawake.*" | awk -F " " '{ print $2 }'
+    pmset -g | grep "^\\s*ttyskeepawake.*" | awk -F " " '{ print $2 }'
   register: pmset_current
   changed_when: false
 
@@ -128,8 +119,7 @@
 
 - name: Get current pmset 'destroyfvkeyonstandby' value
   ansible.builtin.shell: >
-    set -o pipefail && \
-      pmset -g | grep "^\\s*destroyfvkeyonstandby.*" | awk -F " " '{ print $2 }'
+    pmset -g | grep "^\\s*destroyfvkeyonstandby.*" | awk -F " " '{ print $2 }'
   register: pmset_current
   changed_when: false
 
