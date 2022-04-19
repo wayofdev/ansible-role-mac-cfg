@@ -1,11 +1,11 @@
 ---
 
-- name: Using scutil to set HostName, ComputerName, and LocalHostName.
+- name: "Using scutil to set HostName, ComputerName, and LocalHostName."
   ansible.builtin.hostname:
     name: "{{ hostname }}"
   when: change_hostname
 
-- name: Write new hostname to SMB server.
+- name: "Write new hostname to SMB server."
   community.general.osx_defaults:
     domain: /Library/Preferences/SystemConfiguration/com.apple.smb.server
     key: NetBIOSName
@@ -15,7 +15,7 @@
   when: change_hostname
   become: true
 
-- name: Expand save panel by default
+- name: "Expand save panel by default."
   community.general.osx_defaults:
     domain: NSGlobalDomain
     key: NSNavPanelExpandedStateForSaveMode # NSNavPanelExpandedStateForSaveMode2
@@ -23,7 +23,7 @@
     value: true
     state: present
 
-- name: Expand print panel by default
+- name: "Expand print panel by default."
   community.general.osx_defaults:
     domain: NSGlobalDomain
     key: PMPrintingExpandedStateForPrint # PMPrintingExpandedStateForPrint2
@@ -31,7 +31,7 @@
     value: true
     state: present
 
-- name: Automatically quit printer app once the print jobs complete
+- name: "Automatically quit printer app once the print jobs complete."
   community.general.osx_defaults:
     domain: com.apple.print.PrintingPrefs
     key: "Quit When Finished"
@@ -39,7 +39,7 @@
     value: true
     state: present
 
-- name: Reveal IP address, hostname, OS version, etc. when clicking the clock in the login window (only).
+- name: "Reveal IP address, hostname, OS version, etc. when clicking the clock in the login window (only)."
   community.general.osx_defaults:
     domain: /Library/Preferences/com.apple.loginwindow
     key: AdminHostInfo
@@ -47,3 +47,142 @@
     value: HostName
     state: present
   become: true
+
+- name: "Add iOS Simulator to Launchpad."
+  ansible.builtin.file:
+    src: "/Applications/Xcode.app/Contents/Developer/Applications/Simulator.app"
+    dest: "/Applications/Simulator.app"
+    owner: "{{ remote_regular_user }}"
+    group: staff
+    state: link
+
+### Feedback Assistant
+
+- name: "Turn of Feedback Assistant data auto-gathering."
+  community.general.osx_defaults:
+    domain: com.apple.appleseed.FeedbackAssistant
+    key: Autogather
+    type: bool
+    value: false
+    state: present
+
+### Photos
+
+- name: "Photos: Prevent Photos from opening automatically when devices are plugged in."
+  community.general.osx_defaults:
+    domain: com.apple.ImageCapture
+    key: disableHotPlug
+    type: bool
+    value: true
+    state: present
+
+- name: "Mail: Copy email addresses as `foo@example.com` instead of `Foo Bar <foo@example.com>` in Mail.app."
+  community.general.osx_defaults:
+    domain: com.apple.mail
+    key: AddressesIncludeNameOnPasteboard
+    type: bool
+    value: false
+    state: present
+
+### Screenshots
+
+- name: "Screenshots: Save to custom folder instead of Desktop."
+  community.general.osx_defaults:
+    domain: com.apple.screencapture
+    key: location
+    type: string
+    value: "${HOME}/Screenshots"
+    state: present
+
+- name: "Screenshots: Change the default file name."
+  community.general.osx_defaults:
+    domain: com.apple.screencapture
+    key: name
+    type: string
+    value: "src"
+    state: present
+
+### Activity Monitor
+
+- name: "Activity Monitor: Show the main window when launching app."
+  community.general.osx_defaults:
+    domain: com.apple.ActivityMonitor
+    key: OpenMainWindow
+    type: bool
+    value: true
+    state: present
+
+- name: "Activity Monitor: Show all processes."
+  community.general.osx_defaults:
+    domain: com.apple.ActivityMonitor
+    key: ShowCategory
+    type: int
+    value: 0
+    state: present
+
+- name: "Activity Monitor: Sort Activity Monitor results by CPU usage"
+  community.general.osx_defaults:
+    domain: com.apple.ActivityMonitor
+    key: SortColumn
+    type: string
+    value: "CPUUsage"
+    state: present
+
+- name: "Activity Monitor: Sort Activity Monitor results by CPU usage - Direction DSC"
+  community.general.osx_defaults:
+    domain: com.apple.ActivityMonitor
+    key: SortDirection
+    type: int
+    value: 0
+    state: present
+
+### Safari
+# defaults write com.apple.Safari UserStyleSheetEnabled -bool false
+
+- name: "Safari: Enable Develop menu and the Web Inspector in Safari 14+ - Inspect Menu"
+  community.general.osx_defaults:
+    domain: com.apple.Safari
+    key: WebKitDeveloperExtrasEnabledPreferenceKey
+    type: bool
+    value: true
+    state: present
+
+- name: "Safari: Enable Develop menu and the Web Inspector in Safari 14+"
+  community.general.osx_defaults:
+    domain: com.apple.Safari
+    key: WebKitPreferences.developerExtrasEnabled
+    type: bool
+    value: true
+    state: present
+
+- name: "Safari: Change default homepage"
+  community.general.osx_defaults:
+    domain: com.apple.Safari
+    key: HomePage
+    type: string
+    value: "https://app.daily.dev/"
+    state: present
+
+- name: "Safari: Show homepage instead of Start Page when opening new tab"
+  community.general.osx_defaults:
+    domain: com.apple.Safari
+    key: NewTabBehavior
+    type: bool
+    value: false
+    state: present
+
+- name: "Safari: Show homepage instead of Start Page when opening new window"
+  community.general.osx_defaults:
+    domain: com.apple.Safari
+    key: NewWindowBehavior
+    type: bool
+    value: false
+    state: present
+
+# @todo Add to readme.md as post install instruction
+# You will have to manually give full disk access to terminal/iterm to do that
+# Enable Safari’s debug menu
+# Go to System Preferences -> Security & Privacy -> Full Disk Access -> Click on iTerm2
+# defaults write com.apple.Safari IncludeInternalDebugMenu -bool true
+
+### Address Book, Dashboard, iCal, TextEdit, and Disk Utility

@@ -47,6 +47,7 @@
       - '\U0022'
       - '\U0027'
       - '\U0027'
+  changed_when: false
 
 ### Mouse
 
@@ -131,3 +132,18 @@
     type: bool
     value: true
     state: present
+
+### Shortcuts
+
+- name: Allow global app shortcuts
+  community.general.osx_defaults:
+    domain: com.apple.universalaccess
+    key: com.apple.custommenu.apps
+    type: array
+    value:
+      - NSGlobalDomain
+
+- name: "⌥⌘, brings up System Preferences dialog (opt+cmd+comma)"
+  ansible.builtin.shell: >
+    defaults write "Apple Global Domain" NSUserKeyEquivalents -dict-add "System Preferences\\U2026" "@~,"
+  changed_when: false

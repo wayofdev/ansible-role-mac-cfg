@@ -1,6 +1,6 @@
 ---
 
-- name: Get pmset capabilities.
+- name: "Get pmset capabilities."
   ansible.builtin.command: "pmset -g cap"
   register: pmset_cap
   changed_when: false
@@ -18,32 +18,19 @@
   when: restart_on_freeze and (getrestartfreeze_current.stdout | lower) != (restart_on_freeze | ternary('on','off') )
   become: true
 
-- name: "Get current pmset 'hibernation' value"
+- name: "Get current pmset 'hibernation' value."
   ansible.builtin.shell: >
     pmset -g | grep "^\\s*hibernatemode.*" | awk -F " " '{ print $2 }'
   register: pmset_current
   changed_when: false
 
-- name: "Set hibernation mode to {{ hibernatemode }}"
+- name: "Set hibernation mode to {{ hibernatemode }}."
   ansible.builtin.command: "pmset -a hibernatemode {{ hibernatemode }}"
   when: "hibernatemode in [0, 3, 25] and (pmset_current.stdout | string ) != ( hibernatemode | string )
     and 'hibernatemode' in pmset_cap.stdout"
   become: true
 
-- name: "Get current display sleep delay"
-  ansible.builtin.shell: >
-    systemsetup -getdisplaysleep | awk -F ': ' '{print $2}'
-  when: sleep_display
-  register: getcdisplaysleep_current
-  changed_when: false
-  become: true
-
-- name: "Set display sleep time to {{ sleep_display }}"
-  ansible.builtin.command: "systemsetup -setdisplaysleep {{ sleep_display }}"
-  when: sleep_display and ( getcdisplaysleep_current.stdout | string ) != ( sleep_display | string )
-  become: true
-
-- name: "Get current computer sleep delay"
+- name: "Get current computer sleep delay."
   ansible.builtin.shell: >
     systemsetup -getcomputersleep | awk -F ': ' '{print $2}'
   when: sleep_computer
@@ -51,12 +38,25 @@
   changed_when: false
   become: true
 
-- name: "Set computer sleep time to {{ sleep_computer }}"
+- name: "Set computer sleep time to {{ sleep_computer }}."
   ansible.builtin.command: "systemsetup -setcomputersleep {{ sleep_computer }}"
   when: sleep_computer and ( getcomputersleep_current.stdout | string ) != ( sleep_computer | string )
   become: true
 
-- name: "Get current harddisk sleep delay"
+- name: "Get current display sleep delay."
+  ansible.builtin.shell: >
+    systemsetup -getdisplaysleep | awk -F ': ' '{print $2}'
+  when: sleep_display
+  register: getcdisplaysleep_current
+  changed_when: false
+  become: true
+
+- name: "Set display sleep time to {{ sleep_display }}."
+  ansible.builtin.command: "systemsetup -setdisplaysleep {{ sleep_display }}"
+  when: sleep_display and ( getcdisplaysleep_current.stdout | string ) != ( sleep_display | string )
+  become: true
+
+- name: "Get current harddisk sleep delay."
   ansible.builtin.shell: >
     systemsetup -getharddisksleep | awk -F ': ' '{print $2}'
   when: sleep_harddisk
@@ -64,67 +64,72 @@
   changed_when: false
   become: true
 
-- name: "Set harddisk sleep time to {{ sleep_harddisk }}"
+- name: "Set harddisk sleep time to {{ sleep_harddisk }}."
   ansible.builtin.command: "systemsetup -setharddisksleep {{ sleep_harddisk }}"
   when: sleep_harddisk and ( getharddisksleep_current.stdout | string ) != ( sleep_harddisk | string )
   become: true
 
-- name: Get current pmset 'powernap' value
+- name: "Get current pmset 'powernap' value."
   ansible.builtin.shell: >
     pmset -g | grep "^\\s*powernap.*" | awk -F " " '{ print $2 }'
   register: pmset_current
   changed_when: false
 
-- name: "Set powernap mode to {{ powernap }}"
+- name: "Set powernap mode to {{ powernap }}."
   ansible.builtin.command: "pmset -a powernap {{ powernap | ternary(1,0) }}"
   when: "powernap and ( pmset_current.stdout | string ) != ( powernap | ternary(1,0) | string )
     and 'powernap' in pmset_cap.stdout"
   become: true
 
-- name: Get current pmset 'lidwake' value
+- name: "Get current pmset 'lidwake' value."
   ansible.builtin.shell: >
     pmset -g | grep "^\\s*lidwake.*" | awk -F " " '{ print $2 }'
   register: pmset_current
   changed_when: false
 
-- name: "Set lidwake mode to {{ lidwake }}"
+- name: "Set lidwake mode to {{ lidwake }}."
   ansible.builtin.command: "pmset -a lidwake {{ lidwake | ternary(1,0) }}"
   when: "lidwake and ( pmset_current.stdout | string ) != ( lidwake | ternary(1,0) | string )
     and 'lidwake' in pmset_cap.stdout"
   become: true
 
-- name: Get current pmset 'acwake' value
+- name: "Get current pmset 'acwake' value."
   ansible.builtin.shell: >
     pmset -g | grep "^\\s*acwake.*" | awk -F " " '{ print $2 }'
   register: pmset_current
   changed_when: false
 
-- name: "Set acwake mode to {{ acwake }}"
+- name: "Set acwake mode to {{ acwake }}."
   ansible.builtin.command: "pmset -a acwake {{ acwake | ternary(1,0) }}"
   when: "acwake and (pmset_current.stdout | string ) != ( acwake | ternary(1,0) | string )
     and 'acwake' in pmset_cap.stdout"
   become: true
 
-- name: Get current pmset 'ttyskeepawake' value
+- name: "Get current pmset 'ttyskeepawake' value."
   ansible.builtin.shell: >
     pmset -g | grep "^\\s*ttyskeepawake.*" | awk -F " " '{ print $2 }'
   register: pmset_current
   changed_when: false
 
-- name: "Set ttyskeepawake mode to {{ ttyskeepawake }}"
+- name: "Set ttyskeepawake mode to {{ ttyskeepawake }}."
   ansible.builtin.command: "pmset -a ttyskeepawake {{ ttyskeepawake | ternary(1,0) }}"
   when: "ttyskeepawake and ( pmset_current.stdout | string ) != ( ttyskeepawake | ternary(1,0) | string )
     and 'ttyskeepawake' in pmset_cap.stdout"
   become: true
 
-- name: Get current pmset 'destroyfvkeyonstandby' value
+- name: "Get current pmset 'destroyfvkeyonstandby' value."
   ansible.builtin.shell: >
     pmset -g | grep "^\\s*destroyfvkeyonstandby.*" | awk -F " " '{ print $2 }'
   register: pmset_current
   changed_when: false
 
-- name: "Set destroyfvkeyonstandby mode to {{ destroyfvkeyonstandby }}"
+- name: "Set destroyfvkeyonstandby mode to {{ destroyfvkeyonstandby }}."
   ansible.builtin.command: "pmset -a destroyfvkeyonstandby {{ destroyfvkeyonstandby | ternary(1,0) }}"
   when: "destroyfvkeyonstandby and ( pmset_current.stdout | string ) != ( destroyfvkeyonstandby | ternary(1,0) | string )
     and 'destroyfvkeyonstandby' in pmset_cap.stdout"
+  become: true
+
+- name: "Print out current system setup settings."
+  ansible.builtin.command: systemsetup -getsleep
+  changed_when: false
   become: true

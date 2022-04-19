@@ -1,1 +1,188 @@
 ---
+
+- name: Allow quitting via ⌘ + Q; doing so will also hide desktop icons
+  community.general.osx_defaults:
+    domain: com.apple.finder
+    key: QuitMenuItem
+    type: bool
+    value: true
+    state: present
+
+- name: Set new path as the default location for new Finder windows
+  community.general.osx_defaults:
+    domain: com.apple.finder
+    key: NewWindowTarget
+    type: string
+    value: "{{ finder_new_window_target }}"
+    state: present
+
+- name: Set new path as the default location for new Finder windows
+  community.general.osx_defaults:
+    domain: com.apple.finder
+    key: NewWindowTargetPath
+    type: string
+    value: "{{ finder_new_window_target_path }}"
+    state: present
+
+- name: Change current search scope for all new searches
+  community.general.osx_defaults:
+    domain: com.apple.finder
+    key: FXDefaultSearchScope
+    type: string
+    value: "{{ finder_search_scope }}"
+    state: present
+
+- name: Change finder view in all windows by default
+  community.general.osx_defaults:
+    domain: com.apple.finder
+    key: FXPreferredViewStyle
+    type: string
+    value: "{{ finder_view_mode }}"
+    state: present
+
+- name: "Show path bar in Finder (Example: 751 items ... 351 GB left ...)"
+  community.general.osx_defaults:
+    domain: com.apple.finder
+    key: ShowPathbar
+    type: bool
+    value: true
+    state: present
+
+- name: "Keep folders on top when sorting by name"
+  community.general.osx_defaults:
+    domain: com.apple.finder
+    key: _FXSortFoldersFirst
+    type: bool
+    value: true
+    state: present
+
+- name: "Disable the warning when changing a file extension"
+  community.general.osx_defaults:
+    domain: com.apple.finder
+    key: FXEnableExtensionChangeWarning
+    type: bool
+    value: false
+    state: present
+
+- name: "Show status bar"
+  community.general.osx_defaults:
+    domain: com.apple.finder
+    key: ShowStatusBar
+    type: bool
+    value: true
+    state: present
+
+- name: "Show bottom path bar by default"
+  community.general.osx_defaults:
+    domain: com.apple.finder
+    key: ShowPathBar
+    type: bool
+    value: true
+    state: present
+
+
+- name: "Avoid creating .DS_Store files on network volumes"
+  community.general.osx_defaults:
+    domain: com.apple.finder
+    key: DSDontWriteNetworkStores
+    type: bool
+    value: true
+    state: present
+
+- name: "Avoid creating .DS_Store files on USB volumes"
+  community.general.osx_defaults:
+    domain: com.apple.finder
+    key: DSDontWriteUSBStores
+    type: bool
+    value: true
+    state: present
+
+- name: "Disable the warning before emptying the Trash"
+  community.general.osx_defaults:
+    domain: com.apple.finder
+    key: WarnOnEmptyTrash
+    type: bool
+    value: false
+    state: present
+
+- name: "Display full POSIX path as Finder window title"
+  community.general.osx_defaults:
+    domain: com.apple.finder
+    key: _FXShowPosixPathInTitle
+    type: bool
+    value: true
+    state: present
+
+- name: "Show all filename extensions"
+  community.general.osx_defaults:
+    domain: NSGlobalDomain
+    key: AppleShowAllExtensions
+    type: bool
+    value: false
+    state: present
+
+- name: "Expand the following File Info panes: General, Open With, Sharing & Permissions"
+  ansible.builtin.shell: >
+    defaults write com.apple.finder FXInfoPanesExpanded -dict \
+      MetaData -bool true \
+      General -bool true \
+      OpenWith -bool true \
+      Privileges -bool true
+  changed_when: false
+
+- name: "Show icons for external hard drives on Desktop"
+  community.general.osx_defaults:
+    domain: com.apple.finder
+    key: ShowExternalHardDrivesOnDesktop
+    type: bool
+    value: false
+    state: present
+
+- name: "Show icons for hard drives on Desktop"
+  community.general.osx_defaults:
+    domain: com.apple.finder
+    key: ShowHardDrivesOnDesktop
+    type: bool
+    value: false
+    state: present
+
+- name: "Show icons for mounted servers on Desktop"
+  community.general.osx_defaults:
+    domain: com.apple.finder
+    key: ShowMountedServersOnDesktop
+    type: bool
+    value: false
+    state: present
+
+- name: "Show icons for removable media on Desktop"
+  community.general.osx_defaults:
+    domain: com.apple.finder
+    key: ShowRemovableMediaOnDesktop
+    type: bool
+    value: false
+    state: present
+
+- name: "Show the ~/Library folder in finder"
+  ansible.builtin.shell: >
+    chflags nohidden ~/Library && xattr -d com.apple.FinderInfo ~/Library
+  changed_when: false
+  become: true
+
+- name: "Show the ~/Users folder in finder"
+  ansible.builtin.shell: >
+    chflags nohidden /Users
+  changed_when: false
+  become: true
+
+- name: Change which programs will open the given file types.
+  block:
+    - name: "Installing duti - command-line tool to select default applications for document types Mac OS X."
+      community.general.homebrew_cask:
+        name: iterm2
+        state: installed
+
+    - name: "Show the ~/Users folder in finder"
+      ansible.builtin.shell: >
+        duti -s com.sublimetext.4 public.data all
+        duti -s com.sublimetext.4 public.plain-text all
+      changed_when: false

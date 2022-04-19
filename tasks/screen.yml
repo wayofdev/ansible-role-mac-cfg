@@ -1,1 +1,17 @@
 ---
+
+- name: "Require password when screen awakes."
+  community.general.osx_defaults:
+    domain: com.apple.screensaver
+    key: askForPassword
+    type: int
+    value: 1
+    state: present
+
+- name: "Require password immediately after sleep or screen saver begins"
+  community.general.osx_defaults:
+    domain: com.apple.screensaver
+    key: askForPasswordDelay
+    type: int
+    value: 0
+    state: present

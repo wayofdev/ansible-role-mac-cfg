@@ -1,5 +1,7 @@
 ---
 
+### Battery
+
 # https://www.dssw.co.uk/reference/pmset.html
 
 # Restart automatically if the computer freezes
@@ -20,14 +22,19 @@ restart_on_freeze: true
 #   should use this setting.
 hibernatemode: 3
 
-# Set display sleep time delay in minutes
-sleep_display: "Never"
-
-# Set computer sleep time delay in minutes
+# https://apple.stackexchange.com/questions/95195/what-is-the-difference-between-pmset-and-systemsetup-sleep-options
+#
+# Set amount of idle time until computer, display and hard disk sleep to <minutes>.
+# Specify "Never" or "Off" for never.
 sleep_computer: "Never"
 
-# Set hard disk sleep time delay in minutes
-sleep_harddisk: "Never"
+# Set amount of idle time until display sleeps to <minutes>.
+# Specify "Never" or "Off" for never.
+sleep_display: 15
+
+# Set amount of idle time until hard disk sleeps to <minutes>.
+# Specify "Never" or "Off" for never.
+sleep_harddisk: 30
 
 # https://support.apple.com/en-gb/guide/mac-help/mh40773/mac
 #
@@ -65,3 +72,55 @@ change_hostname: false
 
 # This mac-book's hostname
 hostname: mbpro-{{ remote_regular_user }}
+
+### Dock
+
+# Drag a file over an icon in the Dock, hover, and the application will open.
+# https://macos-defaults.com/misc/enable-spring-load-actions-on-all-items.html
+dock_enable_spring_load_everywhere: true
+
+# Don’t show recent applications in Dock
+dock_show_recents: false
+
+# Bottom left screen corner
+# ... @todo
+
+# Bottom right screen corner
+# ... @todo
+
+### Finder
+
+# What path should new finder windows open
+# Computer     : `PfCm`
+# Volume       : `PfVo`
+# $HOME        : `PfHm`
+# Desktop      : `PfDe`
+# Documents    : `PfDo`
+# Recents      : `PfAF`
+# Other…       : `PfLo`
+#
+# Set Desktop as the default location for new Finder windows by default
+finder_new_window_target: "PfDe"
+finder_new_windows_target_path: "file://${HOME}/Desktop/"
+
+# Set search scope.
+# This Mac       : `SCev`
+# Current Folder : `SCcf`
+# Previous Scope : `SCsp`
+finder_search_scope: "SCcf"
+
+# Set preferred view mode.
+# Icon View   : `icnv`
+# List View   : `Nlsv`
+# Column View : `clmv`
+# Cover Flow  : `Flwv`
+# Use column view in all Finder windows by default
+finder_view_mode: "clmv"
+
+### General
+
+### Input
+
+### Language & Region
+
+### Screen

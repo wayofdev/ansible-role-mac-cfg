@@ -17,14 +17,6 @@
     value: false
     state: present
 
-- name: Enable spring loading for all Dock items
-  community.general.osx_defaults:
-    domain: com.apple.dock
-    key: "show-recents"
-    type: bool
-    value: false
-    state: present
-
 - name: Bottom left screen corner → Start screen saver (corner)
   community.general.osx_defaults:
     domain: com.apple.dock
@@ -56,11 +48,3 @@
     type: int
     value: 0
     state: present
-
-- name: Add iOS Simulator to Launchpad
-  ansible.builtin.file:
-    src: "/Applications/Xcode.app/Contents/Developer/Applications/Simulator.app"
-    dest: "/Applications/Simulator.app"
-    owner: "{{ remote_regular_user }}"
-    group: staff
-    state: link
