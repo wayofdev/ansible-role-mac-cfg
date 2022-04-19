@@ -21,6 +21,11 @@
     - general
     - configuregeneral
 
+- include_tasks: safari.yml
+  tags:
+    - safari
+    - configuresafari
+
 - include_tasks: input.yml
   tags:
     - mouse

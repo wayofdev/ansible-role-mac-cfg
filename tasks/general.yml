@@ -76,6 +76,8 @@
     value: true
     state: present
 
+### Mail
+
 - name: "Mail: Copy email addresses as `foo@example.com` instead of `Foo Bar <foo@example.com>` in Mail.app."
   community.general.osx_defaults:
     domain: com.apple.mail
@@ -135,54 +137,3 @@
     type: int
     value: 0
     state: present
-
-### Safari
-# defaults write com.apple.Safari UserStyleSheetEnabled -bool false
-
-- name: "Safari: Enable Develop menu and the Web Inspector in Safari 14+ - Inspect Menu"
-  community.general.osx_defaults:
-    domain: com.apple.Safari
-    key: WebKitDeveloperExtrasEnabledPreferenceKey
-    type: bool
-    value: true
-    state: present
-
-- name: "Safari: Enable Develop menu and the Web Inspector in Safari 14+"
-  community.general.osx_defaults:
-    domain: com.apple.Safari
-    key: WebKitPreferences.developerExtrasEnabled
-    type: bool
-    value: true
-    state: present
-
-- name: "Safari: Change default homepage"
-  community.general.osx_defaults:
-    domain: com.apple.Safari
-    key: HomePage
-    type: string
-    value: "https://app.daily.dev/"
-    state: present
-
-- name: "Safari: Show homepage instead of Start Page when opening new tab"
-  community.general.osx_defaults:
-    domain: com.apple.Safari
-    key: NewTabBehavior
-    type: bool
-    value: false
-    state: present
-
-- name: "Safari: Show homepage instead of Start Page when opening new window"
-  community.general.osx_defaults:
-    domain: com.apple.Safari
-    key: NewWindowBehavior
-    type: bool
-    value: false
-    state: present
-
-# @todo Add to readme.md as post install instruction
-# You will have to manually give full disk access to terminal/iterm to do that
-# Enable Safari’s debug menu
-# Go to System Preferences -> Security & Privacy -> Full Disk Access -> Click on iTerm2
-# defaults write com.apple.Safari IncludeInternalDebugMenu -bool true
-
-### Address Book, Dashboard, iCal, TextEdit, and Disk Utility
