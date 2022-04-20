@@ -128,6 +128,7 @@
       OpenWith -bool true \
       Privileges -bool true
   changed_when: false
+  when: finder_expand_fileinfo_panels
 
 - name: "Show icons for external hard drives on Desktop"
   community.general.osx_defaults:

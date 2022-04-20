@@ -1,5 +1,13 @@
 ---
 
+### Applications
+
+# Photos: Prevent Photos from opening automatically when devices are plugged in.
+photos_disable_hotplug: true
+
+# Mail: Copy email addresses as `foo@example.com` instead of `Foo Bar <foo@example.com>` in Mail.app.
+mail_use_advanced_copy_format: false
+
 ### Battery
 
 # https://www.dssw.co.uk/reference/pmset.html
@@ -67,12 +75,6 @@ ttyskeepawake: true
 # password while coming out of standby mode.
 destroyfvkeyonstandby: false
 
-# On macOS, this module uses scutil to set HostName, ComputerName, and LocalHostName
-change_hostname: false
-
-# This mac-book's hostname
-hostname: mbpro-{{ remote_regular_user }}
-
 ### Dock
 
 # Drag a file over an icon in the Dock, hover, and the application will open.
@@ -104,7 +106,7 @@ finder_allow_quitting: true
 #
 # Set Desktop as the default location for new Finder windows by default
 finder_new_window_target: "PfDe"
-finder_new_windows_target_path: "file://${HOME}/Desktop/"
+finder_new_window_target_path: "file://${HOME}/Desktop/"
 
 # Set search scope.
 # This Mac       : `SCev`
@@ -183,8 +185,73 @@ finder_default_editor: "com.sublimetext.4"
 
 ### General
 
+# On macOS, this module uses scutil to set HostName, ComputerName, and LocalHostName
+change_hostname: false
+
+# This mac-book's hostname
+hostname: mbpro-{{ remote_regular_user }}
+
+# Expand save panel by default.
+general_expand_save_panel: true
+
+# Expand save panel by default.
+general_expand_print_panel: true
+
+# Automatically quit printer app once the print jobs complete.
+general_quit_print_job: true
+
+# Reveal IP address, hostname, OS version, etc. when clicking the clock in the login window (only).
+general_login_clock_click_hostname: true
+
+# Add iOS Simulator to Launchpad.
+general_create_simulator_symlink: true
+
+# Turn off Feedback Assistant data auto-gathering.
+feedback_send_data_to_apple: false
+
 ### Input
+
+# Use F1, F2, etc. keys as standard function keys on external keyboards each key.
+input_fkeys_as_primary: true
+
+# Pressing Fn key shows Emoji keyboard.
+input_fnkey_shows_emoji: true
+
+# Disable text auto-correction in native apps.
+input_disable_auto_correction: true
+
+# Disable text autocorrection in web.
+input_disable_web_auto_correction: true
+
+# Do not disable smart quotes, but set them as simple one's, instead of smart.
+# Use "" for double quotes and '' for single quotes
+input_use_simple_quotes: true
+
+# Disable natural scroll for mouse and trackpad.
+input_use_native_macos_scroll: false
+
+# Magic mouse should run in two button mode
+input_mouse_two_button_mode: true
+
+# Magic mouse - enable double tap gesture for zoom
+input_mouse_double_tap_gesture: true
+
+# Map bottom right corner to right-click for integrated trackpad
+input_bottom_right_click_trackpad: true
+
+# Map bottom right corner to right-click for bluetooth trackpad
+input_bottom_right_click_bt_trackpad: true
+
+# Allow global app shortcuts
+input_allow_global_app_shortcuts: true
+
+# Enable global shortcut: ⌥⌘, brings up System Preferences dialog (opt+cmd+comma)
+input_shortcut_opt_cmd_comma: true
 
 ### Language & Region
 
+### Safari
+
 ### Screen
+
+### Security

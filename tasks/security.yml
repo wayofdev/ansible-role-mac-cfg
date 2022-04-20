@@ -1,0 +1,11 @@
+---
+
+### Feedback Assistant
+
+- name: "Turn off Feedback Assistant data auto-gathering."
+  community.general.osx_defaults:
+    domain: com.apple.appleseed.FeedbackAssistant
+    key: Autogather
+    type: bool
+    value: "{{ feedback_send_data_to_apple }}"
+    state: present

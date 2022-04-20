@@ -1,0 +1,57 @@
+---
+
+### Activity Monitor
+
+- name: "Activity Monitor: Sort Activity Monitor results by CPU usage"
+  community.general.osx_defaults:
+    domain: com.apple.ActivityMonitor
+    key: SortColumn
+    type: string
+    value: "CPUUsage"
+    state: present
+
+- name: "Activity Monitor: Sort Activity Monitor results by CPU usage - Direction DSC"
+  community.general.osx_defaults:
+    domain: com.apple.ActivityMonitor
+    key: SortDirection
+    type: int
+    value: 0
+    state: present
+
+### Mail
+
+- name: "Mail: Copy email addresses as `foo@example.com` instead of `Foo Bar <foo@example.com>` in Mail.app."
+  community.general.osx_defaults:
+    domain: com.apple.mail
+    key: AddressesIncludeNameOnPasteboard
+    type: bool
+    value: "{{ mail_use_advanced_copy_format }}"
+    state: present
+
+### Photos
+
+- name: "Photos: Prevent Photos from opening automatically when devices are plugged in."
+  community.general.osx_defaults:
+    domain: com.apple.ImageCapture
+    key: disableHotPlug
+    type: bool
+    value: "{{ photos_disable_hotplug }}"
+    state: present
+
+### Activity Monitor
+
+- name: "Activity Monitor: Show the main window when launching app."
+  community.general.osx_defaults:
+    domain: com.apple.ActivityMonitor
+    key: OpenMainWindow
+    type: bool
+    value: true
+    state: present
+
+- name: "Activity Monitor: Show all processes."
+  community.general.osx_defaults:
+    domain: com.apple.ActivityMonitor
+    key: ShowCategory
+    type: int
+    value: 0
+    state: present

@@ -1,15 +1,20 @@
 ---
 
-- include_tasks: dock.yml
+- include_tasks: applications.yml
   tags:
-    - dock
-    - configuredock
+    - applications
+    - configureapplications
 
 - include_tasks: battery.yml
   tags:
     - battery
     - batterysaving
     - configurebattery
+
+- include_tasks: dock.yml
+  tags:
+    - dock
+    - configuredock
 
 - include_tasks: finder.yml
   tags:
@@ -20,11 +25,6 @@
   tags:
     - general
     - configuregeneral
-
-- include_tasks: safari.yml
-  tags:
-    - safari
-    - configuresafari
 
 - include_tasks: input.yml
   tags:
@@ -39,7 +39,17 @@
     - lang
     - configurelang
 
+- include_tasks: safari.yml
+  tags:
+    - safari
+    - configuresafari
+
 - include_tasks: screen.yml
   tags:
     - screen
     - configurescreen
+
+- include_tasks: security.yml
+  tags:
+    - security
+    - configuresecurity

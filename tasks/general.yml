@@ -20,7 +20,7 @@
     domain: NSGlobalDomain
     key: NSNavPanelExpandedStateForSaveMode # NSNavPanelExpandedStateForSaveMode2
     type: bool
-    value: true
+    value: "{{ general_expand_save_panel }}"
     state: present
 
 - name: "Expand print panel by default."
@@ -28,7 +28,7 @@
     domain: NSGlobalDomain
     key: PMPrintingExpandedStateForPrint # PMPrintingExpandedStateForPrint2
     type: bool
-    value: true
+    value: "{{ general_expand_print_panel }}"
     state: present
 
 - name: "Automatically quit printer app once the print jobs complete."
@@ -36,7 +36,7 @@
     domain: com.apple.print.PrintingPrefs
     key: "Quit When Finished"
     type: bool
-    value: true
+    value: "{{ general_quit_print_job }}"
     state: present
 
 - name: "Reveal IP address, hostname, OS version, etc. when clicking the clock in the login window (only)."
@@ -47,6 +47,7 @@
     value: HostName
     state: present
   become: true
+  when: general_login_clock_click_hostname
 
 - name: "Add iOS Simulator to Launchpad."
   ansible.builtin.file:
@@ -55,85 +56,4 @@
     owner: "{{ remote_regular_user }}"
     group: staff
     state: link
-
-### Feedback Assistant
-
-- name: "Turn of Feedback Assistant data auto-gathering."
-  community.general.osx_defaults:
-    domain: com.apple.appleseed.FeedbackAssistant
-    key: Autogather
-    type: bool
-    value: false
-    state: present
-
-### Photos
-
-- name: "Photos: Prevent Photos from opening automatically when devices are plugged in."
-  community.general.osx_defaults:
-    domain: com.apple.ImageCapture
-    key: disableHotPlug
-    type: bool
-    value: true
-    state: present
-
-### Mail
-
-- name: "Mail: Copy email addresses as `foo@example.com` instead of `Foo Bar <foo@example.com>` in Mail.app."
-  community.general.osx_defaults:
-    domain: com.apple.mail
-    key: AddressesIncludeNameOnPasteboard
-    type: bool
-    value: false
-    state: present
-
-### Screenshots
-
-- name: "Screenshots: Save to custom folder instead of Desktop."
-  community.general.osx_defaults:
-    domain: com.apple.screencapture
-    key: location
-    type: string
-    value: "${HOME}/Screenshots"
-    state: present
-
-- name: "Screenshots: Change the default file name."
-  community.general.osx_defaults:
-    domain: com.apple.screencapture
-    key: name
-    type: string
-    value: "src"
-    state: present
-
-### Activity Monitor
-
-- name: "Activity Monitor: Show the main window when launching app."
-  community.general.osx_defaults:
-    domain: com.apple.ActivityMonitor
-    key: OpenMainWindow
-    type: bool
-    value: true
-    state: present
-
-- name: "Activity Monitor: Show all processes."
-  community.general.osx_defaults:
-    domain: com.apple.ActivityMonitor
-    key: ShowCategory
-    type: int
-    value: 0
-    state: present
-
-- name: "Activity Monitor: Sort Activity Monitor results by CPU usage"
-  community.general.osx_defaults:
-    domain: com.apple.ActivityMonitor
-    key: SortColumn
-    type: string
-    value: "CPUUsage"
-    state: present
-
-- name: "Activity Monitor: Sort Activity Monitor results by CPU usage - Direction DSC"
-  community.general.osx_defaults:
-    domain: com.apple.ActivityMonitor
-    key: SortDirection
-    type: int
-    value: 0
-    state: present
+  when: general_create_simulator_symlink
