@@ -185,7 +185,7 @@
 
     - name: "Prefer custom editor over default TextEdit for plain text files."
       ansible.builtin.shell: >
-        duti -s {{ finder_default_editor }} public.data all
+        duti -s {{ finder_default_editor }} public.data all; \
         duti -s {{ finder_default_editor }} public.plain-text all
       changed_when: false
   when: finder_install_duti
