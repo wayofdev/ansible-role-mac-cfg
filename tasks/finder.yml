@@ -179,7 +179,7 @@
 - name: Change which programs will open the given file types.
   block:
     - name: "Installing duti - command-line tool to select default applications for document types Mac OS X."
-      community.general.homebrew_cask:
+      community.general.homebrew:
         name: duti
         state: installed
 
