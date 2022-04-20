@@ -164,7 +164,7 @@
 
 - name: "Show the ~/Library folder in finder"
   ansible.builtin.shell: >
-    chflags nohidden ~/Library && xattr -d com.apple.FinderInfo ~/Library
+    chflags nohidden ~/Library && xattr -d com.apple.FinderInfo ~/Library || true
   changed_when: false
   become: true
   when: finder_unhide_library_folder
