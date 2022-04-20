@@ -186,7 +186,7 @@ finder_default_editor: "com.sublimetext.4"
 ### General
 
 # On macOS, this module uses scutil to set HostName, ComputerName, and LocalHostName
-change_hostname: true
+change_hostname: false
 
 # This mac-book's hostname
 hostname: mbpro-{{ remote_regular_user }}
@@ -262,7 +262,7 @@ screen_require_pass_after_awake: true
 screen_require_pass_delay: 0
 
 # Screenshots: Save to custom folder instead of Desktop.
-screenshots_directory: "~/Screenshots"
+screenshots_directory: "/Users/root/Screenshots"
 
 # Screenshots: Change the default file name prefix.
 screenshot_use_prefix: "src"

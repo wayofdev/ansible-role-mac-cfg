@@ -9,13 +9,14 @@
     type: int
     value: 1
     state: present
+  when: screen_require_pass_after_awake
 
 - name: "Require password immediately after sleep or screen saver begins"
   community.general.osx_defaults:
     domain: com.apple.screensaver
     key: askForPasswordDelay
     type: int
-    value: 0
+    value: "{{ screen_require_pass_delay }}"
     state: present
 
 ### Screenshots
@@ -25,13 +26,13 @@
     domain: com.apple.screencapture
     key: location
     type: string
-    value: "~/Screenshots"
+    value: "{{ screenshots_directory }}"
     state: present
 
-- name: "Screenshots: Change the default file name."
+- name: "Screenshots: Change the default file name prefix."
   community.general.osx_defaults:
     domain: com.apple.screencapture
     key: name
     type: string
-    value: "src"
+    value: "{{ screenshot_use_prefix }}"
     state: present
