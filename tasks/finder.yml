@@ -180,7 +180,7 @@
   block:
     - name: "Installing duti - command-line tool to select default applications for document types Mac OS X."
       community.general.homebrew_cask:
-        name: iterm2
+        name: duti
         state: installed
 
     - name: "Prefer custom editor over default TextEdit for plain text files."
