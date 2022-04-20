@@ -38,11 +38,11 @@ sleep_computer: "Never"
 
 # Set amount of idle time until display sleeps to <minutes>.
 # Specify "Never" or "Off" for never.
-sleep_display: 15
+sleep_display: "Never"  # 15
 
 # Set amount of idle time until hard disk sleeps to <minutes>.
 # Specify "Never" or "Off" for never.
-sleep_harddisk: 30
+sleep_harddisk: "Never"  # 30
 
 # https://support.apple.com/en-gb/guide/mac-help/mh40773/mac
 #
@@ -106,7 +106,7 @@ finder_allow_quitting: true
 #
 # Set Desktop as the default location for new Finder windows by default
 finder_new_window_target: "PfDe"
-finder_new_window_target_path: "file://${HOME}/Desktop/"
+finder_new_window_target_path: "file://~/Desktop/"
 
 # Set search scope.
 # This Mac       : `SCev`
