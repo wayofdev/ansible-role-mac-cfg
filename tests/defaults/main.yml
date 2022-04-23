@@ -1,79 +1,126 @@
 ---
 
+########################################################################################
 ### Applications
+########################################################################################
 
-# Photos: Prevent Photos from opening automatically when devices are plugged in.
-photos_disable_hotplug: true
+#
+# Activity Monitor
+#
+activity_monitor:
+  # Show the main window when launching app.
+  show_main_window: true
 
-# Mail: Copy email addresses as `foo@example.com` instead of `Foo Bar <foo@example.com>` in Mail.app.
-mail_use_advanced_copy_format: false
+  # Sort Activity Monitor results
+  sort_by: "CPUUsage"
 
+  # Activity Monitor: Sort Direction
+  # 0 goes for DSC
+  sort_direction: 0
+
+#
+# MacOS Mail.app
+#
+mail:
+  # Copy email addresses as `foo@example.com` instead of `Foo Bar <foo@example.com>` in Mail.app.
+  use_advanced_copy_format: false
+
+#
+# MacOS Photos.app
+#
+photos:
+  # Prevent Photos from opening automatically when devices are plugged in.
+  disable_hotplug: true
+
+########################################################################################
 ### Battery
+########################################################################################
 
+# Mostly here 'pmset' utility is used. For reference see:
 # https://www.dssw.co.uk/reference/pmset.html
-
-# Restart automatically if the computer freezes
-restart_on_freeze: true
-
-# Set hibernate mode:
-# hibernatemode = 0 (binary 0000) by default on supported desktops. The system will not back memory up to
-#   persistent storage. The system must wake from the contents of memory; the system will lose context on
-#   power loss. This is, historically, plain old sleep.
 #
-# hibernatemode = 3 (binary 0011) by default on supported portables. The system will store a copy of mem-ory memory
-#   ory to persistent storage (the disk), and will power memory during sleep. The system will wake from
-#   memory, unless a power loss forces it to restore from disk image.
+# To get total regular & safe sleep set following parameters to these values:
+# powernap: false
+# womp: false
+# tcpkeepalive: false
+# ttyskeepawake false
 #
-# hibernatemode = 25 (binary 0001 1001) is only settable via pmset. The system will store a copy of mem-ory memory
-#   ory to persistent storage (the disk), and will remove power to memory. The system will restore from
-#   disk image. If you want "hibernation" - slower sleeps, slower wakes, and better battery life, you
-#   should use this setting.
-hibernatemode: 3
+power:
+  # Restart automatically if the computer freezes
+  restart_on_freeze: true
 
-# https://apple.stackexchange.com/questions/95195/what-is-the-difference-between-pmset-and-systemsetup-sleep-options
-#
-# Set amount of idle time until computer, display and hard disk sleep to <minutes>.
-# Specify "Never" or "Off" for never.
-sleep_computer: "Never"
+  # Settings to apply when device is on A/C charger.
+  on_charger:
+    # Wake the machine when the laptop lid is opened
+    lidwake: true
 
-# Set amount of idle time until display sleeps to <minutes>.
-# Specify "Never" or "Off" for never.
-sleep_display: "Never"  # 15
+    # Prevent idle system sleep when any tty (e.g. remote login session) is ’active’.
+    ttyskeepawake: true
 
-# Set amount of idle time until hard disk sleeps to <minutes>.
-# Specify "Never" or "Off" for never.
-sleep_harddisk: "Never"  # 30
+    # https://support.apple.com/en-gb/guide/mac-help/mh40773/mac
+    #
+    # Power Nap, available on Mac computers with flash memory, lets some Mac computers stay up to date
+    # even while they’re sleeping. When your Mac goes to sleep, Power Nap activates periodically to update information.
+    # The information that’s updated depends on whether your Mac is running on battery power (a Mac notebook computer)
+    # or plugged into a power adapter (a Mac notebook computer or Mac desktop computer).
+    # When your Mac is asleep and using battery power, Power Nap:
+    # * Checks for new messages in Mail
+    # * Updates events in Calendar
+    # * Updates other iCloud events
+    # When your Mac is plugged into a power adapter, Power Nap can also do activities such as
+    # downloading software updates and performing Time Machine backups.
+    powernap: true
 
-# https://support.apple.com/en-gb/guide/mac-help/mh40773/mac
-#
-# Power Nap, available on Mac computers with flash memory, lets some Mac computers stay up to date
-# even while they’re sleeping. When your Mac goes to sleep, Power Nap activates periodically to update information.
-# The information that’s updated depends on whether your Mac is running on battery power (a Mac notebook computer)
-# or plugged into a power adapter (a Mac notebook computer or Mac desktop computer).
-# When your Mac is asleep and using battery power, Power Nap:
-# * Checks for new messages in Mail
-# * Updates events in Calendar
-# * Updates other iCloud events
-# When your Mac is plugged into a power adapter, Power Nap can also do activities such as
-# downloading software updates and performing Time Machine backups.
-#
-# Set usage of PowerNap
-powernap: true
+    # Set hibernate mode:
+    # hibernatemode = 0 (binary 0000) by default on supported desktops. The system will not back memory up to
+    #   persistent storage. The system must wake from the contents of memory; the system will lose context on
+    #   power loss. This is, historically, plain old sleep.
+    #
+    # hibernatemode = 3 (binary 0011) by default on supported portables. The system will store a copy of mem-ory memory
+    #   ory to persistent storage (the disk), and will power memory during sleep. The system will wake from
+    #   memory, unless a power loss forces it to restore from disk image.
+    #
+    # hibernatemode = 25 (binary 0001 1001) is only settable via pmset. The system will store a copy of mem-ory memory
+    #   ory to persistent storage (the disk), and will remove power to memory. The system will restore from
+    #   disk image. If you want "hibernation" - slower sleeps, slower wakes, and better battery life, you
+    #   should use this setting.
+    hibernatemode: 3
 
-# wake the machine when the laptop lid is opened
-lidwake: true
+    # Display sleep timer
+    displaysleep: 15
 
-# Wake the machine when power source (AC/battery) is changed
-acwake: false
+    # Wake on ethernet magic packet. Same as "Wake for network access" in the Energy Saver preferences.
+    womp: true
 
-# prevent idle system sleep when any tty (e.g. remote login session) is 'active'. A tty is 'inactive'
-# only when its idle time exceeds the system sleep timer.
-ttyskeepawake: true
+    # System sleep timer (value in minutes, or 0 to disable)
+    sleep: 0
 
-# Destroy File Vault Key when going to standby mode. By default, File vault keys are retained even
-# when system goes to standby. If the keys are destroyed, user will be prompted to enter the
-# password while coming out of standby mode.
-destroyfvkeyonstandby: false
+    # Wake for network access
+    tcpkeepalive: true
+
+    # Display sleep will use an intermediate half-brightness state between full brightness and fully off
+    halfdim: true
+
+    # Wake the machine when power source (AC/battery) is changed
+    acwake: false
+
+    # https://apple.stackexchange.com/a/342286
+    # Not used with SSD's
+    disksleep: 0
+
+  # Settings to apply when device is using battery.
+  on_battery:
+    lidwake: true
+    ttyskeepawake: false
+    powernap: false
+    hibernatemode: 3
+    displaysleep: 15
+    womp: false
+    sleep: 30
+    tcpkeepalive: false
+    halfdim: true
+    acwake: false
+    disksleep: 0
 
 ### Dock
 
@@ -84,11 +131,30 @@ dock_enable_spring_load_everywhere: true
 # Don’t show recent applications in Dock
 dock_show_recents: false
 
-# Bottom left screen corner
-# ... @todo
+### Hot Corners
 
-# Bottom right screen corner
-# ... @todo
+# Possible values:
+#  0: no-op
+#  2: Mission Control
+#  3: Show application windows
+#  4: Desktop
+#  5: Start screen saver
+#  6: Disable screen saver
+#  7: Dashboard
+# 10: Put display to sleep
+# 11: Launchpad
+# 12: Notification Center
+
+# Bottom right screen corner → Start screen saver (5) (corner)
+dock_bottom_left_corner: 5
+dock_bottom_left_modifier: 0
+
+# Bottom right screen corner → Launchpad (modifier)
+dock_bottom_right_corner: 11
+dock_bottom_right_modifier: 0
+
+# Mission Control - Speed up animations
+dock_expose_animation_duration: 0.1
 
 ### Finder
 
@@ -156,16 +222,20 @@ finder_show_all_file_exts: false
 finder_expand_fileinfo_panels: true
 
 # Show icons for external hard drives on Desktop
-finder_desktop_show_ext_hard_drives: false
+# default in system: true
+finder_desktop_show_ext_hard_drives: true
 
 # Show icons for hard drives on Desktop
+# default in system: false
 finder_desktop_show_hard_drives: false
 
 # Show icons for mounted servers on Desktop
+# default in system: false
 finder_desktop_show_mounted_servers: false
 
 # Show icons for removable media on Desktop
-finder_desktop_show_removable_media: false
+# default in system: true
+finder_desktop_show_removable_media: true
 
 # Show the ~/Library folder in finder
 finder_unhide_library_folder: true
@@ -186,7 +256,7 @@ finder_default_editor: "com.sublimetext.4"
 ### General
 
 # On macOS, this module uses scutil to set HostName, ComputerName, and LocalHostName
-change_hostname: false
+change_hostname: true
 
 # This mac-book's hostname
 hostname: mbpro-{{ remote_regular_user }}
@@ -205,9 +275,6 @@ general_login_clock_click_hostname: true
 
 # Add iOS Simulator to Launchpad.
 general_create_simulator_symlink: true
-
-# Turn off Feedback Assistant data auto-gathering.
-feedback_send_data_to_apple: false
 
 ### Input
 
@@ -250,9 +317,79 @@ input_shortcut_opt_cmd_comma: true
 
 ### Language & Region
 
+# Set the timezone; see `sudo systemsetup -listtimezones` for other values
+lng_timezone: "Europe/Riga"
+
+# Set main languages - English US, Latvian - LV, Latvian - RU.
+lng_languages:
+  - en-US
+  - lv-LV
+  - ru-LV
+
+lng_locale: "en_US@currency=EUR"
+
+# Use metric measurement units.
+lng_metric_units: true
+
+# Set "AppleMeasurementUnits" setting to centimeters.
+lng_apple_units: "Centimeters"
+
+# Enables the input menu in the menu bar.
+lng_inputs_in_status_bar: true
+
 ### Safari
 
+# Safari: Enable Develop menu and the Web Inspector in Safari 14+
+safari_web_inspector: true
+
+# Safari: Change default homepage
+safari_homepage: "https://app.daily.dev/"
+
+# Safari: Show homepage instead of Start Page when opening new tab
+safari_show_homepage_in_new_tabs: true
+
+# Safari: Show homepage instead of Start Page when opening new window
+safari_show_homepage_in_new_windows: true
+
 ### Screen
+
+# Screenshots: Save to custom folder instead of Desktop.
+screenshots_directory: "~/Screenshots"
+
+# Screenshots: Change the default file name prefix.
+screenshots_use_prefix: "src"
+
+# Set default system screensaver
+# Available:
+# "Album Artwork"
+# "Arabesque"
+# "Drift"
+# "FloatingMessage"
+# "Flurry"
+# "Hello"
+# "Monterey"
+# "Random"
+# "Shell"
+# "Word of the Day"
+screensaver_name: "Drift"
+
+# Show clock when screensaver is running
+screensaver_show_clock: true
+
+# Show screen saver after:
+# Please choose these values, as OSX use dropdown in UI
+#
+# 0 - do not use screensaver
+# 60 - 1 minute
+# 120 - 2 minutes
+# 300 - 5 minutes
+# 600 - 10 minutes
+# 1200 - 20 minutes
+# 1800 - 30 minutes
+# 3600 - 1 hour
+screensaver_start_after: 300
+
+### Security
 
 # Require password when screen awakes.
 screen_require_pass_after_awake: true
@@ -261,10 +398,14 @@ screen_require_pass_after_awake: true
 # 0 is for immediate password require
 screen_require_pass_delay: 0
 
-# Screenshots: Save to custom folder instead of Desktop.
-screenshots_directory: "/Users/root/Screenshots"
+# Turn off Feedback Assistant data auto-gathering.
+feedback_send_data_to_apple: false
 
-# Screenshots: Change the default file name prefix.
-screenshot_use_prefix: "src"
+# Turn on system firewall.
+# Turned off by default.
+# If this role is used with dev-env-osx playbook, then lulu firewall is used instead.
+firewall_enabled: false
 
-### Security
+# Check for software updates once per week
+# Default: 7 (in days)
+software_updates_delay_days: 7
