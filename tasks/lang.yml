@@ -2,21 +2,17 @@
 
 # Language and Region
 
-# Set the timezone; see `sudo systemsetup -listtimezones` for other values
 - name: Set timezone to Europe/Riga
   community.general.timezone:
-    name: Europe/Riga
+    name: "{{ lng_timezone }}"
   become: true
 
-- name: Set main languages - English US, Latvian - LV, Latvian - RU.
+- name: Set main languages.
   community.general.osx_defaults:
     domain: NSGlobalDomain
     key: AppleLanguages
     type: array
-    value:
-      - en-US
-      - lv-LV
-      - ru-LV
+    value: "{{ lng_languages }}"
     state: present
 
 - name: Set system locale - US English with EUR as main currency.
@@ -24,15 +20,15 @@
     domain: NSGlobalDomain
     key: AppleLocale
     type: string
-    value: "en_US@currency=EUR"
+    value: "{{ lng_locale }}"
     state: present
 
-- name: Set metric measurment units.
+- name: Set metric measurement units.
   community.general.osx_defaults:
     domain: NSGlobalDomain
     key: AppleMetricUnits
     type: bool
-    value: true
+    value: "{{ lng_metric_units }}"
     state: present
 
 - name: Measurments in centimeters.
@@ -40,7 +36,7 @@
     domain: NSGlobalDomain
     key: AppleMeasurementUnits
     type: string
-    value: "Centimeters"
+    value: "{{ lng_apple_units }}"
     state: present
 
 - name: Enables the input menu in the menu bar.
@@ -48,5 +44,5 @@
     domain: com.apple.TextInputMenu
     key: visible
     type: bool
-    value: true
+    value: "{{ lng_inputs_in_status_bar }}"
     state: present

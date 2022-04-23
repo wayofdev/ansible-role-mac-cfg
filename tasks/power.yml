@@ -1,0 +1,50 @@
+---
+
+- name: "Get pmset capabilities."
+  ansible.builtin.command: "pmset -g cap"
+  register: pmset_cap
+  changed_when: false
+
+- name: "Get current restart-on-freeze status."
+  ansible.builtin.shell: >
+    systemsetup -getrestartfreeze | awk -F ': ' '{print $2}'
+  when: restart_on_freeze
+  register: getrestartfreeze_current
+  changed_when: false
+  become: true
+
+- name: "Set restart-on-freeze flag."
+  ansible.builtin.command: "systemsetup --setrestartfreeze {{ restart_on_freeze | ternary('on','off') }}"
+  when: restart_on_freeze and (getrestartfreeze_current.stdout | lower) != (restart_on_freeze | ternary('on','off') )
+  become: true
+
+- name: "Set the power settings when using the battery and a/c charger."
+  pmset:
+    on_charger:
+      lidwake: "{{ power.on_charger.lidwake | ternary(1,0) }}"
+      ttyskeepawake: "{{ power.on_charger.ttyskeepawake | ternary(1,0) }}"
+      powernap: "{{ power.on_charger.powernap | ternary(1,0) }}"
+      hibernatemode: "{{ power.on_charger.hibernatemode }}"
+      displaysleep: "{{ power.on_charger.displaysleep }}"
+      sleep: "{{ power.on_charger.sleep }}"
+      tcpkeepalive: "{{ power.on_charger.tcpkeepalive | ternary(1,0) }}"
+      halfdim: "{{ power.on_charger.halfdim | ternary(1,0) }}"
+      acwake: "{{ power.on_charger.acwake | ternary(1,0) }}"
+      disksleep: "{{ power.on_charger.disksleep }}"
+
+    on_battery:
+      lidwake: "{{ power.on_charger.lidwake | ternary(1,0) }}"
+      ttyskeepawake: "{{ power.on_charger.ttyskeepawake | ternary(1,0) }}"
+      powernap: "{{ power.on_charger.powernap | ternary(1,0) }}"
+      hibernatemode: "{{ power.on_charger.hibernatemode }}"
+      displaysleep: "{{ power.on_charger.displaysleep }}"
+      sleep: "{{ power.on_charger.sleep }}"
+      tcpkeepalive: "{{ power.on_charger.tcpkeepalive | ternary(1,0) }}"
+      halfdim: "{{ power.on_charger.halfdim | ternary(1,0) }}"
+      acwake: "{{ power.on_charger.acwake | ternary(1,0) }}"
+      disksleep: "{{ power.on_charger.disksleep }}"
+
+- name: "Print out current system setup settings."
+  ansible.builtin.command: systemsetup -g custom
+  changed_when: false
+  become: true

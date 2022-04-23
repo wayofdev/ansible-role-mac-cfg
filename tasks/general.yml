@@ -18,7 +18,7 @@
 - name: "Expand save panel by default."
   community.general.osx_defaults:
     domain: NSGlobalDomain
-    key: NSNavPanelExpandedStateForSaveMode # NSNavPanelExpandedStateForSaveMode2
+    key: NSNavPanelExpandedStateForSaveMode # NSNavPanelExpandedStateForSaveMode2 deprecated?
     type: bool
     value: "{{ general_expand_save_panel }}"
     state: present
@@ -26,7 +26,7 @@
 - name: "Expand print panel by default."
   community.general.osx_defaults:
     domain: NSGlobalDomain
-    key: PMPrintingExpandedStateForPrint # PMPrintingExpandedStateForPrint2
+    key: PMPrintingExpandedStateForPrint # PMPrintingExpandedStateForPrint2 deprecated?
     type: bool
     value: "{{ general_expand_print_panel }}"
     state: present

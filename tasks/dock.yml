@@ -6,7 +6,7 @@
     domain: com.apple.dock
     key: "enable-spring-load-actions-on-all-items"
     type: bool
-    value: true
+    value: "{{ dock_enable_spring_load_everywhere }}"
     state: present
 
 - name: Don’t show recent applications in Dock
@@ -14,7 +14,7 @@
     domain: com.apple.dock
     key: "show-recents"
     type: bool
-    value: false
+    value: "{{ dock_show_recents }}"
     state: present
 
 - name: Bottom left screen corner → Start screen saver (corner)
@@ -22,7 +22,7 @@
     domain: com.apple.dock
     key: "wvous-bl-corner"
     type: int
-    value: 5
+    value: "{{ dock_bottom_left_corner }}"
     state: present
 
 - name: Bottom left screen corner → Start screen saver (modifier)
@@ -30,7 +30,7 @@
     domain: com.apple.dock
     key: "wvous-bl-modifier"
     type: int
-    value: 0
+    value: "{{ dock_bottom_left_modifier }}"
     state: present
 
 - name: Bottom right screen corner → Launchpad (corner)
@@ -38,7 +38,7 @@
     domain: com.apple.dock
     key: "wvous-br-corner"
     type: int
-    value: 11
+    value: "{{ dock_bottom_right_corner }}"
     state: present
 
 - name: Bottom right screen corner → Launchpad (modifier)
@@ -46,5 +46,13 @@
     domain: com.apple.dock
     key: "wvous-br-modifier"
     type: int
-    value: 0
+    value: "{{ dock_bottom_right_modifier }}"
+    state: present
+
+- name: Mission Control - Speed up animations
+  community.general.osx_defaults:
+    domain: com.apple.dock
+    key: "expose-animation-duration"
+    type: float
+    value: "{{ dock_expose_animation_duration }}"
     state: present

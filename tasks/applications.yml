@@ -2,20 +2,36 @@
 
 ### Activity Monitor
 
-- name: "Activity Monitor: Sort Activity Monitor results by CPU usage"
+- name: "Activity Monitor: Show the main window when launching app."
+  community.general.osx_defaults:
+    domain: com.apple.ActivityMonitor
+    key: OpenMainWindow
+    type: bool
+    value: "{{ activity_monitor.show_main_window }}"
+    state: present
+
+- name: "Activity Monitor: Show all processes."
+  community.general.osx_defaults:
+    domain: com.apple.ActivityMonitor
+    key: ShowCategory
+    type: int
+    value: 0
+    state: present
+
+- name: "Activity Monitor: Sort Activity Monitor results by {{ activity_monitor.sort_by }}"
   community.general.osx_defaults:
     domain: com.apple.ActivityMonitor
     key: SortColumn
     type: string
-    value: "CPUUsage"
+    value: "{{ activity_monitor.sort_by }}"
     state: present
 
-- name: "Activity Monitor: Sort Activity Monitor results by CPU usage - Direction DSC"
+- name: "Activity Monitor: Sort Activity Monitor results by {{ activity_monitor.sort_by }} - Direction DSC"
   community.general.osx_defaults:
     domain: com.apple.ActivityMonitor
     key: SortDirection
     type: int
-    value: 0
+    value: "{{ activity_monitor.sort_direction }}"
     state: present
 
 ### Mail
@@ -25,7 +41,7 @@
     domain: com.apple.mail
     key: AddressesIncludeNameOnPasteboard
     type: bool
-    value: "{{ mail_use_advanced_copy_format }}"
+    value: "{{ mail.use_advanced_copy_format }}"
     state: present
 
 ### Photos
@@ -35,23 +51,5 @@
     domain: com.apple.ImageCapture
     key: disableHotPlug
     type: bool
-    value: "{{ photos_disable_hotplug }}"
-    state: present
-
-### Activity Monitor
-
-- name: "Activity Monitor: Show the main window when launching app."
-  community.general.osx_defaults:
-    domain: com.apple.ActivityMonitor
-    key: OpenMainWindow
-    type: bool
-    value: true
-    state: present
-
-- name: "Activity Monitor: Show all processes."
-  community.general.osx_defaults:
-    domain: com.apple.ActivityMonitor
-    key: ShowCategory
-    type: int
-    value: 0
+    value: "{{ photos.disable_hotplug }}"
     state: present

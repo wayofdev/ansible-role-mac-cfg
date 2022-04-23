@@ -1,5 +1,24 @@
 ---
 
+### Screen
+
+- name: "Require password when screen awakes."
+  community.general.osx_defaults:
+    domain: com.apple.screensaver
+    key: askForPassword
+    type: int
+    value: 1
+    state: present
+  when: screen_require_pass_after_awake
+
+- name: "Require password immediately after sleep or screen saver begins"
+  community.general.osx_defaults:
+    domain: com.apple.screensaver
+    key: askForPasswordDelay
+    type: int
+    value: "{{ screen_require_pass_delay }}"
+    state: present
+
 ### Feedback Assistant
 
 - name: "Turn off Feedback Assistant data auto-gathering."
@@ -8,4 +27,30 @@
     key: Autogather
     type: bool
     value: "{{ feedback_send_data_to_apple }}"
+    state: present
+
+### Firewall
+
+# Alternative way
+# https://github.com/rgcr/m-cli - utility:
+# m firewall status
+# m firewall enable / disable
+# without unloading, loading plist
+- name: "Firewall - Setting autostart by default."
+  community.general.osx_defaults:
+    domain: /Library/Preferences/com.apple.alf
+    key: globalstate
+    type: int
+    value: "{{ firewall_enabled }}"
+    state: present
+  become: true
+
+### Software Updates
+
+- name: "Software Updates - Check for updates each {{ software_updates_delay_days }} days."
+  community.general.osx_defaults:
+    domain: com.apple.SoftwareUpdate
+    key: ScheduleFrequency
+    type: int
+    value: "{{ software_updates_delay_days }}"
     state: present

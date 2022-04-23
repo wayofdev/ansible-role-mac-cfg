@@ -3,28 +3,31 @@
 ### Safari
 # defaults write com.apple.Safari UserStyleSheetEnabled -bool false
 
-- name: "Safari: Enable Develop menu and the Web Inspector in Safari 14+ - Inspect Menu"
-  community.general.osx_defaults:
-    domain: com.apple.Safari
-    key: WebKitDeveloperExtrasEnabledPreferenceKey
-    type: bool
-    value: true
-    state: present
+- name: Magic mouse should run in two button mode.
+  block:
+    - name: "Safari: Enable Develop menu and the Web Inspector in Safari 14+ - Inspect Menu"
+      community.general.osx_defaults:
+        domain: com.apple.Safari
+        key: WebKitDeveloperExtrasEnabledPreferenceKey
+        type: bool
+        value: true
+        state: present
 
-- name: "Safari: Enable Develop menu and the Web Inspector in Safari 14+"
-  community.general.osx_defaults:
-    domain: com.apple.Safari
-    key: WebKitPreferences.developerExtrasEnabled
-    type: bool
-    value: true
-    state: present
+    - name: "Safari: Enable Develop menu and the Web Inspector in Safari 14+"
+      community.general.osx_defaults:
+        domain: com.apple.Safari
+        key: WebKitPreferences.developerExtrasEnabled
+        type: bool
+        value: true
+        state: present
+  when: safari_web_inspector
 
 - name: "Safari: Change default homepage"
   community.general.osx_defaults:
     domain: com.apple.Safari
     key: HomePage
     type: string
-    value: "https://app.daily.dev/"
+    value: "{{ safari_homepage }}"
     state: present
 
 - name: "Safari: Show homepage instead of Start Page when opening new tab"
@@ -32,7 +35,7 @@
     domain: com.apple.Safari
     key: NewTabBehavior
     type: bool
-    value: false
+    value: "{{ safari_show_homepage_in_new_tabs | ternary(false,true) }}"
     state: present
 
 - name: "Safari: Show homepage instead of Start Page when opening new window"
@@ -40,7 +43,7 @@
     domain: com.apple.Safari
     key: NewWindowBehavior
     type: bool
-    value: false
+    value: "{{ safari_show_homepage_in_new_windows | ternary(false,true) }}"
     state: present
 
 # @todo Add to readme.md as post install instruction

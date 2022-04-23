@@ -1,24 +1,5 @@
 ---
 
-### Screen
-
-- name: "Require password when screen awakes."
-  community.general.osx_defaults:
-    domain: com.apple.screensaver
-    key: askForPassword
-    type: int
-    value: 1
-    state: present
-  when: screen_require_pass_after_awake
-
-- name: "Require password immediately after sleep or screen saver begins"
-  community.general.osx_defaults:
-    domain: com.apple.screensaver
-    key: askForPasswordDelay
-    type: int
-    value: "{{ screen_require_pass_delay }}"
-    state: present
-
 ### Screenshots
 
 - name: "Screenshots: Save to custom folder instead of Desktop."
@@ -34,5 +15,39 @@
     domain: com.apple.screencapture
     key: name
     type: string
-    value: "{{ screenshot_use_prefix }}"
+    value: "{{ screenshots_use_prefix }}"
+    state: present
+
+- name: "Screensaver: Get current screensaver."
+  ansible.builtin.command: >
+    defaults -currentHost read com.apple.screensaver | grep -o {{ screensaver_name }}
+  register: screensaver_current
+  changed_when: false
+
+- name: "Screensaver: Change default one."
+  ansible.builtin.command: >
+    defaults -currentHost write com.apple.screensaver "moduleDict" \
+      -dict-add "path" -string "/System/Library/Screen Savers/{{ screensaver_name }}.saver"
+  when: (screensaver_current != screensaver_name)
+
+- name: "Screensaver: Change default one."
+  ansible.builtin.command: >
+    defaults -currentHost write com.apple.screensaver "moduleDict" \
+      -dict-add "type" -integer 1
+  when: (screensaver_current != screensaver_name)
+
+- name: "Screensaver: Show clock when screensaver is running."
+  community.general.osx_defaults:
+    domain: com.apple.screensaver
+    key: showClock
+    type: bool
+    value: "{{ screensaver_show_clock }}"
+    state: present
+
+- name: "Screensaver: Show clock when screensaver is running."
+  community.general.osx_defaults:
+    domain: com.apple.screensaver
+    key: idleTime
+    type: int
+    value: "{{ screensaver_start_after }}"
     state: present

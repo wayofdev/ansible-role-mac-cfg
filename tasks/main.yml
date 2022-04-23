@@ -5,11 +5,13 @@
     - applications
     - configureapplications
 
-- include_tasks: battery.yml
+- include_tasks: power.yml
   tags:
+    - power
     - battery
     - batterysaving
     - configurebattery
+    - configurepower
 
 - include_tasks: dock.yml
   tags:
