@@ -256,7 +256,7 @@ finder_default_editor: "com.sublimetext.4"
 ### General
 
 # On macOS, this module uses scutil to set HostName, ComputerName, and LocalHostName
-change_hostname: true
+change_hostname: false
 
 # This mac-book's hostname
 hostname: mbpro-{{ remote_regular_user }}
