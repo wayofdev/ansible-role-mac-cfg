@@ -8,14 +8,14 @@
 - name: "Get current restart-on-freeze status."
   ansible.builtin.shell: >
     systemsetup -getrestartfreeze | awk -F ': ' '{print $2}'
-  when: restart_on_freeze
+  when: power.restart_on_freeze
   register: getrestartfreeze_current
   changed_when: false
   become: true
 
 - name: "Set restart-on-freeze flag."
-  ansible.builtin.command: "systemsetup --setrestartfreeze {{ restart_on_freeze | ternary('on','off') }}"
-  when: restart_on_freeze and (getrestartfreeze_current.stdout | lower) != (restart_on_freeze | ternary('on','off') )
+  ansible.builtin.command: "systemsetup --setrestartfreeze {{ power.restart_on_freeze | ternary('on','off') }}"
+  when: power.restart_on_freeze and (getrestartfreeze_current.stdout | lower) != (power.restart_on_freeze | ternary('on','off') )
   become: true
 
 - name: "Set the power settings when using the battery and a/c charger."

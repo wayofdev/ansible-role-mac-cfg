@@ -65,7 +65,8 @@ jobs:
         run: |
           set -eux
           pip install ansible
-          cp tests/defaults/main.yml ./defaults/main.yml
+          # Do not change hostname on remote runner.
+          sed -i 's/change_hostname\: true/change_hostname\: false/g' ./defaults/main.yml
           ansible-galaxy install -r requirements.yml
 
       - name: Test the playbook.
