@@ -17,6 +17,8 @@ galaxy_info:
 
   galaxy_tags:
     - 'macos'
+    - 'mac'
+    - 'monterey'
     - 'configuration'
     - 'osx'
     - 'defaults'

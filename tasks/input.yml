@@ -1,45 +1,51 @@
 ---
 
+- name: Input - Disable natural scroll for mouse and trackpad.
+  community.general.osx_defaults:
+    domain: NSGlobalDomain
+    key: com.apple.swipescrolldirection
+    type: bool
+    value: "{{ input.use_native_macos_scroll }}"
+    state: present
+
 ### Keyboard
 
 # Fn key is used for special features.
-- name: Use F1, F2, etc. keys as standard function keys on external keyboards each key.
+- name: Keyboard - Use F1, F2, etc. keys as standard function keys on external keyboards each key.
   community.general.osx_defaults:
     domain: NSGlobalDomain
     key: com.apple.keyboard.fnState
     type: int
-    value: 1
+    value: "{{ input.keyboard.fn_key_state }}"
     state: present
-  when: input_fkeys_as_primary
 
-- name: Pressing Fn key shows Emoji keyboard.
+- name: Keyboard - Pressing Fn key should trigger action.
   community.general.osx_defaults:
-    domain: NSGlobalDomain
+    domain: com.apple.HIToolbox
     key: AppleFnUsageType
     type: int
-    value: 2
+    value: "{{ input.keyboard.fn_usage_type }}"
     state: present
-  when: input_fnkey_shows_emoji
 
 ### Text
 
-- name: Disable text auto-correction in native apps.
+- name: Text - Disable text auto-correction in native apps.
   community.general.osx_defaults:
     domain: NSGlobalDomain
     key: NSAutomaticSpellingCorrectionEnabled
     type: bool
-    value: "{{ input_disable_auto_correction | ternary(false,true) }}"
+    value: "{{ input.text.disable_auto_correction | ternary(false,true) }}"
     state: present
 
-- name: Disable auto-correction in web.
+- name: Text - Disable auto-correction in web.
   community.general.osx_defaults:
     domain: NSGlobalDomain
     key: WebAutomaticSpellingCorrectionEnabled
     type: bool
-    value: "{{ input_disable_web_auto_correction | ternary(false,true) }}"
+    value: "{{ input.text.disable_web_auto_correction | ternary(false,true) }}"
     state: present
 
-- name: Do not disable smart quotes, but set them as simple one's, instead of smart.
+- name: Text - Do not disable smart quotes, but set them as simple one's, instead of smart.
   community.general.osx_defaults:
     domain: NSGlobalDomain
     key: NSUserQuotesArray
@@ -50,21 +56,13 @@
       - '\U0027'
       - '\U0027'
   changed_when: false
-  when: input_use_simple_quotes
+  when: input.text.use_simple_quotes
 
 ### Mouse
 
-- name: Disable natural scroll for mouse and trackpad.
-  community.general.osx_defaults:
-    domain: NSGlobalDomain
-    key: com.apple.swipescrolldirection
-    type: bool
-    value: "{{ input_use_native_macos_scroll }}"
-    state: present
-
-- name: Magic mouse should run in two button mode.
+- name: Mouse - Run in two button mode.
   block:
-    - name: Magic mouse should run in two button mode.
+    - name: Mouse - Run in two button mode.
       community.general.osx_defaults:
         domain: com.apple.AppleMultitouchMouse
         key: MouseButtonMode
@@ -72,18 +70,18 @@
         value: TwoButton
         state: present
 
-    - name: Bluetooth Magic mouse should run in two button mode.
+    - name: Bluetooth Mouse - Run in two button mode.
       community.general.osx_defaults:
         domain: com.apple.driver.AppleBluetoothMultitouch.mouse
         key: MouseButtonMode
         type: string
         value: TwoButton
         state: present
-  when: input_mouse_two_button_mode
+  when: input.mouse.two_button_mode
 
-- name: Magic mouse - enable double tap gesture for zoom.
+- name: Mouse - Enable double tap gesture for zoom.
   block:
-    - name: Magic mouse - enable double tap gesture for zoom.
+    - name: Мouse - Enable double tap gesture for zoom.
       community.general.osx_defaults:
         domain: com.apple.AppleMultitouchMouse
         key: MouseOneFingerDoubleTapGesture
@@ -91,18 +89,18 @@
         value: 1
         state: present
 
-    - name: Bluetooth Magic mouse - enable double tap gesture for zoom.
+    - name: Bluetooth Mouse - Enable double tap gesture for zoom.
       community.general.osx_defaults:
         domain: com.apple.driver.AppleBluetoothMultitouch.mouse
         key: MouseOneFingerDoubleTapGesture
         type: int
         value: 1
         state: present
-  when: input_mouse_double_tap_gesture
+  when: input.mouse.double_tap_gesture
 
 ### Trackpad
 
-- name: Enabling trackpad controls.
+- name: Trackpad - Enabling trackpad controls.
   community.general.osx_defaults:
     domain: NSGlobalDomain
     key: ContextMenuGesture
@@ -110,8 +108,7 @@
     value: 1
     state: present
 
-
-- name: Map bottom right corner to right-click for integrated trackpad r1.
+- name: Trackpad - Map bottom right corner to right-click for integrated trackpad.
   block:
     - name: Apply rule 1.
       community.general.osx_defaults:
@@ -128,9 +125,9 @@
         type: bool
         value: true
         state: present
-  when: input_bottom_right_click_trackpad
+  when: input.trackpad.bottom_right_click_trackpad
 
-- name: Map bottom right corner to right-click for bluetooth trackpad.
+- name: Trackpad - Map bottom right corner to right-click for bluetooth.
   block:
     - name: Apply rule 1.
       community.general.osx_defaults:
@@ -147,22 +144,29 @@
         type: bool
         value: true
         state: present
-  when: input_bottom_right_click_bt_trackpad
+  when: input.trackpad.bottom_right_click_bt_trackpad
 
 ### Shortcuts
 
-- name: Allow global app shortcuts.
+- name: Shortcuts - Allow global app shortcuts.
   community.general.osx_defaults:
     domain: com.apple.universalaccess
     key: com.apple.custommenu.apps
     type: array
     value:
       - NSGlobalDomain
-  changed_when: false
-  when: input_allow_global_app_shortcuts
+    state: present
+  when: input.shortcuts.allow
 
-- name: "⌥⌘, brings up System Preferences dialog (opt+cmd+comma)"
+- name: Shortcuts - Get ⌥ ⌘ , shortcut status.
+  ansible.builtin.shell: >
+    defaults read | grep 'System\ Preferences\\\\U2026'
+  register: opt_cmd_comma_current
+  failed_when: "opt_cmd_comma_current.rc == 2"
+  changed_when: false
+  check_mode: false
+
+- name: Shortcuts - ⌥ ⌘ , brings up System Preferences dialog (opt + cmd + comma).
   ansible.builtin.shell: >
     defaults write "Apple Global Domain" NSUserKeyEquivalents -dict-add "System Preferences\\U2026" "@~,"
-  changed_when: false
-  when: input_shortcut_opt_cmd_comma
+  when: input.shortcuts.opt_cmd_comma and opt_cmd_comma_current.stdout == ''

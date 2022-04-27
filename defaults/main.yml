@@ -11,6 +11,9 @@ activity_monitor:
   # Show the main window when launching app.
   show_main_window: true
 
+  # Show all processes.
+  show_category: 0
+
   # Sort Activity Monitor results
   sort_by: "CPUUsage"
 
@@ -32,8 +35,248 @@ photos:
   # Prevent Photos from opening automatically when devices are plugged in.
   disable_hotplug: true
 
+#
+# Other Applications
+#
+other:
+  # Add iOS Simulator to Launchpad.
+  create_simulator_symlink: true
+
 ########################################################################################
-### Battery
+### Dock
+########################################################################################
+
+dock:
+  # Drag a file over an icon in the Dock, hover, and the application will open.
+  # https://macos-defaults.com/misc/enable-spring-load-actions-on-all-items.html
+  enable_spring_load_everywhere: true
+
+  # Don’t show recent applications in Dock
+  show_recents: false
+
+  ### Hot Corners
+
+  # Possible values:
+  #  0: no-op
+  #  2: Mission Control
+  #  3: Show application windows
+  #  4: Desktop
+  #  5: Start screen saver
+  #  6: Disable screen saver
+  #  7: Dashboard
+  # 10: Put display to sleep
+  # 11: Launchpad
+  # 12: Notification Center
+
+  # Bottom right screen corner → Start screen saver
+  bottom_left_corner: 5
+  bottom_left_modifier: 0
+
+  # Bottom right screen corner → Launchpad
+  bottom_right_corner: 11
+  bottom_right_modifier: 0
+
+  # Mission Control - Speed up animations
+  expose_animation_duration: 0.1
+
+########################################################################################
+### Finder
+########################################################################################
+
+finder:
+  # Allow quitting via ⌘ + Q; doing so will also hide desktop icons
+  allow_quitting: true
+
+  # What path should new finder windows open
+  # Computer     : `PfCm`
+  # Volume       : `PfVo`
+  # $HOME        : `PfHm`
+  # Desktop      : `PfDe`
+  # Documents    : `PfDo`
+  # Recents      : `PfAF`
+  # Other…       : `PfLo`
+  #
+  # Set Desktop as the default location for new Finder windows by default
+  new_window_target: "PfDe"
+  new_window_target_path: "file://~/Desktop/"
+
+  # Set search scope.
+  # This Mac       : `SCev`
+  # Current Folder : `SCcf`
+  # Previous Scope : `SCsp`
+  search_scope: "SCcf"
+
+  # Set preferred view mode.
+  # Icon View   : `icnv`
+  # List View   : `Nlsv`
+  # Column View : `clmv`
+  # Cover Flow  : `Flwv`
+  # Use column view in all Finder windows by default
+  view_mode: "clmv"
+
+  # Show path bar in Finder (Example: 751 items ... 351 GB left ...)
+  show_path_bar: true
+
+  # Keep folders on top when sorting by name
+  keep_folders_on_top: true
+
+  # Disable the warning when changing a file extension
+  disable_extension_change_warning: true
+
+  # Show status bar
+  show_status_bar: true
+
+  # Show bottom path bar by default
+  show_bottom_path_bar: true
+
+  # Avoid creating .DS_Store files on network volumes
+  avoid_dsstore_on_network_volumes: true
+
+  # Avoid creating .DS_Store files on USB volumes
+  avoid_dsstore_on_usb_volumes: true
+
+  # Disable the warning before emptying the Trash
+  disable_trash_warning: true
+
+  # Display full POSIX path as Finder window title
+  show_full_title: true
+
+  # Show all filename extensions
+  show_all_file_exts: false
+
+  # Expand the following File Info panes: General, Open With, Sharing & Permissions
+  expand_fileinfo_panels: true
+
+  # Show icons for external hard drives on Desktop
+  desktop_show_ext_hard_drives: true
+
+  # Show icons for hard drives on Desktop
+  desktop_show_hard_drives: false
+
+  # Show icons for mounted servers on Desktop
+  desktop_show_mounted_servers: false
+
+  # Show icons for removable media on Desktop
+  desktop_show_removable_media: true
+
+  # Show the ~/Library folder in finder
+  unhide_library_folder: true
+
+  # Show the ~/Users folder in finder
+  unhide_users_folder: true
+
+  # Install duti - utility to allow to change default file types.
+  install_duti: true
+
+  # Prefer custom editor over default TextEdit for plain text files.
+  # Works only if flag 'install_duti' is set to true
+  # Examples:
+  # com.sublimetext.3
+  # com.sublimetext.4
+  # com.microsoft.VSCode
+  default_editor: "com.sublimetext.4"
+
+########################################################################################
+### Input
+########################################################################################
+
+input:
+  # Disable natural scroll for mouse and trackpad.
+  use_native_macos_scroll: false
+
+  keyboard:
+    # For 0 - Use F1, F2, etc. keys as Brightness/Media
+    # For 1 - Use F1, F2, etc. keys as standard function keys on external keyboards each key.
+    fn_key_state: 1
+
+    # What should happen when pressing Fn key?
+    # 0 - Do Nothing
+    # 1 - Change Input Source
+    # 2 - Show Emoji & Symbols
+    # 3 - Start Dictation (Press Twice)
+    fn_usage_type: 2
+
+  text:
+    # Disable text auto-correction in native apps.
+    disable_auto_correction: true
+
+    # Disable text autocorrection in web.
+    disable_web_auto_correction: true
+
+    # Do not disable smart quotes, but set them as simple one's, instead of smart.
+    # Use "" for double quotes and '' for single quotes
+    use_simple_quotes: true
+
+  mouse:
+    # Magic mouse should run in two button mode
+    two_button_mode: true
+
+    # Magic mouse - enable double tap gesture for zoom
+    double_tap_gesture: true
+
+  trackpad:
+    # Map bottom right corner to right-click for integrated trackpad
+    bottom_right_click_trackpad: true
+
+    # Map bottom right corner to right-click for bluetooth trackpad
+    bottom_right_click_bt_trackpad: true
+
+  shortcuts:
+    # Allow global app shortcuts
+    allow: true
+
+    # Enable global shortcut: ⌥⌘, brings up System Preferences dialog (opt+cmd+comma)
+    opt_cmd_comma: true
+
+########################################################################################
+### Language & Region
+########################################################################################
+
+lang:
+  # Set the timezone; see `sudo systemsetup -listtimezones` for other values
+  timezone: "Europe/Riga"
+
+  # Set main languages - English US, Latvian - LV, Latvian - RU.
+  languages:
+    - en-US
+    - lv-LV
+    - ru-LV
+
+  locale: "en_US@currency=EUR"
+
+  # Use metric measurement units.
+  metric_units: true
+
+  # Set "AppleMeasurementUnits" setting to centimeters.
+  apple_units: "Centimeters"
+
+  # Enables the input menu in the menu bar.
+  inputs_in_status_bar: true
+
+  # List of input sources.
+  input_sources:
+    # Default input sources, set them by priority.
+    # First one will be selected as default one.
+    - name: "ABC"
+      id: 252
+    - name: "Latvian"
+      id: 30765
+    - name: "Russian - Phonetic"
+      id: 19457
+
+########################################################################################
+### Network
+########################################################################################
+
+network:
+  change_hostname: true
+
+  # This mac-book's hostname
+  # On macOS, this module uses scutil to set HostName, ComputerName, and LocalHostName
+  hostname: mbpro-{{ remote_regular_user }}
+
+########################################################################################
+### Power Management
 ########################################################################################
 
 # Mostly here 'pmset' utility is used. For reference see:
@@ -115,297 +358,131 @@ power:
     powernap: false
     hibernatemode: 3
     displaysleep: 15
-    womp: false
     sleep: 30
     tcpkeepalive: false
     halfdim: true
     acwake: false
     disksleep: 0
 
-### Dock
-
-# Drag a file over an icon in the Dock, hover, and the application will open.
-# https://macos-defaults.com/misc/enable-spring-load-actions-on-all-items.html
-dock_enable_spring_load_everywhere: true
-
-# Don’t show recent applications in Dock
-dock_show_recents: false
-
-### Hot Corners
-
-# Possible values:
-#  0: no-op
-#  2: Mission Control
-#  3: Show application windows
-#  4: Desktop
-#  5: Start screen saver
-#  6: Disable screen saver
-#  7: Dashboard
-# 10: Put display to sleep
-# 11: Launchpad
-# 12: Notification Center
-
-# Bottom right screen corner → Start screen saver (5) (corner)
-dock_bottom_left_corner: 5
-dock_bottom_left_modifier: 0
-
-# Bottom right screen corner → Launchpad (modifier)
-dock_bottom_right_corner: 11
-dock_bottom_right_modifier: 0
-
-# Mission Control - Speed up animations
-dock_expose_animation_duration: 0.1
-
-### Finder
-
-# Allow quitting via ⌘ + Q; doing so will also hide desktop icons
-finder_allow_quitting: true
-
-# What path should new finder windows open
-# Computer     : `PfCm`
-# Volume       : `PfVo`
-# $HOME        : `PfHm`
-# Desktop      : `PfDe`
-# Documents    : `PfDo`
-# Recents      : `PfAF`
-# Other…       : `PfLo`
-#
-# Set Desktop as the default location for new Finder windows by default
-finder_new_window_target: "PfDe"
-finder_new_window_target_path: "file://~/Desktop/"
-
-# Set search scope.
-# This Mac       : `SCev`
-# Current Folder : `SCcf`
-# Previous Scope : `SCsp`
-finder_search_scope: "SCcf"
-
-# Set preferred view mode.
-# Icon View   : `icnv`
-# List View   : `Nlsv`
-# Column View : `clmv`
-# Cover Flow  : `Flwv`
-# Use column view in all Finder windows by default
-finder_view_mode: "clmv"
-
-# Show path bar in Finder (Example: 751 items ... 351 GB left ...)
-finder_show_path_bar: true
-
-# Keep folders on top when sorting by name
-finder_keep_folders_on_top: true
-
-# Disable the warning when changing a file extension
-finder_disable_extension_change_warning: true
-
-# Show status bar
-finder_show_status_bar: true
-
-# Show bottom path bar by default
-finder_show_bottom_path_bar: true
-
-# Avoid creating .DS_Store files on network volumes
-finder_avoid_dsstore_on_network_volumes: true
-
-# Avoid creating .DS_Store files on USB volumes
-finder_avoid_dsstore_on_usb_volumes: true
-
-# Disable the warning before emptying the Trash
-finder_disable_trash_warning: true
-
-# Display full POSIX path as Finder window title
-finder_show_full_title: true
-
-# Show all filename extensions
-finder_show_all_file_exts: false
-
-# Expand the following File Info panes: General, Open With, Sharing & Permissions
-finder_expand_fileinfo_panels: true
-
-# Show icons for external hard drives on Desktop
-# default in system: true
-finder_desktop_show_ext_hard_drives: true
-
-# Show icons for hard drives on Desktop
-# default in system: false
-finder_desktop_show_hard_drives: false
-
-# Show icons for mounted servers on Desktop
-# default in system: false
-finder_desktop_show_mounted_servers: false
-
-# Show icons for removable media on Desktop
-# default in system: true
-finder_desktop_show_removable_media: true
-
-# Show the ~/Library folder in finder
-finder_unhide_library_folder: true
-
-# Show the ~/Users folder in finder
-finder_unhide_users_folder: true
-
-# Install duti - utility to allow to change default file types.
-finder_install_duti: true
-
-# Prefer custom editor over default TextEdit for plain text files.
-# Examples:
-# com.sublimetext.3
-# com.sublimetext.4
-# com.microsoft.VSCode
-finder_default_editor: "com.sublimetext.4"
-
-### General
-
-# On macOS, this module uses scutil to set HostName, ComputerName, and LocalHostName
-change_hostname: true
-
-# This mac-book's hostname
-hostname: mbpro-{{ remote_regular_user }}
-
-# Expand save panel by default.
-general_expand_save_panel: true
-
-# Expand save panel by default.
-general_expand_print_panel: true
-
-# Automatically quit printer app once the print jobs complete.
-general_quit_print_job: true
-
-# Reveal IP address, hostname, OS version, etc. when clicking the clock in the login window (only).
-general_login_clock_click_hostname: true
-
-# Add iOS Simulator to Launchpad.
-general_create_simulator_symlink: true
-
-### Input
-
-# Use F1, F2, etc. keys as standard function keys on external keyboards each key.
-input_fkeys_as_primary: true
-
-# Pressing Fn key shows Emoji keyboard.
-input_fnkey_shows_emoji: true
-
-# Disable text auto-correction in native apps.
-input_disable_auto_correction: true
-
-# Disable text autocorrection in web.
-input_disable_web_auto_correction: true
-
-# Do not disable smart quotes, but set them as simple one's, instead of smart.
-# Use "" for double quotes and '' for single quotes
-input_use_simple_quotes: true
-
-# Disable natural scroll for mouse and trackpad.
-input_use_native_macos_scroll: false
-
-# Magic mouse should run in two button mode
-input_mouse_two_button_mode: true
-
-# Magic mouse - enable double tap gesture for zoom
-input_mouse_double_tap_gesture: true
-
-# Map bottom right corner to right-click for integrated trackpad
-input_bottom_right_click_trackpad: true
-
-# Map bottom right corner to right-click for bluetooth trackpad
-input_bottom_right_click_bt_trackpad: true
-
-# Allow global app shortcuts
-input_allow_global_app_shortcuts: true
-
-# Enable global shortcut: ⌥⌘, brings up System Preferences dialog (opt+cmd+comma)
-input_shortcut_opt_cmd_comma: true
-
-### Language & Region
-
-# Set the timezone; see `sudo systemsetup -listtimezones` for other values
-lng_timezone: "Europe/Riga"
-
-# Set main languages - English US, Latvian - LV, Latvian - RU.
-lng_languages:
-  - en-US
-  - lv-LV
-  - ru-LV
-
-lng_locale: "en_US@currency=EUR"
-
-# Use metric measurement units.
-lng_metric_units: true
-
-# Set "AppleMeasurementUnits" setting to centimeters.
-lng_apple_units: "Centimeters"
-
-# Enables the input menu in the menu bar.
-lng_inputs_in_status_bar: true
-
+########################################################################################
 ### Safari
+########################################################################################
 
-# Safari: Enable Develop menu and the Web Inspector in Safari 14+
-safari_web_inspector: true
+safari:
+  # Safari: Enable Develop menu and the Web Inspector in Safari 14+
+  web_inspector: true
 
-# Safari: Change default homepage
-safari_homepage: "https://app.daily.dev/"
+  # Safari: Change default homepage
+  homepage: "https://app.daily.dev/"
 
-# Safari: Show homepage instead of Start Page when opening new tab
-safari_show_homepage_in_new_tabs: true
+  # Safari: Setup new tab behavior
+  # 0: Homepage
+  # 1: Empty Page
+  # 2: Same Page
+  # 3: Bookmarks
+  # 4: Top Sites
+  tab_behaviour: 0
 
-# Safari: Show homepage instead of Start Page when opening new window
-safari_show_homepage_in_new_windows: true
+  # Safari: Setup new window behavior
+  # 0: Homepage
+  # 1: Empty Page
+  # 2: Same Page
+  # 3: Bookmarks
+  # 4: Top Sites
+  window_behaviour: 0
 
-### Screen
+########################################################################################
+### Screensaver
+########################################################################################
 
-# Screenshots: Save to custom folder instead of Desktop.
-screenshots_directory: "~/Screenshots"
+screensaver:
+  # Set default system screensaver
+  # Available:
+  # "Album Artwork"
+  # "Arabesque"
+  # "Drift"
+  # "FloatingMessage"
+  # "Flurry"
+  # "Hello"
+  # "Monterey"
+  # "Random"
+  # "Shell"
+  # "Word of the Day"
+  name: "Flurry"
 
-# Screenshots: Change the default file name prefix.
-screenshots_use_prefix: "src"
+  # Show clock when screensaver is running
+  show_clock: true
 
-# Set default system screensaver
-# Available:
-# "Album Artwork"
-# "Arabesque"
-# "Drift"
-# "FloatingMessage"
-# "Flurry"
-# "Hello"
-# "Monterey"
-# "Random"
-# "Shell"
-# "Word of the Day"
-screensaver_name: "Drift"
+  # Show screen saver after:
+  # Please choose these values, as OSX use dropdown in UI
+  #
+  # 0 - do not use screensaver
+  # 60 - 1 minute
+  # 120 - 2 minutes
+  # 300 - 5 minutes
+  # 600 - 10 minutes
+  # 1200 - 20 minutes
+  # 1800 - 30 minutes
+  # 3600 - 1 hour
+  start_after: 300
 
-# Show clock when screensaver is running
-screensaver_show_clock: true
+########################################################################################
+### Screenshots
+########################################################################################
 
-# Show screen saver after:
-# Please choose these values, as OSX use dropdown in UI
-#
-# 0 - do not use screensaver
-# 60 - 1 minute
-# 120 - 2 minutes
-# 300 - 5 minutes
-# 600 - 10 minutes
-# 1200 - 20 minutes
-# 1800 - 30 minutes
-# 3600 - 1 hour
-screensaver_start_after: 300
+screenshots:
+  # Save to custom folder instead of Desktop.
+  directory: "/Users/{{ remote_regular_user }}/Screenshots"
 
+  # Change the default file name prefix.
+  use_prefix: "src"
+
+########################################################################################
 ### Security
+########################################################################################
 
-# Require password when screen awakes.
-screen_require_pass_after_awake: true
+security:
+  screen:
+    # Require password when screen awakes.
+    require_pass_after_awake: true
 
-# Require password immediately after sleep or screen saver begins
-# 0 is for immediate password require
-screen_require_pass_delay: 0
+    # Require password immediately after sleep or screen saver begins
+    # 0 is for immediate password require
+    require_pass_delay: 0
 
-# Turn off Feedback Assistant data auto-gathering.
-feedback_send_data_to_apple: false
+  privacy:
+    # Turn off Feedback Assistant data auto-gathering.
+    apple_feedback_assistant: false
 
-# Turn on system firewall.
-# Turned off by default.
-# If this role is used with dev-env-osx playbook, then lulu firewall is used instead.
-firewall_enabled: false
+  firewall:
+    # Turn on system firewall.
+    # Turned off by default.
+    # If this role is used with dev-env-osx playbook, then lulu firewall is used instead.
+    # Modes:
+    # https://discussions.apple.com/thread/3148672
+    # 0 - disabled
+    # 1 - enabled in "open" mode
+    # 2 - enabled in "strict" mode
+    mode: 0
 
-# Check for software updates once per week
-# Default: 7 (in days)
-software_updates_delay_days: 7
+  updates:
+    # Check for software updates once per week
+    # Default: 7 (in days)
+    delay_days: 7
+
+########################################################################################
+### UI
+########################################################################################
+
+ui:
+  # Expand save panel by default.
+  expand_save_panel: true
+
+  # Expand save panel by default.
+  expand_print_panel: true
+
+  # Automatically quit printer app once the print jobs complete.
+  quit_print_job: true
+
+  # Reveal IP address, hostname, OS version, etc. when clicking the clock in the login window (only).
+  login_clock_clickable: true

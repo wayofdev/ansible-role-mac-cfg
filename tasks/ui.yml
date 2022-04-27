@@ -1,0 +1,35 @@
+---
+
+- name: UI - Expand save panel by default.
+  community.general.osx_defaults:
+    domain: NSGlobalDomain
+    key: NSNavPanelExpandedStateForSaveMode
+    type: bool
+    value: "{{ ui.expand_save_panel }}"
+    state: present
+
+- name: UI - Expand print panel by default.
+  community.general.osx_defaults:
+    domain: NSGlobalDomain
+    key: PMPrintingExpandedStateForPrint
+    type: bool
+    value: "{{ ui.expand_print_panel }}"
+    state: present
+
+- name: UI - Automatically quit printer app once the print jobs complete.
+  community.general.osx_defaults:
+    domain: com.apple.print.PrintingPrefs
+    key: "Quit When Finished"
+    type: bool
+    value: "{{ ui.quit_print_job }}"
+    state: present
+
+- name: UI - Reveal IP address, hostname, OS version, etc. when clicking the clock in the login window (only).
+  community.general.osx_defaults:
+    domain: /Library/Preferences/com.apple.loginwindow
+    key: AdminHostInfo
+    type: string
+    value: HostName
+    state: present
+  become: true
+  when: ui.login_clock_clickable

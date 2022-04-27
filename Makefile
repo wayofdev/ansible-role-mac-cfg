@@ -13,6 +13,11 @@ lint:
 	yamllint .
 .PHONY: lint
 
+### Run tests
+test:
+	ansible-playbook tests/test.yml --ask-become
+.PHONY: test
+
 ### List all hostnames
 ls-host:
 	ansible all -i $(inventory) -m shell -a "hostname;"

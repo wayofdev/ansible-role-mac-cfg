@@ -1,0 +1,37 @@
+---
+
+- name: Screensaver - Get current screensaver.
+  ansible.builtin.shell: >
+    defaults -currentHost read com.apple.screensaver | grep -o {{ screensaver.name }}
+  register: screensaver_current
+  changed_when: false
+  failed_when: "screensaver_current.rc == 2"
+  check_mode: false
+
+- name: Screensaver - Change default one.
+  ansible.builtin.command: >
+    defaults -currentHost write com.apple.screensaver "moduleDict" \
+      -dict-add "path" -string "/System/Library/Screen Savers/{{ screensaver.name }}.saver"
+  when: (screensaver_current.stdout != screensaver.name)
+
+- name: Screensaver - Change default one.
+  ansible.builtin.command: >
+    defaults -currentHost write com.apple.screensaver "moduleDict" \
+      -dict-add "type" -integer 1
+  when: (screensaver_current.stdout != screensaver.name)
+
+- name: Screensaver - Show clock when screensaver is running.
+  community.general.osx_defaults:
+    domain: com.apple.screensaver
+    key: showClock
+    type: bool
+    value: "{{ screensaver.show_clock }}"
+    state: present
+
+- name: Screensaver - Show clock when screensaver is running.
+  community.general.osx_defaults:
+    domain: com.apple.screensaver
+    key: idleTime
+    type: int
+    value: "{{ screensaver.start_after }}"
+    state: present

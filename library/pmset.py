@@ -17,6 +17,7 @@ def parse_pmset_output(output):
             result[section_name][k] = v
     return result
 
+
 def run_module():
     module_args = dict(
         on_battery=dict(type='dict', required=False, default=dict()),

@@ -1,48 +1,82 @@
 ---
 
-# Language and Region
+# Language & Region
 
-- name: Set timezone to Europe/Riga
+- name: Language & Region - Set timezone to Europe/Riga.
   community.general.timezone:
-    name: "{{ lng_timezone }}"
+    name: "{{ lang.timezone }}"
   become: true
 
-- name: Set main languages.
+- name: Language & Region - Set main languages.
   community.general.osx_defaults:
     domain: NSGlobalDomain
     key: AppleLanguages
     type: array
-    value: "{{ lng_languages }}"
+    value: "{{ lang.languages }}"
     state: present
 
-- name: Set system locale - US English with EUR as main currency.
+- name: Language & Region - Set system locale - US English with EUR as main currency.
   community.general.osx_defaults:
     domain: NSGlobalDomain
     key: AppleLocale
     type: string
-    value: "{{ lng_locale }}"
+    value: "{{ lang.locale }}"
     state: present
 
-- name: Set metric measurement units.
+- name: Language & Region - Set metric measurement units.
   community.general.osx_defaults:
     domain: NSGlobalDomain
     key: AppleMetricUnits
     type: bool
-    value: "{{ lng_metric_units }}"
+    value: "{{ lang.metric_units }}"
     state: present
 
-- name: Measurments in centimeters.
+- name: Language & Region - Measurements in centimeters.
   community.general.osx_defaults:
     domain: NSGlobalDomain
     key: AppleMeasurementUnits
     type: string
-    value: "{{ lng_apple_units }}"
+    value: "{{ lang.apple_units }}"
     state: present
 
-- name: Enables the input menu in the menu bar.
+- name: Language & Region - Enables the input menu in the menu bar.
   community.general.osx_defaults:
     domain: com.apple.TextInputMenu
     key: visible
     type: bool
-    value: "{{ lng_inputs_in_status_bar }}"
+    value: "{{ lang.inputs_in_status_bar }}"
     state: present
+
+# @todo Ensure idempotency test
+- name: Language & Region - Get current list of sources.
+  ansible.builtin.shell: >
+    defaults read com.apple.HIToolbox AppleEnabledInputSources
+  register: input_sources_current
+  changed_when: false
+  check_mode: false
+
+# https://github.com/mathiasbynens/custom.keylayout/issues/7
+- name: Language & Region - Build a list of input sources.
+  ansible.builtin.set_fact:
+    input_sources: "{{ input_sources }} + ['<dict><key>InputSourceKind</key><string>Keyboard Layout</string><key>KeyboardLayout ID</key><integer>{{ item.id }}</integer><key>KeyboardLayout Name</key><string>{{ item.name }}</string></dict>']"
+  with_items: "{{ lang.input_sources }}"
+
+- name: Language & Region - Print result of built input sources list.
+  ansible.builtin.debug:
+    var: input_sources
+
+- name: Language & Region - Add input sources.
+  community.general.osx_defaults:
+    domain: com.apple.HIToolbox
+    key: AppleEnabledInputSources
+    type: array
+    value: "{{ input_sources }}"
+  changed_when: false
+
+- name: Language & Region - Add input source history.
+  community.general.osx_defaults:
+    domain: com.apple.HIToolbox
+    key: AppleInputSourceHistory
+    type: array
+    value: "{{ input_sources }}"
+  changed_when: false

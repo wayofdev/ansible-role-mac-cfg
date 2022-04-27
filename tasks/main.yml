@@ -5,14 +5,6 @@
     - applications
     - configureapplications
 
-- include_tasks: power.yml
-  tags:
-    - power
-    - battery
-    - batterysaving
-    - configurebattery
-    - configurepower
-
 - include_tasks: dock.yml
   tags:
     - dock
@@ -23,17 +15,9 @@
     - finder
     - configurefinder
 
-- include_tasks: general.yml
-  tags:
-    - general
-    - configuregeneral
-
 - include_tasks: input.yml
   tags:
-    - mouse
-    - trackpad
-    - keyboard
-    - configurekeyboard
+    - input
     - configureinput
 
 - include_tasks: lang.yml
@@ -41,17 +25,37 @@
     - lang
     - configurelang
 
+- include_tasks: network.yml
+  tags:
+    - network
+    - configurenetwork
+
+- include_tasks: power.yml
+  tags:
+    - power
+    - configurepower
+
 - include_tasks: safari.yml
   tags:
     - safari
     - configuresafari
 
-- include_tasks: screen.yml
+- include_tasks: screensaver.yml
   tags:
-    - screen
-    - configurescreen
+    - screensaver
+    - configurescreensaver
+
+- include_tasks: screenshots.yml
+  tags:
+    - screenshots
+    - configurescreenshots
 
 - include_tasks: security.yml
   tags:
     - security
     - configuresecurity
+
+- include_tasks: ui.yml
+  tags:
+    - ui
+    - configureui

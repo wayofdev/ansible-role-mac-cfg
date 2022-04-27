@@ -2,7 +2,7 @@
 
 ### Activity Monitor
 
-- name: "Activity Monitor: Show the main window when launching app."
+- name: Activity Monitor - Show the main window when launching app.
   community.general.osx_defaults:
     domain: com.apple.ActivityMonitor
     key: OpenMainWindow
@@ -10,15 +10,15 @@
     value: "{{ activity_monitor.show_main_window }}"
     state: present
 
-- name: "Activity Monitor: Show all processes."
+- name: Activity Monitor - Show all processes.
   community.general.osx_defaults:
     domain: com.apple.ActivityMonitor
     key: ShowCategory
     type: int
-    value: 0
+    value: "{{ activity_monitor.show_category }}"
     state: present
 
-- name: "Activity Monitor: Sort Activity Monitor results by {{ activity_monitor.sort_by }}"
+- name: Activity Monitor - Sort Activity Monitor results by {{ activity_monitor.sort_by }}
   community.general.osx_defaults:
     domain: com.apple.ActivityMonitor
     key: SortColumn
@@ -26,7 +26,7 @@
     value: "{{ activity_monitor.sort_by }}"
     state: present
 
-- name: "Activity Monitor: Sort Activity Monitor results by {{ activity_monitor.sort_by }} - Direction DSC"
+- name: Activity Monitor - Sort Activity Monitor results by {{ activity_monitor.sort_by }} - Direction DSC
   community.general.osx_defaults:
     domain: com.apple.ActivityMonitor
     key: SortDirection
@@ -36,7 +36,7 @@
 
 ### Mail
 
-- name: "Mail: Copy email addresses as `foo@example.com` instead of `Foo Bar <foo@example.com>` in Mail.app."
+- name: Mail - Copy email addresses as `foo@example.com` instead of `Foo Bar <foo@example.com>` in Mail.app.
   community.general.osx_defaults:
     domain: com.apple.mail
     key: AddressesIncludeNameOnPasteboard
@@ -46,10 +46,21 @@
 
 ### Photos
 
-- name: "Photos: Prevent Photos from opening automatically when devices are plugged in."
+- name: Photos - Prevent Photos from opening automatically when devices are plugged in.
   community.general.osx_defaults:
     domain: com.apple.ImageCapture
     key: disableHotPlug
     type: bool
     value: "{{ photos.disable_hotplug }}"
     state: present
+
+### Other
+
+- name: Other - Add iOS Simulator to Launchpad.
+  ansible.builtin.file:
+    src: "/Applications/Xcode.app/Contents/Developer/Applications/Simulator.app"
+    dest: "/Applications/Simulator.app"
+    owner: "{{ remote_regular_user }}"
+    group: staff
+    state: link
+  when: other.create_simulator_symlink
