@@ -58,17 +58,15 @@
 # https://github.com/mathiasbynens/custom.keylayout/issues/7
 - name: Language & Region - Build a list of input sources.
   ansible.builtin.set_fact:
-    input_sources: >
-      "{{ input_sources }} + ['
-        <dict>
-          <key>InputSourceKind</key>
-          <string>Keyboard Layout</string>
-          <key>KeyboardLayout ID</key>
-          <integer>{{ item.id }}</integer>
-          <key>KeyboardLayout Name</key>
-          <string>{{ item.name }}</string>
+    input_sources: >-
+      {{ input_sources }} + ['<dict>
+        <key>InputSourceKind</key>
+        <string>Keyboard Layout</string>
+        <key>KeyboardLayout ID</key>
+        <integer>{{ item.id }}</integer>
+        <key>KeyboardLayout Name</key>
+        <string>{{ item.name }}</string>
       </dict>']
-      "
   with_items: "{{ lang.input_sources }}"
 
 - name: Language & Region - Print result of built input sources list.

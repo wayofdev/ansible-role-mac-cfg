@@ -70,7 +70,7 @@ jobs:
           ansible-galaxy install -r requirements.yml
 
       - name: Test the playbook.
-        run: ansible-playbook tests/test.yml
+        run: ansible-playbook tests/test.yml -vvv
         env:
           ANSIBLE_FORCE_COLOR: '1'
 
