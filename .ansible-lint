@@ -2,5 +2,4 @@
 
 skip_list:
   - 'experimental'
-  - '240'
   - 'risky-shell-pipe'

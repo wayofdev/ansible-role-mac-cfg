@@ -1,9 +1,23 @@
 ---
 
-- name: Power - Get pmset capabilities.
+- name: Power - Register pmset capabilities.
   ansible.builtin.command: "pmset -g cap"
   register: pmset_cap
   changed_when: false
+
+- name: Power - Print out pmset capabilities.
+  ansible.builtin.debug:
+    var: pmset_cap.stdout_lines
+
+- name: Power - Register current system setup settings (before).
+  ansible.builtin.command: pmset -g custom
+  register: pmset_output_before
+  changed_when: false
+  become: true
+
+- name: Power - Print out current system setup settings (before).
+  ansible.builtin.debug:
+    var: pmset_output_before.stdout_lines
 
 - name: Power - Get current restart-on-freeze status.
   ansible.builtin.shell: >
@@ -49,12 +63,12 @@
       disksleep: "{{ power.on_battery.disksleep }}"
   become: true
 
-- name: Power - Register current system setup settings.
+- name: Power - Register current system setup settings (after).
   ansible.builtin.command: pmset -g custom
-  register: pmset_output
+  register: pmset_output_after
   changed_when: false
   become: true
 
-- name: Power - Print out current system setup settings.
+- name: Power - Print out current system setup settings (after).
   ansible.builtin.debug:
-    var: pmset_output.stdout_lines
+    var: pmset_output_after.stdout_lines
