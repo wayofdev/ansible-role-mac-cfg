@@ -169,7 +169,7 @@
   become: true
   when: finder.unhide_library_folder
 
-  # Can't use ansible.builtin.xattr ☹️
+# Can't use ansible.builtin.xattr ☹️
 - name: Finder - Show the ~/Library folder in finder - remove xattr attrs
   ansible.builtin.shell: >
     xattr -d com.apple.FinderInfo ~/Library

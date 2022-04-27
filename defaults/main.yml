@@ -255,8 +255,7 @@ lang:
 
   # List of input sources.
   input_sources:
-    # Default input sources, set them by priority.
-    # First one will be selected as default one.
+    # Default input sources.
     - name: "ABC"
       id: 252
     - name: "Latvian"
