@@ -1,5 +1,10 @@
 ---
 
+- name: Power - Are we running on laptop or static unit?
+  ansible.builtin.set_fact:
+    is_laptop: >
+      /usr/sbin/system_profiler SPHardwareDataType | grep "Model Identifier" | grep "Book"
+
 - name: Power - Register pmset capabilities.
   ansible.builtin.command: "pmset -g cap"
   register: pmset_cap
@@ -62,6 +67,7 @@
       acwake: "{{ power.on_battery.acwake | ternary(1,0) }}"
       disksleep: "{{ power.on_battery.disksleep }}"
   become: true
+  when: is_laptop != ''
 
 - name: Power - Register current system setup settings (after).
   ansible.builtin.command: pmset -g custom

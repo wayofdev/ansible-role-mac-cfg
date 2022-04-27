@@ -47,13 +47,16 @@
     value: "{{ lang.inputs_in_status_bar }}"
     state: present
 
-# @todo Ensure idempotency test
 - name: Language & Region - Get current list of sources.
   ansible.builtin.shell: >
     defaults read com.apple.HIToolbox AppleEnabledInputSources
   register: input_sources_current
   changed_when: false
   check_mode: false
+
+- name: Language & Region - Printing list of sources before modification.
+  ansible.builtin.debug:
+    var: input_sources_current.stdout
 
 - name: Language & Region - Build a list of input sources.
   ansible.builtin.set_fact:
