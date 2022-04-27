@@ -169,13 +169,15 @@
   become: true
   when: finder.unhide_library_folder
 
+  # Can't use ansible.builtin.xattr ☹️
 - name: Finder - Show the ~/Library folder in finder - remove xattr attrs
-  community.general.xattr:
-    path: ~/Library
-    key: com.apple.FinderInfo
-    state: absent
-  when: finder.unhide_library_folder
+  ansible.builtin.shell: >
+    xattr -d com.apple.FinderInfo ~/Library
+  changed_when: false
+  register: xattr_output
+  failed_when: "xattr_output.rc == 2"
   become: true
+  when: finder.unhide_library_folder
 
 - name: Finder - Show the ~/Users folder in finder.
   ansible.builtin.shell: >
