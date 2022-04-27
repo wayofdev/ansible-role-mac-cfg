@@ -3,11 +3,13 @@
 
 from ansible.module_utils.basic import AnsibleModule
 
+
 def parse_pmset_output(output):
     # Parses `pmset -g custom` into a 2-level dict.
+    section_name = ''
     result = {}
     for line in output.split('\n'):
-        if line == '':
+        if line == '' or 'Sleep On Power Button' in line:
             continue
         if line[0] != ' ' and line[-1] == ':':
             section_name = line[:-1]
@@ -37,21 +39,18 @@ def run_module():
         result['diff']['after'] += '{block}.{param}={val}\n'.format(
             block=block, param=param, val=new_value)
 
-    blocks = [
-        ('on_battery', '-b', output['Battery Power']),
-        ('on_charger', '-c', output['AC Power']),
-    ]
+    blocks = [('on_charger', '-c', output['AC Power']), ]
+
+    if 'Battery Power' in output:
+        blocks.append(('on_battery', '-b', output['Battery Power']))
+
     for block, mode_flag, current_values in blocks:
         # Iterate over user-specified parameters and check if there's anything
         # to change.
         for param, value in module.params[block].items():
             if value is None: continue
             if param not in current_values:
-                module.fail_json(msg=(
-                    '{} is not present in pmset output. Run '
-                    '`pmset -g custom` to see the list of valid parameters'
-                ).format(param),
-                                 **result)
+                continue
             orig = current_values[param]
             if isinstance(value, int):
                 orig = int(orig)
