@@ -27,6 +27,15 @@
     state: absent
   changed_when: false
 
+- name: Screensaver - Get current settings.
+  ansible.builtin.command: "defaults read com.apple.screensaver"
+  register: scr_settings
+  changed_when: false
+
+- name: Screensaver - Print current settings.
+  ansible.builtin.debug:
+    var: scr_settings.stdout_lines
+
 - name: Screensaver - Show clock when screensaver is running.
   community.general.osx_defaults:
     domain: com.apple.screensaver
@@ -36,7 +45,7 @@
     state: present
   changed_when: false
 
-- name: Screensaver - Show clock when screensaver is running.
+- name: Screensaver - Start after {{ screensaver.start_after }} seconds.
   community.general.osx_defaults:
     domain: com.apple.screensaver
     key: idleTime
