@@ -15,6 +15,7 @@
     state: absent
   changed_when: false
   when: lookup('env', 'CI') != ''
+  become: true
 
 - name: Screensaver - Get current screensaver.
   ansible.builtin.shell: >
@@ -53,7 +54,7 @@
     value: "{{ screensaver.start_after }}"
     state: present
 
-- name: Screensaver - Token Removal Action - Restoring Defaults
+- name: Screensaver - Token Removal Action - Restoring Defaults.
   community.general.osx_defaults:
     domain: com.apple.screensaver
     key: tokenRemovalAction
