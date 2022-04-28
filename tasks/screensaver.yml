@@ -20,6 +20,13 @@
       -dict-add "type" -integer 1
   when: (screensaver_current.stdout != screensaver.name)
 
+- name: Screensaver - Show clock when screensaver is running (first remove default to avoid type mismatch).
+  community.general.osx_defaults:
+    domain: com.apple.screensaver
+    key: showClock
+    state: absent
+  changed_when: false
+
 - name: Screensaver - Show clock when screensaver is running.
   community.general.osx_defaults:
     domain: com.apple.screensaver
@@ -27,6 +34,7 @@
     type: bool
     value: "{{ screensaver.show_clock }}"
     state: present
+  changed_when: false
 
 - name: Screensaver - Show clock when screensaver is running.
   community.general.osx_defaults:

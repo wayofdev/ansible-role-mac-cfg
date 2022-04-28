@@ -8,7 +8,7 @@ def parse_pmset_output(output):
     # Parses `pmset -g custom` into a 2-level dict.
     section_name = ''
     result = {}
-    for line in output.split('\n'):
+    for line in output.splitlines():
         if line == '' or 'Sleep On Power Button' in line:
             continue
         if line[0] != ' ' and line[-1] == ':':
