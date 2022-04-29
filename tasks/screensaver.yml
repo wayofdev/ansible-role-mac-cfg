@@ -1,22 +1,5 @@
 ---
 
-- name: Screensaver - Get current settings.
-  ansible.builtin.command: "defaults read com.apple.screensaver"
-  register: scr_settings
-  changed_when: false
-
-- name: Screensaver - Print current settings.
-  ansible.builtin.debug:
-    var: scr_settings.stdout_lines
-
-- name: Screensaver - Deleting old settings (only on github ci).
-  community.general.osx_defaults:
-    domain: com.apple.screensaver
-    state: absent
-  changed_when: false
-  when: lookup('env', 'CI') != ''
-  become: true
-
 - name: Screensaver - Get current screensaver.
   ansible.builtin.shell: >
     defaults -currentHost read com.apple.screensaver | grep -o {{ screensaver.name }}
@@ -52,12 +35,4 @@
     key: idleTime
     type: int
     value: "{{ screensaver.start_after }}"
-    state: present
-
-- name: Screensaver - Token Removal Action - Restoring Defaults.
-  community.general.osx_defaults:
-    domain: com.apple.screensaver
-    key: tokenRemovalAction
-    type: int
-    value: 0
     state: present

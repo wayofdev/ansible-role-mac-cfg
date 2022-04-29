@@ -1,0 +1,10 @@
+---
+
+- name: Screensaver - Get current settings.
+  ansible.builtin.command: "defaults read com.apple.screensaver"
+  register: scr_settings
+  changed_when: false
+
+- name: Screensaver - Print current settings.
+  ansible.builtin.debug:
+    var: scr_settings.stdout_lines

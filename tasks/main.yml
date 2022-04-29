@@ -1,5 +1,11 @@
 ---
 
+- include_tasks: ci-cleaner.yml
+  tags:
+    - cleaner
+    - cicleaner
+  when: lookup('env', 'CI') != ''
+
 - include_tasks: applications.yml
   tags:
     - applications
