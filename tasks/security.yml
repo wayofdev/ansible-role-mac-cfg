@@ -56,3 +56,10 @@
     type: int
     value: "{{ security.updates.delay_days }}"
     state: present
+
+### Firevault
+
+- name: Security - Enable Firevault
+  firevault:
+    enabled: "{{ security.firevault.enabled }}"
+  when: security.firevault.enabled

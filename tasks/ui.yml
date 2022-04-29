@@ -33,3 +33,11 @@
     state: present
   become: true
   when: ui.login_clock_clickable
+
+- name: UI - Menu Bar - Trigger Bluetooth menu icon visibility.
+  community.general.osx_defaults:
+    domain: com.apple.controlcenter
+    key: "NSStatusItem Visible Bluetooth"
+    type: bool
+    value: "{{ ui.menu_bar.bluetooth_icon }}"
+    state: present

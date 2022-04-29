@@ -469,6 +469,9 @@ security:
     # Default: 7 (in days)
     delay_days: 7
 
+  firevault:
+    enabled: true
+
 ########################################################################################
 ### UI
 ########################################################################################
@@ -485,3 +488,7 @@ ui:
 
   # Reveal IP address, hostname, OS version, etc. when clicking the clock in the login window (only).
   login_clock_clickable: true
+
+  menu_bar:
+    # Show bluetooth in menu bar.
+    bluetooth_icon: true
