@@ -36,6 +36,7 @@
     type: int
     value: "{{ screensaver.start_after }}"
     state: present
+  changed_when: false
 
 - name: Screensaver - Token Removal Action - Restoring Defaults.
   community.general.osx_defaults:
@@ -44,3 +45,4 @@
     type: int
     value: 0
     state: present
+  changed_when: false
