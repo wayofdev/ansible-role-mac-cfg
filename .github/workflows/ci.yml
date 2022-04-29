@@ -65,6 +65,8 @@ jobs:
         run: |
           set -eux
           pip install ansible
+          # Do not enable firevault on runners
+          sed -ie 's/enabled\: true/enabled\: false/g' ./defaults/main.yml
           # Do not change hostname on remote runner.
           sed -ie 's/change_hostname\: true/change_hostname\: false/g' ./defaults/main.yml
           ansible-galaxy install -r requirements.yml
