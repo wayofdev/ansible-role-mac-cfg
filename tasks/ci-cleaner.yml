@@ -13,4 +13,3 @@
   ansible.builtin.command: "defaults delete com.apple.screensaver"
   register: scr_settings
   changed_when: false
-  become: true
