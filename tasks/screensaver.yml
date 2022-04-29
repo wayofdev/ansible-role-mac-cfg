@@ -36,3 +36,11 @@
     type: int
     value: "{{ screensaver.start_after }}"
     state: present
+
+- name: Screensaver - Token Removal Action - Restoring Defaults.
+  community.general.osx_defaults:
+    domain: com.apple.screensaver
+    key: tokenRemovalAction
+    type: int
+    value: 0
+    state: present

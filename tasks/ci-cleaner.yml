@@ -8,3 +8,9 @@
 - name: Screensaver - Print current settings.
   ansible.builtin.debug:
     var: scr_settings.stdout_lines
+
+- name: Screensaver - Deleting old settings, as they have incorrect types.
+  ansible.builtin.command: "defaults delete com.apple.screensaver"
+  register: scr_settings
+  changed_when: false
+  become: true
