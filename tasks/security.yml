@@ -21,15 +21,24 @@
     state: present
   changed_when: false
 
-### Feedback Assistant
+### Privacy
 
-- name: Security - Feedback Assistant - Turn off Feedback Assistant data auto-gathering.
+- name: Security - Privacy / Feedback Assistant - Turn off Feedback Assistant data auto-gathering.
   community.general.osx_defaults:
     domain: com.apple.appleseed.FeedbackAssistant
     key: Autogather
     type: bool
     value: "{{ security.privacy.apple_feedback_assistant }}"
     state: present
+
+- name: Security - Privacy / Advertising - Disable Personalized Ads.
+  community.general.osx_defaults:
+    domain: com.apple.AdLib
+    key: allowApplePersonalizedAdvertising
+    type: int
+    value: 0
+    state: present
+  when: security.privacy.disable_personalized_ads
 
 ### Firewall
 

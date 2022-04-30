@@ -1,5 +1,7 @@
 ---
 
+# https://ansible-lint.readthedocs.io/en/latest/configuring/
+
 skip_list:
   - 'experimental'
   - 'risky-shell-pipe'

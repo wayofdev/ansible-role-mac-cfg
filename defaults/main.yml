@@ -453,6 +453,9 @@ security:
     # Turn off Feedback Assistant data auto-gathering.
     apple_feedback_assistant: false
 
+    # Turn off personalized ads, a little less tracking from apple side...
+    disable_personalized_ads: true
+
   firewall:
     # Turn on system firewall.
     # Turned off by default.
