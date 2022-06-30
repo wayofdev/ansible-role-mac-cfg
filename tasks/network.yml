@@ -2,8 +2,8 @@
 
 - name: Using scutil to set HostName, ComputerName, and LocalHostName
   ansible.builtin.hostname:
-    name: "{{ maccfg_network_change_hostname }}"
-  when: network.change_hostname
+    name: "{{ maccfg_network_hostname }}"
+  when: maccfg_network_change_hostname
 
 - name: Write new hostname to SMB server
   community.general.osx_defaults:
@@ -12,7 +12,7 @@
     type: string
     value: "{{ maccfg_network_hostname }}"
     state: present
-  when: network.change_hostname
+  when: maccfg_network_change_hostname
   become: true
   become_user: root
 

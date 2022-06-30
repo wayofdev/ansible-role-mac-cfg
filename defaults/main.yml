@@ -72,7 +72,7 @@ maccfg_dock_bottom_right_corner: 11
 maccfg_dock_bottom_right_modifier: 0
 
 # Mission Control - Speed up animations
-maccfg_dock_expose_animation_duration: 0.1
+maccfg_dock_expose_animation_duration: "0.1"
 
 ########################################################################################
 ### Finder
@@ -164,7 +164,7 @@ maccfg_finder_install_duti: true
 
 # Prefer custom editor over default TextEdit for plain text files.
 # Works only if flag 'install_duti' is set to true
-# Examples:
+# Examples
 # com.sublimetext.3
 # com.sublimetext.4
 # com.microsoft.VSCode
@@ -213,7 +213,7 @@ maccfg_input_trackpad_bottom_right_click_bt_trackpad: true
 # Allow global app shortcuts
 maccfg_input_shortcuts_allow: true
 
-# Enable global shortcut: ⌥⌘, brings up System Preferences dialog (opt+cmd+comma)
+# Enable global shortcut – ⌥⌘, brings up System Preferences dialog (opt+cmd+comma)
 maccfg_input_shortcuts_opt_cmd_comma: true
 
 ########################################################################################
@@ -235,7 +235,7 @@ maccfg_lang_locale: "en_US@currency=EUR"
 maccfg_lang_metric_units: true
 
 # Set "AppleMeasurementUnits" setting to centimeters.
-maccfg_lang_apple_units: "Centimeters"
+maccfg_lang_apple_units: Centimeters
 
 # Enables the input menu in the menu bar.
 maccfg_lang_inputs_in_status_bar: true
@@ -258,7 +258,7 @@ maccfg_network_change_hostname: true
 
 # This mac-book's hostname
 # On macOS, this module uses scutil to set HostName, ComputerName, and LocalHostName
-maccfg_network_hostname: mbpro-{{ remote_regular_user }}
+maccfg_network_hostname: "mbpro-{{ remote_regular_user }}"
 
 ########################################################################################
 ### Power Management
