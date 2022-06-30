@@ -11,8 +11,8 @@ on:  # yamllint disable-line rule:truthy
       - master
   workflow_dispatch:
     inputs:
-      shouldPublishImage:
-        description: 'Should publish image to Ansible Galaxy? (yes/no)'
+      shouldPublish:
+        description: 'Should publish role to Ansible Galaxy? (yes/no)'
         required: false
         default: 'no'
 
@@ -21,82 +21,92 @@ jobs:
     name: Lint
     runs-on: ubuntu-latest
     steps:
-      - name: Check out the codebase.
-        uses: actions/checkout@v2
+      - name: Check out the codebase
+        uses: actions/checkout@v3
 
-      - name: Set up Python 3.
-        uses: actions/setup-python@v3
+      - name: Setup python
+        uses: actions/setup-python@v4
         with:
-          python-version: '3.x'
+          python-version: '3.9'
 
-      - name: Install test dependencies.
-        run: |
-          pip3 install yamllint
-          pip3 install ansible-lint
-          ansible-galaxy install -r requirements.yml
+      - name: Install poetry into system
+        uses: gi0baro/setup-poetry-bin@v1
+        with:
+          virtualenvs-in-project: true
 
-      - name: Run yamllint.
-        run: yamllint .
+      - name: Load cached .venv
+        id: cached-poetry-dependencies
+        uses: actions/cache@v3
+        with:
+          path: .venv
+          key: venv-${{ runner.os }}-${{ hashFiles('**/poetry.lock') }}-${{ hashFiles('**/requirements.yml') }}
 
-      - name: Run ansible lint.
-        working-directory: tests
-        run: ansible-lint test.yml -c ../.ansible-lint
+      - name: Install dependencies
+        if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
+        run: make install-deps
 
-      - name: Verify syntax
-        working-directory: tests
-        run: ansible-playbook test.yml --syntax-check
+      - name: Run linting tasks
+        run: make lint
 
-  integration:
-    name: Integration.
+  integration-macos-molecule:
+    name: Integration on macOS
     runs-on: ${{ matrix.os }}
     strategy:
+      max-parallel: 4
       matrix:
-        os:
-          - macos-12
+        os: ["macos-12"]
+        scenario: ["default-macos-on-localhost"]
 
     steps:
-      - name: Check out the codebase.
-        uses: actions/checkout@v2
-      - uses: actions/setup-python@v3
+      - name: Check out the codebase
+        uses: actions/checkout@v3
         with:
-          python-version: 3.9
+          submodules: true
 
-      - name: Install dependencies.
+      - name: Check out the actions/cache source
+        uses: actions/checkout@v3
+        with:
+          repository: actions/cache
+          ref: v3
+          path: .tmp/actions/cache
+
+      - name: Check out fix - make actions/cache@v3 run always, not only when job succeeds
         run: |
-          set -eux
-          pip install ansible
-          # Do not enable firevault on runners
-          sed -ie 's/enabled\: true/enabled\: false/g' ./defaults/main.yml
-          # Do not change hostname on remote runner.
-          sed -ie 's/change_hostname\: true/change_hostname\: false/g' ./defaults/main.yml
-          ansible-galaxy install -r requirements.yml
+          sed -i -e '/ post-if: /d' .tmp/actions/cache/action.yml
 
-      - name: Test the playbook.
-        run: ansible-playbook tests/test.yml
-        env:
-          ANSIBLE_FORCE_COLOR: '1'
+      - name: Install poetry into system
+        uses: gi0baro/setup-poetry-bin@v1
+        with:
+          virtualenvs-in-project: true
 
-      - name: Idempotence check.
-        run: |
-          idempotence=$(mktemp)
-          ansible-playbook tests/test.yml | tee -a ${idempotence}
-          tail ${idempotence} \
-            | grep -q 'changed=0.*failed=0' \
-            && (echo 'Idempotence test: pass' && exit 0) \
-            || (echo 'Idempotence test: fail' && exit 1)
+      - name: Load cached .venv
+        id: cached-poetry-dependencies
+        uses: ./.tmp/actions/cache
+        with:
+          path: .venv
+          key: venv-${{ runner.os }}-${{ hashFiles('**/poetry.lock') }}-${{ hashFiles('**/requirements.yml') }}
+
+      - name: Install dependencies
+        if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
+        run: make install-deps
+
+      - name: Test the playbook with molecule
+        run: poetry run molecule test --scenario-name "${SCENARIO}" -- -v
         env:
-          ANSIBLE_FORCE_COLOR: '1'
+          SCENARIO: ${{ matrix.scenario }}
+          PY_COLORS: '1'
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   publish:
-    if: github.event.inputs.shouldPublishImage == 'yes' || github.ref == 'refs/heads/master'
+    if: github.event.inputs.shouldPublish == 'yes' || github.ref == 'refs/heads/master'
     needs:
       - lint
-      - integration
+      - integration-macos-molecule
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-
-      - name: galaxy
-        uses: robertdebock/galaxy-action@1.2.0
+      - name: Publish to Ansible Galaxy
+        uses: robertdebock/galaxy-action@1.2.1
         with:
           galaxy_api_key: ${{ secrets.GALAXY_API_KEY }}
+
+...

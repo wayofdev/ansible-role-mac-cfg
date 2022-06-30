@@ -1,6 +1,8 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
+# (c) 2022, lotyp <lotyp7.woop@gmail.com>
+
 from ansible.module_utils.basic import AnsibleModule
 
 

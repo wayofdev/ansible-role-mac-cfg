@@ -1,6 +1,6 @@
 {
-    "version": "1.0.0",
+    "version": "2.1.0",
     "repository": {
-        "url": "https://github.com/wayofdev/ansible-role-osx-config.git"
+        "url": "https://github.com/wayofdev/ansible-role-macos-config.git"
     }
 }

@@ -1,0 +1,31 @@
+---
+
+dependency:
+  name: galaxy
+  options:
+    role-file: requirements.yml
+    requirements-file: requirements.yml
+
+# Run against remote machine over SSH
+driver:
+  name: delegated
+  options:
+    managed: false
+    login_cmd_template: 'ssh {instance} -F /tmp/ssh_config'
+    ansible_connection_options:
+      connection: ssh
+      ansible_ssh_common_args: '-F /tmp/ssh_config'
+      ansible_sudo_pass: "${ANSIBLE_SUDO_PASSWORD}"
+  become_method: sudo
+
+platforms:
+  - name: macos-12-vm
+
+provisioner:
+  name: ansible
+  playbooks:
+    converge: "../_partials/playbooks/converge.yml"
+    verify: "../_partials/playbooks/verify.yml"
+
+verifier:
+  name: ansible

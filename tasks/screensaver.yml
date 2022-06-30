@@ -1,44 +1,44 @@
 ---
 
-- name: Screensaver - Get current screensaver.
+- name: Screensaver - Get current screensaver
   ansible.builtin.shell: >
-    defaults -currentHost read com.apple.screensaver | grep -o {{ screensaver.name }}
+    defaults -currentHost read com.apple.screensaver | grep -o {{ maccfg_screensaver_name }}
   register: screensaver_current
   changed_when: false
   failed_when: "screensaver_current.rc == 2"
   check_mode: false
 
-- name: Screensaver - Change default one.
+- name: Screensaver - Set to {{ maccfg_screensaver_name }}
   ansible.builtin.command: >
     defaults -currentHost write com.apple.screensaver "moduleDict" \
-      -dict-add "path" -string "/System/Library/Screen Savers/{{ screensaver.name }}.saver"
-  when: (screensaver_current.stdout != screensaver.name)
+      -dict-add "path" -string "/System/Library/Screen Savers/{{ maccfg_screensaver_name }}.saver"
+  when: (screensaver_current.stdout != maccfg_screensaver_name)
 
-- name: Screensaver - Change default one.
+- name: Screensaver - Change default one
   ansible.builtin.command: >
     defaults -currentHost write com.apple.screensaver "moduleDict" \
       -dict-add "type" -integer 1
-  when: (screensaver_current.stdout != screensaver.name)
+  when: (screensaver_current.stdout != maccfg_screensaver_name)
 
-- name: Screensaver - Show clock when screensaver is running.
+- name: Screensaver - Show clock when screensaver is running
   community.general.osx_defaults:
     domain: com.apple.screensaver
     key: showClock
     type: bool
-    value: "{{ screensaver.show_clock }}"
+    value: "{{ maccfg_screensaver_show_clock }}"
     state: present
   changed_when: false
 
-- name: Screensaver - Start after {{ screensaver.start_after }} seconds.
+- name: Screensaver - Start after {{ maccfg_screensaver_start_after }} seconds
   community.general.osx_defaults:
     domain: com.apple.screensaver
     key: idleTime
     type: int
-    value: "{{ screensaver.start_after }}"
+    value: "{{ maccfg_screensaver_start_after }}"
     state: present
   changed_when: false
 
-- name: Screensaver - Token Removal Action - Restoring Defaults.
+- name: Screensaver - Token Removal Action - Restoring Defaults
   community.general.osx_defaults:
     domain: com.apple.screensaver
     key: tokenRemovalAction
@@ -46,3 +46,5 @@
     value: 0
     state: present
   changed_when: false
+
+...

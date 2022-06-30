@@ -3,5 +3,10 @@
 # https://ansible-lint.readthedocs.io/en/latest/configuring/
 
 skip_list:
-  - 'experimental'
-  - 'risky-shell-pipe'
+  - risky-shell-pipe
+
+exclude_paths:
+  - ./contrib
+  - ./.venv
+
+...

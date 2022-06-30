@@ -1,126 +1,156 @@
 ---
 
-- name: Finder - Allow quitting via ⌘ + Q; doing so will also hide desktop icons.
+- name: Finder - Allow quitting via ⌘ + Q; doing so will also hide desktop icons
   community.general.osx_defaults:
     domain: com.apple.finder
     key: QuitMenuItem
     type: bool
-    value: "{{ finder.allow_quitting }}"
+    value: "{{ maccfg_finder_allow_quitting }}"
     state: present
+  tags:
+    - maccfg-finder
 
-- name: Finder - Set new path as the default location for new Finder windows.
+- name: Finder - Set path which Finder should open on start
   community.general.osx_defaults:
     domain: com.apple.finder
     key: NewWindowTarget
     type: string
-    value: "{{ finder.new_window_target }}"
+    value: "{{ maccfg_finder_new_window_target }}"
     state: present
+  tags:
+    - maccfg-finder
 
-- name: Finder - Set new path as the default location for new Finder windows.
+- name: Finder - Set file path which Finder should open on start
   community.general.osx_defaults:
     domain: com.apple.finder
     key: NewWindowTargetPath
     type: string
-    value: "{{ finder.new_window_target_path }}"
+    value: "{{ maccfg_finder_new_window_target_path }}"
     state: present
+  tags:
+    - maccfg-finder
 
-- name: Finder - Change current search scope for all new searches.
+- name: Finder - Change current search scope for all new searches
   community.general.osx_defaults:
     domain: com.apple.finder
     key: FXDefaultSearchScope
     type: string
-    value: "{{ finder.search_scope }}"
+    value: "{{ maccfg_finder_search_scope }}"
     state: present
+  tags:
+    - maccfg-finder
 
-- name: Finder - Change finder view in all windows by default.
+- name: Finder - Change finder view in all windows by default
   community.general.osx_defaults:
     domain: com.apple.finder
     key: FXPreferredViewStyle
     type: string
-    value: "{{ finder.view_mode }}"
+    value: "{{ maccfg_finder_view_mode }}"
     state: present
+  tags:
+    - maccfg-finder
 
-- name: "Finder - Show path bar in Finder (Example: 751 items ... 351 GB left ...)."
+- name: "Finder - Show path bar in Finder (Example: 751 items ... 351 GB left ...)"
   community.general.osx_defaults:
     domain: com.apple.finder
     key: ShowPathbar
     type: bool
-    value: "{{ finder.show_path_bar }}"
+    value: "{{ maccfg_finder_show_path_bar }}"
     state: present
+  tags:
+    - maccfg-finder
 
-- name: Finder - Keep folders on top when sorting by name.
+- name: Finder - Keep folders on top when sorting by name
   community.general.osx_defaults:
     domain: com.apple.finder
     key: _FXSortFoldersFirst
     type: bool
-    value: "{{ finder.keep_folders_on_top }}"
+    value: "{{ maccfg_finder_keep_folders_on_top }}"
     state: present
+  tags:
+    - maccfg-finder
 
-- name: Finder - Disable the warning when changing a file extension.
+- name: Finder - Disable the warning when changing a file extension
   community.general.osx_defaults:
     domain: com.apple.finder
     key: FXEnableExtensionChangeWarning
     type: bool
-    value: "{{ finder.disable_extension_change_warning | ternary(false,true) }}"
+    value: "{{ maccfg_finder_disable_extension_change_warning | ternary(false,true) }}"
     state: present
+  tags:
+    - maccfg-finder
 
-- name: Finder - Show status bar.
+- name: Finder - Show status bar
   community.general.osx_defaults:
     domain: com.apple.finder
     key: ShowStatusBar
     type: bool
-    value: "{{ finder.show_status_bar }}"
+    value: "{{ maccfg_finder_show_status_bar }}"
     state: present
+  tags:
+    - maccfg-finder
 
-- name: Finder - Show bottom path bar by default.
+- name: Finder - Show bottom path bar by default
   community.general.osx_defaults:
     domain: com.apple.finder
     key: ShowPathBar
     type: bool
-    value: "{{ finder.show_bottom_path_bar }}"
+    value: "{{ maccfg_finder_show_bottom_path_bar }}"
     state: present
+  tags:
+    - maccfg-finder
 
-- name: Finder - Avoid creating .DS_Store files on network volumes.
+- name: Finder - Avoid creating .DS_Store files on network volumes
   community.general.osx_defaults:
     domain: com.apple.finder
     key: DSDontWriteNetworkStores
     type: bool
-    value: "{{ finder.avoid_dsstore_on_network_volumes }}"
+    value: "{{ maccfg_finder_avoid_dsstore_on_network_volumes }}"
     state: present
+  tags:
+    - maccfg-finder
 
-- name: Finder - Avoid creating .DS_Store files on USB volumes.
+- name: Finder - Avoid creating .DS_Store files on USB volumes
   community.general.osx_defaults:
     domain: com.apple.finder
     key: DSDontWriteUSBStores
     type: bool
-    value: "{{ finder.avoid_dsstore_on_usb_volumes }}"
+    value: "{{ maccfg_finder_avoid_dsstore_on_usb_volumes }}"
     state: present
+  tags:
+    - maccfg-finder
 
-- name: Finder - Disable the warning before emptying the Trash.
+- name: Finder - Disable the warning before emptying the Trash
   community.general.osx_defaults:
     domain: com.apple.finder
     key: WarnOnEmptyTrash
     type: bool
-    value: "{{ finder.disable_trash_warning | ternary(false,true) }}"
+    value: "{{ maccfg_finder_disable_trash_warning | ternary(false,true) }}"
     state: present
+  tags:
+    - maccfg-finder
 
-- name: Finder - Display full POSIX path as Finder window title.
+- name: Finder - Display full POSIX path as Finder window title
   community.general.osx_defaults:
     domain: com.apple.finder
     key: _FXShowPosixPathInTitle
     type: bool
-    value: "{{ finder.show_full_title }}"
+    value: "{{ maccfg_finder_show_full_title }}"
     state: present
+  tags:
+    - maccfg-finder
 
-- name: Finder - Show all filename extensions.
+- name: Finder - Show all filename extensions
   community.general.osx_defaults:
     domain: NSGlobalDomain
     key: AppleShowAllExtensions
     type: bool
-    value: "{{ finder.show_all_file_exts }}"
+    value: "{{ maccfg_finder_show_all_file_exts }}"
     state: present
+  tags:
+    - maccfg-finder
 
-- name: "Finder - Expand the following File Info panes: General, Open With, Sharing & Permissions."
+- name: "Finder - Expand the following File Info panes: General, Open With, Sharing & Permissions"
   ansible.builtin.shell: >
     defaults write com.apple.finder FXInfoPanesExpanded -dict \
       MetaData -bool true \
@@ -128,46 +158,59 @@
       OpenWith -bool true \
       Privileges -bool true
   changed_when: false
-  when: finder.expand_fileinfo_panels
+  when: maccfg_finder_expand_fileinfo_panels
+  tags:
+    - maccfg-finder
 
-- name: Finder - Show icons for external hard drives on Desktop.
+- name: Finder - Show icons for external hard drives on Desktop
   community.general.osx_defaults:
     domain: com.apple.finder
     key: ShowExternalHardDrivesOnDesktop
     type: bool
-    value: "{{ finder.desktop_show_ext_hard_drives }}"
+    value: "{{ maccfg_finder_desktop_show_ext_hard_drives }}"
     state: present
+  tags:
+    - maccfg-finder
 
-- name: Finder - Show icons for hard drives on Desktop.
+- name: Finder - Show icons for hard drives on Desktop
   community.general.osx_defaults:
     domain: com.apple.finder
     key: ShowHardDrivesOnDesktop
     type: bool
-    value: "{{ finder.desktop_show_hard_drives }}"
+    value: "{{ maccfg_finder_desktop_show_hard_drives }}"
     state: present
+  tags:
+    - maccfg-finder
 
-- name: Finder - Show icons for mounted servers on Desktop.
+- name: Finder - Show icons for mounted servers on Desktop
   community.general.osx_defaults:
     domain: com.apple.finder
     key: ShowMountedServersOnDesktop
     type: bool
-    value: "{{ finder.desktop_show_mounted_servers }}"
+    value: "{{ maccfg_finder_desktop_show_mounted_servers }}"
     state: present
+  tags:
+    - maccfg-finder
 
-- name: Finder - Show icons for removable media on Desktop.
+- name: Finder - Show icons for removable media on Desktop
   community.general.osx_defaults:
     domain: com.apple.finder
     key: ShowRemovableMediaOnDesktop
     type: bool
-    value: "{{ finder.desktop_show_removable_media }}"
+    value: "{{ maccfg_finder_desktop_show_removable_media }}"
     state: present
+  tags:
+    - maccfg-finder
 
-- name: Finder - Show the ~/Library folder in finder.
+- name: Finder - Show the ~/Library folder in finder
   ansible.builtin.shell: >
     chflags nohidden ~/Library
   changed_when: false
   become: true
-  when: finder.unhide_library_folder
+  become_user: root
+  when: maccfg_finder_unhide_library_folder
+  tags:
+    - maccfg-finder
 
 # Can't use ansible.builtin.xattr ☹️
 - name: Finder - Show the ~/Library folder in finder - remove xattr attrs
@@ -177,25 +220,35 @@
   register: xattr_output
   failed_when: "xattr_output.rc == 2"
   become: true
-  when: finder.unhide_library_folder
+  become_user: root
+  when: maccfg_finder_unhide_library_folder
+  tags:
+    - maccfg-finder
 
-- name: Finder - Show the ~/Users folder in finder.
+- name: Finder - Show the ~/Users folder in finder
   ansible.builtin.shell: >
     chflags nohidden /Users
   changed_when: false
   become: true
-  when: finder.unhide_users_folder
+  become_user: root
+  when: maccfg_finder_unhide_users_folder
+  tags:
+    - maccfg-finder
 
-- name: Finder - Change which programs will open the given file types.
+- name: Finder - Change which programs will open the given file types
   block:
-    - name: Finder - Installing duti - command-line tool to select default applications for document types Mac OS X.
+    - name: Finder - Installing duti - command-line tool to select default applications for document types
       community.general.homebrew:
         name: duti
         state: installed
 
-    - name: Finder - Prefer custom editor over default TextEdit for plain text files.
+    - name: Finder - Prefer custom editor over default TextEdit for plain text files
       ansible.builtin.shell: >
-        duti -s {{ finder.default_editor }} public.data all; \
-        duti -s {{ finder.default_editor }} public.plain-text all
+        duti -s {{ maccfg_finder_default_editor }} public.data all; \
+        duti -s {{ maccfg_finder_default_editor }} public.plain-text all
       changed_when: false
-  when: finder.install_duti
+  when: maccfg_finder_install_duti
+  tags:
+    - maccfg-finder
+
+...

@@ -2,65 +2,81 @@
 
 ### Activity Monitor
 
-- name: Activity Monitor - Show the main window when launching app.
+- name: Maccfg | Applications | Activity Monitor | Show the main window when launching app
   community.general.osx_defaults:
     domain: com.apple.ActivityMonitor
     key: OpenMainWindow
     type: bool
-    value: "{{ activity_monitor.show_main_window }}"
+    value: "{{ maccfg_activity_monitor_show_main_window }}"
     state: present
+  tags:
+    - maccfg-applications
 
-- name: Activity Monitor - Show all processes.
+- name: Maccfg | Applications | Activity Monitor | Show all processes
   community.general.osx_defaults:
     domain: com.apple.ActivityMonitor
     key: ShowCategory
     type: int
-    value: "{{ activity_monitor.show_category }}"
+    value: "{{ maccfg_activity_monitor_show_category }}"
     state: present
+  tags:
+    - maccfg-applications
 
-- name: Activity Monitor - Sort Activity Monitor results by {{ activity_monitor.sort_by }}
+- name: Maccfg | Applications | Activity Monitor | Sort Activity Monitor results by {{ maccfg_activity_monitor_sort_by }}
   community.general.osx_defaults:
     domain: com.apple.ActivityMonitor
     key: SortColumn
     type: string
-    value: "{{ activity_monitor.sort_by }}"
+    value: "{{ maccfg_activity_monitor_sort_by }}"
     state: present
+  tags:
+    - maccfg-applications
 
-- name: Activity Monitor - Sort Activity Monitor results by {{ activity_monitor.sort_by }} - Direction DSC
+- name: Maccfg | Applications | Activity Monitor | Sort Activity Monitor results by {{ maccfg_activity_monitor_sort_by }} - Direction DSC
   community.general.osx_defaults:
     domain: com.apple.ActivityMonitor
     key: SortDirection
     type: int
-    value: "{{ activity_monitor.sort_direction }}"
+    value: "{{ maccfg_activity_monitor_sort_direction }}"
     state: present
+  tags:
+    - maccfg-applications
 
 ### Mail
 
-- name: Mail - Copy email addresses as `foo@example.com` instead of `Foo Bar <foo@example.com>` in Mail.app.
+- name: Maccfg | Applications | Mail.app | Copy email addresses as `foo@example.com` instead of `Foo Bar <foo@example.com>`
   community.general.osx_defaults:
     domain: com.apple.mail
     key: AddressesIncludeNameOnPasteboard
     type: bool
-    value: "{{ mail.use_advanced_copy_format }}"
+    value: "{{ maccfg_mail_use_advanced_copy_format }}"
     state: present
+  tags:
+    - maccfg-applications
 
 ### Photos
 
-- name: Photos - Prevent Photos from opening automatically when devices are plugged in.
+- name: Maccfg | Applications | Photos | Prevent Photos from opening automatically when devices are plugged in
   community.general.osx_defaults:
     domain: com.apple.ImageCapture
     key: disableHotPlug
     type: bool
-    value: "{{ photos.disable_hotplug }}"
+    value: "{{ maccfg_photos_disable_hotplug }}"
     state: present
+  tags:
+    - maccfg-applications
 
 ### Other
 
-- name: Other - Add iOS Simulator to Launchpad.
+- name: Maccfg | Applications | Other | Add iOS Simulator to Launchpad
   ansible.builtin.file:
     src: "/Applications/Xcode.app/Contents/Developer/Applications/Simulator.app"
     dest: "/Applications/Simulator.app"
     owner: "{{ remote_regular_user }}"
     group: staff
     state: link
-  when: other.create_simulator_symlink
+  when: maccfg_other_create_simulator_symlink
+  tags:
+    - maccfg-applications
+
+...

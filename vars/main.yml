@@ -2,3 +2,5 @@
 
 remote_regular_user: "{{ ansible_user_id }}"
 input_sources: []
+
+...

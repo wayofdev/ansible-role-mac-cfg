@@ -1,57 +1,73 @@
 ---
 
-- name: Dock - Enable spring loading for all Dock items.
+- name: Dock - Enable spring loading for all Dock items
   community.general.osx_defaults:
     domain: com.apple.dock
     key: enable-spring-load-actions-on-all-items
     type: bool
-    value: "{{ dock.enable_spring_load_everywhere }}"
+    value: "{{ maccfg_dock_enable_spring_load_everywhere }}"
     state: present
+  tags:
+    - maccfg-dock
 
-- name: Dock - Don’t show recent applications in Dock.
+- name: Dock - Don’t show recent applications in Dock
   community.general.osx_defaults:
     domain: com.apple.dock
     key: show-recents
     type: bool
-    value: "{{ dock.show_recents }}"
+    value: "{{ maccfg_dock_show_recents }}"
     state: present
+  tags:
+    - maccfg-dock
 
-- name: Dock - Bottom left screen corner → Start screen saver (corner).
+- name: Dock - Bottom left screen corner → Start screen saver (corner)
   community.general.osx_defaults:
     domain: com.apple.dock
     key: wvous-bl-corner
     type: int
-    value: "{{ dock.bottom_left_corner }}"
+    value: "{{ maccfg_dock_bottom_left_corner }}"
     state: present
+  tags:
+    - maccfg-dock
 
-- name: Dock - Bottom left screen corner → Start screen saver (modifier).
+- name: Dock - Bottom left screen corner → Start screen saver (modifier)
   community.general.osx_defaults:
     domain: com.apple.dock
     key: wvous-bl-modifier
     type: int
-    value: "{{ dock.bottom_left_modifier }}"
+    value: "{{ maccfg_dock_bottom_left_modifier }}"
     state: present
+  tags:
+    - maccfg-dock
 
-- name: Dock - Bottom right screen corner → Launchpad (corner).
+- name: Dock - Bottom right screen corner → Launchpad (corner)
   community.general.osx_defaults:
     domain: com.apple.dock
     key: wvous-br-corner
     type: int
-    value: "{{ dock.bottom_right_corner }}"
+    value: "{{ maccfg_dock_bottom_right_corner }}"
     state: present
+  tags:
+    - maccfg-dock
 
-- name: Dock - Bottom right screen corner → Launchpad (modifier).
+- name: Dock - Bottom right screen corner → Launchpad (modifier)
   community.general.osx_defaults:
     domain: com.apple.dock
     key: wvous-br-modifier
     type: int
-    value: "{{ dock.bottom_right_modifier }}"
+    value: "{{ maccfg_dock_bottom_right_modifier }}"
     state: present
+  tags:
+    - maccfg-dock
 
-- name: Dock - Mission Control - Speed up animations.
+- name: Dock - Mission Control - Speed up animations
   community.general.osx_defaults:
     domain: com.apple.dock
     key: expose-animation-duration
     type: float
-    value: "{{ dock.expose_animation_duration }}"
+    value: "{{ maccfg_dock_expose_animation_duration }}"
     state: present
+  tags:
+    - maccfg-dock
+
+...

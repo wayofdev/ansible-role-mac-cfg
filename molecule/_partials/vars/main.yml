@@ -1,0 +1,10 @@
+---
+
+homebrew_search_paths:
+  - /usr/local/bin
+  - /usr/local/sbin
+  - /opt/homebrew/bin
+  - /home/linuxbrew/.linuxbrew/bin
+  - /usr/bin
+
+...

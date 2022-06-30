@@ -1,0 +1,21 @@
+---
+
+ansible:
+
+  # List of allowed literal bools (ANSIBLE0014)
+  literal-bools:
+    - "true"
+    - "false"
+    - "yes"
+    - "no"
+
+# Global settings for all defined rules
+rules:
+  # List of files to exclude
+  exclude_files:
+    - ./contrib
+    - ./.venv
+
+  version: "1.0"
+
+...

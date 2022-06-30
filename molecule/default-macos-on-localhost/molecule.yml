@@ -1,0 +1,30 @@
+---
+
+dependency:
+  name: galaxy
+  options:
+    role-file: requirements.yml
+    requirements-file: requirements.yml
+
+# Run locally
+driver:
+  name: delegated
+  options:
+    managed: false
+    ansible_connection_options:
+      connection: local
+      ansible_connection: local
+      ansible_sudo_pass: "${ANSIBLE_SUDO_PASSWORD}"
+  become_method: sudo
+
+platforms:
+  - name: instance
+
+provisioner:
+  name: ansible
+  playbooks:
+    converge: "../_partials/playbooks/converge.yml"
+    verify: "../_partials/playbooks/verify.yml"
+
+verifier:
+  name: ansible

@@ -1,38 +1,24 @@
-Role Name
-=========
+<br>
 
-A brief description of the role goes here.
+<div align="center">
+<img width="456" src="https://raw.githubusercontent.com/wayofdev/ansible-role-tpl/master/assets/logo.gh-light-mode-only.png#gh-light-mode-only">
+<img width="456" src="https://raw.githubusercontent.com/wayofdev/ansible-role-tpl/master/assets/logo.gh-dark-mode-only.png#gh-dark-mode-only">
+</div>
 
-Requirements
-------------
+<br>
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+<br>
 
-Role Variables
---------------
+<div align="center">
+<a href="https://actions-badge.atrox.dev/wayofdev/ansible-role-maccfg/goto"><img alt="Build Status" src="https://img.shields.io/endpoint.svg?url=https%3A%2F%2Factions-badge.atrox.dev%2Fwayofdev%2Fansible-role-maccfg%2Fbadge&style=flat-square"/></a>
+<a href="https://galaxy.ansible.com/wayofdev/maccfg"><img alt="Ansible Role" src="https://img.shields.io/ansible/role/59499?style=flat-square"/></a>
+<a href="https://github.com/wayofdev/ansible-role-maccfg/tags"><img src="https://img.shields.io/github/v/tag/wayofdev/ansible-role-maccfg?sort=semver&style=flat-square" alt="Latest Version"></a>
+<a href="https://galaxy.ansible.com/wayofdev/maccfg"><img alt="Ansible Quality Score" src="https://img.shields.io/ansible/quality/59499?style=flat-square"/></a>
+<a href="https://galaxy.ansible.com/wayofdev/maccfg"><img alt="Ansible Role" src="https://img.shields.io/ansible/role/d/59499?style=flat-square"/></a>
+<a href="LICENSE"><img src="https://img.shields.io/github/license/wayofdev/ansible-role-maccfg.svg?style=flat-square&color=blue" alt="Software License"/></a>
+<a href="#"><img alt="Commits since latest release" src="https://img.shields.io/github/commits-since/wayofdev/ansible-role-maccfg/latest?style=flat-square"></a>
+</div>
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+<br>
 
-Dependencies
-------------
-
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
-
-Example Playbook
-----------------
-
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
-
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
-
-License
--------
-
-BSD
-
-Author Information
-------------------
-
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+# Ansible Role: macOS config Automation

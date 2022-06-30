@@ -2,43 +2,43 @@
 
 ### Screen
 
-- name: Security - Screen - Require password when screen awakes.
+- name: Security - Screen - Require password when screen awakes
   community.general.osx_defaults:
     domain: com.apple.screensaver
     key: askForPassword
     type: int
     value: 1
     state: present
-  when: security.screen.require_pass_after_awake
+  when: maccfg_security_require_pass_after_awake
   changed_when: false
 
-- name: Security - Screen - Require password immediately after sleep or screen saver begins.
+- name: Security - Screen - Require password immediately after sleep or screen saver begins
   community.general.osx_defaults:
     domain: com.apple.screensaver
     key: askForPasswordDelay
     type: int
-    value: "{{ security.screen.require_pass_delay }}"
+    value: "{{ maccfg_security_require_pass_delay }}"
     state: present
   changed_when: false
 
 ### Privacy
 
-- name: Security - Privacy / Feedback Assistant - Turn off Feedback Assistant data auto-gathering.
+- name: Security - Privacy / Feedback Assistant - Turn off Feedback Assistant data auto-gathering
   community.general.osx_defaults:
     domain: com.apple.appleseed.FeedbackAssistant
     key: Autogather
     type: bool
-    value: "{{ security.privacy.apple_feedback_assistant }}"
+    value: "{{ maccfg_privacy_apple_feedback_assistant }}"
     state: present
 
-- name: Security - Privacy / Advertising - Disable Personalized Ads.
+- name: Security - Privacy / Advertising - Disable Personalized Ads
   community.general.osx_defaults:
     domain: com.apple.AdLib
     key: allowApplePersonalizedAdvertising
     type: int
     value: 0
     state: present
-  when: security.privacy.disable_personalized_ads
+  when: maccfg_privacy_disable_personalized_ads
 
 ### Firewall
 
@@ -47,28 +47,31 @@
 # unloading/loading plist
 # $ m firewall status; m firewall [enable|disable]
 #
-- name: Security - Firewall - Setting to run in {{ security.firewall.mode }} mode.
+- name: Security - Firewall - Setting to run in {{ maccfg_firewall_mode }} mode
   community.general.osx_defaults:
     domain: /Library/Preferences/com.apple.alf
     key: globalstate
     type: int
-    value: "{{ security.firewall.mode }}"
+    value: "{{ maccfg_firewall_mode }}"
     state: present
   become: true
+  become_user: root
 
 ### Software Updates
 
-- name: Security - Software Updates - Check for updates each {{ security.updates.delay_days }} days.
+- name: Security - Software Updates - Check for updates each {{ maccfg_updates_delay_days }} days
   community.general.osx_defaults:
     domain: com.apple.SoftwareUpdate
     key: ScheduleFrequency
     type: int
-    value: "{{ security.updates.delay_days }}"
+    value: "{{ maccfg_updates_delay_days }}"
     state: present
 
 ### Firevault
 
-- name: Security - Enable Firevault
+- name: Security - Ensure Firevault is enabled
   firevault:
-    enabled: "{{ security.firevault.enabled }}"
-  when: security.firevault.enabled
+    enabled: "{{ maccfg_firevault_enabled }}"
+  when: maccfg_firevault_enabled
+
+...

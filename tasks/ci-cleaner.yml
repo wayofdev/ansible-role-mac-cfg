@@ -1,15 +1,23 @@
 ---
 
-- name: Screensaver - Get current settings.
+- name: Maccfg | CI - Cleaner | Screensaver | Get current settings
   ansible.builtin.command: "defaults read com.apple.screensaver"
   register: scr_settings
   changed_when: false
+  tags:
+    - maccfg-ci-cleaner
 
-- name: Screensaver - Print current settings.
+- name: Maccfg | CI - Cleaner | Screensaver | Print current settings
   ansible.builtin.debug:
     var: scr_settings.stdout_lines
+  tags:
+    - maccfg-ci-cleaner
 
-- name: Screensaver - Deleting old settings, as they have incorrect types.
+- name: Maccfg | CI - Cleaner | Screensaver | Deleting old settings, as they have incorrect types
   ansible.builtin.command: "defaults delete com.apple.screensaver"
   register: scr_settings
   changed_when: false
+  tags:
+    - maccfg-ci-cleaner
+
+...

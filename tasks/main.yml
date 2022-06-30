@@ -1,67 +1,70 @@
 ---
 
-- include_tasks: ci-cleaner.yml
+# @todo: Move out to molecule
+- name: Maccfg | Include | Github Actions CI fixer tasks
+  ansible.builtin.include_tasks: ci-cleaner.yml
   tags:
-    - cleaner
-    - cicleaner
-  when: lookup('env', 'CI') != ''
+    - maccfg-ci-cleaner
+  when: lookup('env', 'CI') | length > 0
 
-- include_tasks: applications.yml
+- name: Maccfg | Include | Configure Applications
+  ansible.builtin.include_tasks: applications.yml
   tags:
-    - applications
-    - configureapplications
+    - maccfg-applications
 
-- include_tasks: dock.yml
+- name: Maccfg | Include | Configure Dock
+  ansible.builtin.include_tasks: dock.yml
   tags:
-    - dock
-    - configuredock
+    - maccfg-dock
 
-- include_tasks: finder.yml
+- name: Maccfg | Include | Configure Finder
+  ansible.builtin.include_tasks: finder.yml
   tags:
-    - finder
-    - configurefinder
+    - maccfg-finder
 
-- include_tasks: input.yml
+- name: Maccfg | Include | Configure input settings
+  ansible.builtin.include_tasks: input.yml
   tags:
-    - input
-    - configureinput
+    - maccfg-input
 
-- include_tasks: lang.yml
+- name: Maccfg | Include | Configure language settings
+  ansible.builtin.include_tasks: lang.yml
   tags:
-    - lang
-    - configurelang
+    - maccfg-lang
 
-- include_tasks: network.yml
+- name: Maccfg | Include | Configure network settings
+  ansible.builtin.include_tasks: network.yml
   tags:
-    - network
-    - configurenetwork
+    - maccfg-network
 
-- include_tasks: power.yml
+- name: Maccfg | Include | Configure power settings
+  ansible.builtin.include_tasks: power.yml
   tags:
-    - power
-    - configurepower
+    - maccfg-power
 
-- include_tasks: safari.yml
+- name: Maccfg | Include | Configure Safari brower
+  ansible.builtin.include_tasks: safari.yml
   tags:
-    - safari
-    - configuresafari
+    - maccfg-safari
 
-- include_tasks: screensaver.yml
+- name: Maccfg | Include | Configure screensaver
+  ansible.builtin.include_tasks: screensaver.yml
   tags:
-    - screensaver
-    - configurescreensaver
+    - maccfg-screensaver
 
-- include_tasks: screenshots.yml
+- name: Maccfg | Include | Configure screenshot capturing
+  ansible.builtin.include_tasks: screenshots.yml
   tags:
-    - screenshots
-    - configurescreenshots
+    - maccfg-screenshots
 
-- include_tasks: security.yml
+- name: Maccfg | Include | Configure security settings
+  ansible.builtin.include_tasks: security.yml
   tags:
-    - security
-    - configuresecurity
+    - maccfg-security
 
-- include_tasks: ui.yml
+- name: Maccfg | Include | Configure UI settings
+  ansible.builtin.include_tasks: ui.yml
   tags:
-    - ui
-    - configureui
+    - maccfg-ui
+
+...

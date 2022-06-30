@@ -1,0 +1,24 @@
+---
+
+# https://github.com/google-github-actions/release-please-action#release-types-supported
+
+on:  # yamllint disable-line rule:truthy
+  push:
+    branches:
+      - master
+
+name: release-please
+
+jobs:
+  release-please:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: google-github-actions/release-please-action@v3
+        id: release
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          release-type: node
+          package-name: ansible-role-mac-cfg
+          default-branch: master
+
+...

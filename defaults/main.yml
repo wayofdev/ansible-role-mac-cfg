@@ -7,272 +7,258 @@
 #
 # Activity Monitor
 #
-activity_monitor:
-  # Show the main window when launching app.
-  show_main_window: true
+# Show the main window when launching app.
+maccfg_activity_monitor_show_main_window: true
 
-  # Show all processes.
-  show_category: 0
+# Show all processes.
+maccfg_activity_monitor_show_category: 0
 
-  # Sort Activity Monitor results
-  sort_by: "CPUUsage"
+# Sort Activity Monitor results
+maccfg_activity_monitor_sort_by: "CPUUsage"
 
-  # Activity Monitor: Sort Direction
-  # 0 goes for DSC
-  sort_direction: 0
+# Activity Monitor: Sort Direction
+# 0 goes for DSC
+maccfg_activity_monitor_sort_direction: 0
 
 #
 # MacOS Mail.app
 #
-mail:
-  # Copy email addresses as `foo@example.com` instead of `Foo Bar <foo@example.com>` in Mail.app.
-  use_advanced_copy_format: false
+# Copy email addresses as `foo@example.com` instead of `Foo Bar <foo@example.com>` in Mail.app.
+maccfg_mail_use_advanced_copy_format: false
 
 #
 # MacOS Photos.app
 #
-photos:
-  # Prevent Photos from opening automatically when devices are plugged in.
-  disable_hotplug: true
+# Prevent Photos from opening automatically when devices are plugged in.
+maccfg_photos_disable_hotplug: true
 
 #
 # Other Applications
 #
-other:
-  # Add iOS Simulator to Launchpad.
-  create_simulator_symlink: true
+# Add iOS Simulator to Launchpad.
+maccfg_other_create_simulator_symlink: true
 
 ########################################################################################
 ### Dock
 ########################################################################################
 
-dock:
-  # Drag a file over an icon in the Dock, hover, and the application will open.
-  # https://macos-defaults.com/misc/enable-spring-load-actions-on-all-items.html
-  enable_spring_load_everywhere: true
+# Drag a file over an icon in the Dock, hover, and the application will open.
+# https://macos-defaults.com/misc/enable-spring-load-actions-on-all-items.html
+maccfg_dock_enable_spring_load_everywhere: true
 
-  # Don’t show recent applications in Dock
-  show_recents: false
+# Don’t show recent applications in Dock
+maccfg_dock_show_recents: false
 
-  ### Hot Corners
+### Hot Corners
 
-  # Possible values:
-  #  0: no-op
-  #  2: Mission Control
-  #  3: Show application windows
-  #  4: Desktop
-  #  5: Start screen saver
-  #  6: Disable screen saver
-  #  7: Dashboard
-  # 10: Put display to sleep
-  # 11: Launchpad
-  # 12: Notification Center
+# Possible values:
+#  0: no-op
+#  2: Mission Control
+#  3: Show application windows
+#  4: Desktop
+#  5: Start screen saver
+#  6: Disable screen saver
+#  7: Dashboard
+# 10: Put display to sleep
+# 11: Launchpad
+# 12: Notification Center
 
-  # Bottom right screen corner → Start screen saver
-  bottom_left_corner: 5
-  bottom_left_modifier: 0
+# Bottom right screen corner → Start screen saver
+maccfg_dock_bottom_left_corner: 5
+maccfg_dock_bottom_left_modifier: 0
 
-  # Bottom right screen corner → Launchpad
-  bottom_right_corner: 11
-  bottom_right_modifier: 0
+# Bottom right screen corner → Launchpad
+maccfg_dock_bottom_right_corner: 11
+maccfg_dock_bottom_right_modifier: 0
 
-  # Mission Control - Speed up animations
-  expose_animation_duration: 0.1
+# Mission Control - Speed up animations
+maccfg_dock_expose_animation_duration: 0.1
 
 ########################################################################################
 ### Finder
 ########################################################################################
 
-finder:
-  # Allow quitting via ⌘ + Q; doing so will also hide desktop icons
-  allow_quitting: true
+# Allow quitting via ⌘ + Q; doing so will also hide desktop icons
+maccfg_finder_allow_quitting: true
 
-  # What path should new finder windows open
-  # Computer     : `PfCm`
-  # Volume       : `PfVo`
-  # $HOME        : `PfHm`
-  # Desktop      : `PfDe`
-  # Documents    : `PfDo`
-  # Recents      : `PfAF`
-  # Other…       : `PfLo`
-  #
-  # Set Desktop as the default location for new Finder windows by default
-  new_window_target: "PfDe"
-  new_window_target_path: "file://~/Desktop/"
+# What path should new finder windows open
+# Computer     : `PfCm`
+# Volume       : `PfVo`
+# $HOME        : `PfHm`
+# Desktop      : `PfDe`
+# Documents    : `PfDo`
+# Recents      : `PfAF`
+# Other…       : `PfLo`
+#
+# Set Desktop as the default location for new Finder windows by default
+maccfg_finder_new_window_target: "PfDe"
+maccfg_finder_new_window_target_path: "file://~/Desktop/"
 
-  # Set search scope.
-  # This Mac       : `SCev`
-  # Current Folder : `SCcf`
-  # Previous Scope : `SCsp`
-  search_scope: "SCcf"
+# Set search scope.
+# This Mac       : `SCev`
+# Current Folder : `SCcf`
+# Previous Scope : `SCsp`
+maccfg_finder_search_scope: "SCcf"
 
-  # Set preferred view mode.
-  # Icon View   : `icnv`
-  # List View   : `Nlsv`
-  # Column View : `clmv`
-  # Cover Flow  : `Flwv`
-  # Use column view in all Finder windows by default
-  view_mode: "clmv"
+# Set preferred view mode.
+# Icon View   : `icnv`
+# List View   : `Nlsv`
+# Column View : `clmv`
+# Cover Flow  : `Flwv`
+# Use column view in all Finder windows by default
+maccfg_finder_view_mode: "clmv"
 
-  # Show path bar in Finder (Example: 751 items ... 351 GB left ...)
-  show_path_bar: true
+# Show path bar in Finder (Example: 751 items ... 351 GB left ...)
+maccfg_finder_show_path_bar: true
 
-  # Keep folders on top when sorting by name
-  keep_folders_on_top: true
+# Keep folders on top when sorting by name
+maccfg_finder_keep_folders_on_top: true
 
-  # Disable the warning when changing a file extension
-  disable_extension_change_warning: true
+# Disable the warning when changing a file extension
+maccfg_finder_disable_extension_change_warning: true
 
-  # Show status bar
-  show_status_bar: true
+# Show status bar
+maccfg_finder_show_status_bar: true
 
-  # Show bottom path bar by default
-  show_bottom_path_bar: true
+# Show bottom path bar by default
+maccfg_finder_show_bottom_path_bar: true
 
-  # Avoid creating .DS_Store files on network volumes
-  avoid_dsstore_on_network_volumes: true
+# Avoid creating .DS_Store files on network volumes
+maccfg_finder_avoid_dsstore_on_network_volumes: true
 
-  # Avoid creating .DS_Store files on USB volumes
-  avoid_dsstore_on_usb_volumes: true
+# Avoid creating .DS_Store files on USB volumes
+maccfg_finder_avoid_dsstore_on_usb_volumes: true
 
-  # Disable the warning before emptying the Trash
-  disable_trash_warning: true
+# Disable the warning before emptying the Trash
+maccfg_finder_disable_trash_warning: true
 
-  # Display full POSIX path as Finder window title
-  show_full_title: true
+# Display full POSIX path as Finder window title
+maccfg_finder_show_full_title: true
 
-  # Show all filename extensions
-  show_all_file_exts: false
+# Show all filename extensions
+maccfg_finder_show_all_file_exts: false
 
-  # Expand the following File Info panes: General, Open With, Sharing & Permissions
-  expand_fileinfo_panels: true
+# Expand the following File Info panes: General, Open With, Sharing & Permissions
+maccfg_finder_expand_fileinfo_panels: true
 
-  # Show icons for external hard drives on Desktop
-  desktop_show_ext_hard_drives: true
+# Show icons for external hard drives on Desktop
+maccfg_finder_desktop_show_ext_hard_drives: true
 
-  # Show icons for hard drives on Desktop
-  desktop_show_hard_drives: false
+# Show icons for hard drives on Desktop
+maccfg_finder_desktop_show_hard_drives: false
 
-  # Show icons for mounted servers on Desktop
-  desktop_show_mounted_servers: false
+# Show icons for mounted servers on Desktop
+maccfg_finder_desktop_show_mounted_servers: false
 
-  # Show icons for removable media on Desktop
-  desktop_show_removable_media: true
+# Show icons for removable media on Desktop
+maccfg_finder_desktop_show_removable_media: true
 
-  # Show the ~/Library folder in finder
-  unhide_library_folder: true
+# Show the ~/Library folder in finder
+maccfg_finder_unhide_library_folder: true
 
-  # Show the ~/Users folder in finder
-  unhide_users_folder: true
+# Show the ~/Users folder in finder
+maccfg_finder_unhide_users_folder: true
 
-  # Install duti - utility to allow to change default file types.
-  install_duti: true
+# Install duti - utility to allow to change default file types.
+maccfg_finder_install_duti: true
 
-  # Prefer custom editor over default TextEdit for plain text files.
-  # Works only if flag 'install_duti' is set to true
-  # Examples:
-  # com.sublimetext.3
-  # com.sublimetext.4
-  # com.microsoft.VSCode
-  default_editor: "com.sublimetext.4"
+# Prefer custom editor over default TextEdit for plain text files.
+# Works only if flag 'install_duti' is set to true
+# Examples:
+# com.sublimetext.3
+# com.sublimetext.4
+# com.microsoft.VSCode
+maccfg_finder_default_editor: "com.sublimetext.4"
 
 ########################################################################################
 ### Input
 ########################################################################################
 
-input:
-  # Disable natural scroll for mouse and trackpad.
-  use_native_macos_scroll: false
+# Disable natural scroll for mouse and trackpad.
+maccfg_input_use_native_macos_scroll: false
 
-  keyboard:
-    # For 0 - Use F1, F2, etc. keys as Brightness/Media
-    # For 1 - Use F1, F2, etc. keys as standard function keys on external keyboards each key.
-    fn_key_state: 1
+# For 0 - Use F1, F2, etc. keys as Brightness/Media
+# For 1 - Use F1, F2, etc. keys as standard function keys on external keyboards each key.
+maccfg_input_keyboard_fn_key_state: 1
 
-    # What should happen when pressing Fn key?
-    # 0 - Do Nothing
-    # 1 - Change Input Source
-    # 2 - Show Emoji & Symbols
-    # 3 - Start Dictation (Press Twice)
-    fn_usage_type: 2
+# What should happen when pressing Fn key?
+# 0 - Do Nothing
+# 1 - Change Input Source
+# 2 - Show Emoji & Symbols
+# 3 - Start Dictation (Press Twice)
+maccfg_input_keyboard_fn_usage_type: 2
 
-  text:
-    # Disable text auto-correction in native apps.
-    disable_auto_correction: true
+# Disable text auto-correction in native apps.
+maccfg_input_text_disable_auto_correction: true
 
-    # Disable text autocorrection in web.
-    disable_web_auto_correction: true
+# Disable text autocorrection in web.
+maccfg_input_text_disable_web_auto_correction: true
 
-    # Do not disable smart quotes, but set them as simple one's, instead of smart.
-    # Use "" for double quotes and '' for single quotes
-    use_simple_quotes: true
+# Do not disable smart quotes, but set them as simple one's, instead of smart.
+# Use "" for double quotes and '' for single quotes
+maccfg_input_text_use_simple_quotes: true
 
-  mouse:
-    # Magic mouse should run in two button mode
-    two_button_mode: true
+# Magic mouse should run in two button mode
+maccfg_input_mouse_two_button_mode: true
 
-    # Magic mouse - enable double tap gesture for zoom
-    double_tap_gesture: true
+# Magic mouse - enable double tap gesture for zoom
+maccfg_input_mouse_double_tap_gesture: true
 
-  trackpad:
-    # Map bottom right corner to right-click for integrated trackpad
-    bottom_right_click_trackpad: true
+# Map bottom right corner to right-click for integrated trackpad
+maccfg_input_trackpad_bottom_right_click_trackpad: true
 
-    # Map bottom right corner to right-click for bluetooth trackpad
-    bottom_right_click_bt_trackpad: true
+# Map bottom right corner to right-click for bluetooth trackpad
+maccfg_input_trackpad_bottom_right_click_bt_trackpad: true
 
-  shortcuts:
-    # Allow global app shortcuts
-    allow: true
+# Allow global app shortcuts
+maccfg_input_shortcuts_allow: true
 
-    # Enable global shortcut: ⌥⌘, brings up System Preferences dialog (opt+cmd+comma)
-    opt_cmd_comma: true
+# Enable global shortcut: ⌥⌘, brings up System Preferences dialog (opt+cmd+comma)
+maccfg_input_shortcuts_opt_cmd_comma: true
 
 ########################################################################################
 ### Language & Region
 ########################################################################################
 
-lang:
-  # Set the timezone; see `sudo systemsetup -listtimezones` for other values
-  timezone: "Europe/Riga"
+# Set the timezone; see `sudo systemsetup -listtimezones` for other values
+maccfg_lang_timezone: "Europe/Riga"
 
-  # Set main languages - English US, Latvian - LV, Latvian - RU.
-  languages:
-    - en-US
-    - lv-LV
-    - ru-LV
+# Set main languages - English US, Latvian - LV, Latvian - RU.
+maccfg_lang_languages:
+  - en-US
+  - lv-LV
+  - ru-LV
 
-  locale: "en_US@currency=EUR"
+maccfg_lang_locale: "en_US@currency=EUR"
 
-  # Use metric measurement units.
-  metric_units: true
+# Use metric measurement units.
+maccfg_lang_metric_units: true
 
-  # Set "AppleMeasurementUnits" setting to centimeters.
-  apple_units: "Centimeters"
+# Set "AppleMeasurementUnits" setting to centimeters.
+maccfg_lang_apple_units: "Centimeters"
 
-  # Enables the input menu in the menu bar.
-  inputs_in_status_bar: true
+# Enables the input menu in the menu bar.
+maccfg_lang_inputs_in_status_bar: true
 
-  # List of input sources.
-  input_sources:
-    # Default input sources.
-    - name: "ABC"
-      id: 252
-    - name: "Latvian"
-      id: 30765
-    - name: "Russian - Phonetic"
-      id: 19457
+# List of input sources.
+maccfg_lang_input_sources:
+  # Default input sources.
+  - name: "ABC"
+    id: 252
+  - name: "Latvian"
+    id: 30765
+  - name: "Russian - Phonetic"
+    id: 19457
 
 ########################################################################################
 ### Network
 ########################################################################################
 
-network:
-  change_hostname: true
+maccfg_network_change_hostname: true
 
-  # This mac-book's hostname
-  # On macOS, this module uses scutil to set HostName, ComputerName, and LocalHostName
-  hostname: mbpro-{{ remote_regular_user }}
+# This mac-book's hostname
+# On macOS, this module uses scutil to set HostName, ComputerName, and LocalHostName
+maccfg_network_hostname: mbpro-{{ remote_regular_user }}
 
 ########################################################################################
 ### Power Management
@@ -287,211 +273,204 @@ network:
 # tcpkeepalive: false
 # ttyskeepawake false
 #
-power:
-  # Restart automatically if the computer freezes
-  restart_on_freeze: true
+# Restart automatically if the computer freezes
+maccfg_power_restart_on_freeze: true
 
-  # Settings to apply when device is on A/C charger.
-  on_charger:
-    # Wake the machine when the laptop lid is opened
-    lidwake: true
+###
+# Settings to apply when device is on A/C charger.
+###
 
-    # Prevent idle system sleep when any tty (e.g. remote login session) is ’active’.
-    ttyskeepawake: true
+# Wake the machine when the laptop lid is opened
+maccfg_power_on_charger_lidwake: true
 
-    # https://support.apple.com/en-gb/guide/mac-help/mh40773/mac
-    #
-    # Power Nap, available on Mac computers with flash memory, lets some Mac computers stay up to date
-    # even while they’re sleeping. When your Mac goes to sleep, Power Nap activates periodically to update information.
-    # The information that’s updated depends on whether your Mac is running on battery power (a Mac notebook computer)
-    # or plugged into a power adapter (a Mac notebook computer or Mac desktop computer).
-    # When your Mac is asleep and using battery power, Power Nap:
-    # * Checks for new messages in Mail
-    # * Updates events in Calendar
-    # * Updates other iCloud events
-    # When your Mac is plugged into a power adapter, Power Nap can also do activities such as
-    # downloading software updates and performing Time Machine backups.
-    powernap: true
+# Prevent idle system sleep when any tty (e.g. remote login session) is ’active’.
+maccfg_power_on_charger_ttyskeepawake: true
 
-    # Set hibernate mode:
-    # hibernatemode = 0 (binary 0000) by default on supported desktops. The system will not back memory up to
-    #   persistent storage. The system must wake from the contents of memory; the system will lose context on
-    #   power loss. This is, historically, plain old sleep.
-    #
-    # hibernatemode = 3 (binary 0011) by default on supported portables. The system will store a copy of mem-ory memory
-    #   ory to persistent storage (the disk), and will power memory during sleep. The system will wake from
-    #   memory, unless a power loss forces it to restore from disk image.
-    #
-    # hibernatemode = 25 (binary 0001 1001) is only settable via pmset. The system will store a copy of mem-ory memory
-    #   ory to persistent storage (the disk), and will remove power to memory. The system will restore from
-    #   disk image. If you want "hibernation" - slower sleeps, slower wakes, and better battery life, you
-    #   should use this setting.
-    hibernatemode: 3
+# https://support.apple.com/en-gb/guide/mac-help/mh40773/mac
+#
+# Power Nap, available on Mac computers with flash memory, lets some Mac computers stay up to date
+# even while they’re sleeping. When your Mac goes to sleep, Power Nap activates periodically to update information.
+# The information that’s updated depends on whether your Mac is running on battery power (a Mac notebook computer)
+# or plugged into a power adapter (a Mac notebook computer or Mac desktop computer).
+# When your Mac is asleep and using battery power, Power Nap:
+# * Checks for new messages in Mail
+# * Updates events in Calendar
+# * Updates other iCloud events
+# When your Mac is plugged into a power adapter, Power Nap can also do activities such as
+# downloading software updates and performing Time Machine backups.
+maccfg_power_on_charger_powernap: true
 
-    # Display sleep timer
-    displaysleep: 15
+# Set hibernate mode:
+# hibernatemode = 0 (binary 0000) by default on supported desktops. The system will not back memory up to
+#   persistent storage. The system must wake from the contents of memory; the system will lose context on
+#   power loss. This is, historically, plain old sleep.
+#
+# hibernatemode = 3 (binary 0011) by default on supported portables. The system will store a copy of mem-ory memory
+#   ory to persistent storage (the disk), and will power memory during sleep. The system will wake from
+#   memory, unless a power loss forces it to restore from disk image.
+#
+# hibernatemode = 25 (binary 0001 1001) is only settable via pmset. The system will store a copy of mem-ory memory
+#   ory to persistent storage (the disk), and will remove power to memory. The system will restore from
+#   disk image. If you want "hibernation" - slower sleeps, slower wakes, and better battery life, you
+#   should use this setting.
+maccfg_power_on_charger_hibernatemode: 3
 
-    # Wake on ethernet magic packet. Same as "Wake for network access" in the Energy Saver preferences.
-    womp: true
+# Display sleep timer
+maccfg_power_on_charger_displaysleep: 15
 
-    # System sleep timer (value in minutes, or 0 to disable)
-    sleep: 0
+# Wake on ethernet magic packet. Same as "Wake for network access" in the Energy Saver preferences.
+maccfg_power_on_charger_womp: true
 
-    # Wake for network access
-    tcpkeepalive: true
+# System sleep timer (value in minutes, or 0 to disable)
+maccfg_power_on_charger_sleep: 0
 
-    # Display sleep will use an intermediate half-brightness state between full brightness and fully off
-    halfdim: true
+# Wake for network access
+maccfg_power_on_charger_tcpkeepalive: true
 
-    # Wake the machine when power source (AC/battery) is changed
-    acwake: false
+# Display sleep will use an intermediate half-brightness state between full brightness and fully off
+maccfg_power_on_charger_halfdim: true
 
-    # https://apple.stackexchange.com/a/342286
-    # Not used with SSD's
-    disksleep: 0
+# Wake the machine when power source (AC/battery) is changed
+maccfg_power_on_charger_acwake: false
 
-  # Settings to apply when device is using battery.
-  on_battery:
-    lidwake: true
-    ttyskeepawake: false
-    powernap: false
-    hibernatemode: 3
-    displaysleep: 15
-    sleep: 30
-    tcpkeepalive: false
-    halfdim: true
-    acwake: false
-    disksleep: 0
+# https://apple.stackexchange.com/a/342286
+# Not used with SSD's
+maccfg_power_on_charger_disksleep: 0
+
+###
+# Settings to apply when device is using battery.
+###
+maccfg_power_on_battery_lidwake: true
+maccfg_power_on_battery_ttyskeepawake: false
+maccfg_power_on_battery_powernap: false
+maccfg_power_on_battery_hibernatemode: 3
+maccfg_power_on_battery_displaysleep: 15
+maccfg_power_on_battery_sleep: 30
+maccfg_power_on_battery_tcpkeepalive: false
+maccfg_power_on_battery_halfdim: true
+maccfg_power_on_battery_acwake: false
+maccfg_power_on_battery_disksleep: 0
 
 ########################################################################################
 ### Safari
 ########################################################################################
 
-safari:
-  # Safari: Enable Develop menu and the Web Inspector in Safari 14+
-  web_inspector: true
+# Safari: Enable Develop menu and the Web Inspector in Safari 14+
+maccfg_safari_web_inspector: true
 
-  # Safari: Change default homepage
-  homepage: "https://app.daily.dev/"
+# Safari: Change default homepage
+maccfg_safari_homepage: "https://app.daily.dev/"
 
-  # Safari: Setup new tab behavior
-  # 0: Homepage
-  # 1: Empty Page
-  # 2: Same Page
-  # 3: Bookmarks
-  # 4: Top Sites
-  tab_behaviour: 0
+# Safari: Setup new tab behavior
+# 0: Homepage
+# 1: Empty Page
+# 2: Same Page
+# 3: Bookmarks
+# 4: Top Sites
+maccfg_safari_tab_behaviour: 0
 
-  # Safari: Setup new window behavior
-  # 0: Homepage
-  # 1: Empty Page
-  # 2: Same Page
-  # 3: Bookmarks
-  # 4: Top Sites
-  window_behaviour: 0
+# Safari: Setup new window behavior
+# 0: Homepage
+# 1: Empty Page
+# 2: Same Page
+# 3: Bookmarks
+# 4: Top Sites
+maccfg_safari_window_behaviour: 0
 
 ########################################################################################
 ### Screensaver
 ########################################################################################
 
-screensaver:
-  # Set default system screensaver
-  # Available:
-  # "Album Artwork"
-  # "Arabesque"
-  # "Drift"
-  # "FloatingMessage"
-  # "Flurry"
-  # "Hello"
-  # "Monterey"
-  # "Random"
-  # "Shell"
-  # "Word of the Day"
-  name: "Flurry"
+# Set default system screensaver
+# Available:
+# "Album Artwork"
+# "Arabesque"
+# "Drift"
+# "FloatingMessage"
+# "Flurry"
+# "Hello"
+# "Monterey"
+# "Random"
+# "Shell"
+# "Word of the Day"
+maccfg_screensaver_name: "Flurry"
 
-  # Show clock when screensaver is running
-  show_clock: true
+# Show clock when screensaver is running
+maccfg_screensaver_show_clock: true
 
-  # Show screen saver after:
-  # Please choose these values, as OSX use dropdown in UI
-  #
-  # 0 - do not use screensaver
-  # 60 - 1 minute
-  # 120 - 2 minutes
-  # 300 - 5 minutes
-  # 600 - 10 minutes
-  # 1200 - 20 minutes
-  # 1800 - 30 minutes
-  # 3600 - 1 hour
-  start_after: 300
+# Show screen saver after:
+# Please choose these values, as OSX use dropdown in UI
+#
+# 0 - do not use screensaver
+# 60 - 1 minute
+# 120 - 2 minutes
+# 300 - 5 minutes
+# 600 - 10 minutes
+# 1200 - 20 minutes
+# 1800 - 30 minutes
+# 3600 - 1 hour
+maccfg_screensaver_start_after: 300
 
 ########################################################################################
 ### Screenshots
 ########################################################################################
 
-screenshots:
-  # Save to custom folder instead of Desktop.
-  directory: "/Users/{{ remote_regular_user }}/Screenshots"
+# Save to custom folder instead of Desktop.
+maccfg_screenshots_directory: "/Users/{{ remote_regular_user }}/Screenshots"
 
-  # Change the default file name prefix.
-  use_prefix: "src"
+# Change the default file name prefix.
+maccfg_screenshots_use_prefix: "src"
 
 ########################################################################################
 ### Security
 ########################################################################################
 
-security:
-  screen:
-    # Require password when screen awakes.
-    require_pass_after_awake: true
+# Require password when screen awakes.
+maccfg_security_require_pass_after_awake: true
 
-    # Require password immediately after sleep or screen saver begins
-    # 0 is for immediate password require
-    require_pass_delay: 0
+# Require password immediately after sleep or screen saver begins
+# 0 is for immediate password require
+maccfg_security_require_pass_delay: 0
 
-  privacy:
-    # Turn off Feedback Assistant data auto-gathering.
-    apple_feedback_assistant: false
+# Turn off Feedback Assistant data auto-gathering.
+maccfg_privacy_apple_feedback_assistant: false
 
-    # Turn off personalized ads, a little less tracking from apple side...
-    disable_personalized_ads: true
+# Turn off personalized ads, a little less tracking from apple side...
+maccfg_privacy_disable_personalized_ads: true
 
-  firewall:
-    # Turn on system firewall.
-    # Turned off by default.
-    # If this role is used with dev-env-osx playbook, then lulu firewall is used instead.
-    # Modes:
-    # https://discussions.apple.com/thread/3148672
-    # 0 - disabled
-    # 1 - enabled in "open" mode
-    # 2 - enabled in "strict" mode
-    mode: 0
+# Turn on system firewall.
+# Turned off by default.
+# If this role is used with dev-env-osx playbook, then lulu firewall is used instead.
+# Modes:
+# https://discussions.apple.com/thread/3148672
+# 0 - disabled
+# 1 - enabled in "open" mode
+# 2 - enabled in "strict" mode
+maccfg_firewall_mode: 0
 
-  updates:
-    # Check for software updates once per week
-    # Default: 7 (in days)
-    delay_days: 7
+# Check for software updates once per week
+# Default: 7 (in days)
+maccfg_updates_delay_days: 7
 
-  firevault:
-    enabled: true
+maccfg_firevault_enabled: true
 
 ########################################################################################
 ### UI
 ########################################################################################
 
-ui:
-  # Expand save panel by default.
-  expand_save_panel: true
+# Expand save panel by default.
+maccfg_ui_expand_save_panel: true
 
-  # Expand save panel by default.
-  expand_print_panel: true
+# Expand save panel by default.
+maccfg_ui_expand_print_panel: true
 
-  # Automatically quit printer app once the print jobs complete.
-  quit_print_job: true
+# Automatically quit printer app once the print jobs complete.
+maccfg_ui_quit_print_job: true
 
-  # Reveal IP address, hostname, OS version, etc. when clicking the clock in the login window (only).
-  login_clock_clickable: true
+# Reveal IP address, hostname, OS version, etc. when clicking the clock in the login window (only).
+maccfg_ui_login_clock_clickable: true
 
-  menu_bar:
-    # Show bluetooth in menu bar.
-    bluetooth_icon: true
+# Show bluetooth in menu bar.
+maccfg_ui_menu_bar_bluetooth_icon: true
+
+...

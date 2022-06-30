@@ -5,76 +5,84 @@
     is_laptop: >
       /usr/sbin/system_profiler SPHardwareDataType | grep "Model Identifier" | grep "Book"
 
-- name: Power - Register pmset capabilities.
+- name: Power - Register pmset capabilities
   ansible.builtin.command: "pmset -g cap"
   register: pmset_cap
   changed_when: false
 
-- name: Power - Print out pmset capabilities.
+- name: Power - Print out pmset capabilities
   ansible.builtin.debug:
     var: pmset_cap.stdout_lines
 
-- name: Power - Register current system setup settings (before).
+- name: Power - Register current system setup settings (before)
   ansible.builtin.command: pmset -g custom
   register: pmset_output_before
   changed_when: false
   become: true
+  become_user: root
 
-- name: Power - Print out current system setup settings (before).
+- name: Power - Print out current system setup settings (before)
   ansible.builtin.debug:
     var: pmset_output_before.stdout_lines
 
-- name: Power - Get current restart-on-freeze status.
+- name: Power - Get current restart-on-freeze status
   ansible.builtin.shell: >
     systemsetup -getrestartfreeze | awk -F ': ' '{print $2}'
-  when: power.restart_on_freeze
+  when: maccfg_power_restart_on_freeze
   register: getrestartfreeze_current
   changed_when: false
   become: true
+  become_user: root
 
-- name: Power - Set restart-on-freeze flag.
-  ansible.builtin.command: "systemsetup --setrestartfreeze {{ power.restart_on_freeze | ternary('on','off') }}"
-  when: power.restart_on_freeze and (getrestartfreeze_current.stdout | lower) != (power.restart_on_freeze | ternary('on','off') )
+- name: Power - Set restart-on-freeze flag
+  ansible.builtin.command: "systemsetup --setrestartfreeze {{ maccfg_power_restart_on_freeze | ternary('on','off') }}"
+  when: maccfg_power_restart_on_freeze and (getrestartfreeze_current.stdout | lower) != (maccfg_power_restart_on_freeze | ternary('on','off') )
   become: true
+  become_user: root
 
-- name: Power - Set the power settings when device is using a/c charger.
+- name: Power - Set the power settings when device is using a/c charger
   pmset:
     on_charger:
-      lidwake: "{{ power.on_charger.lidwake | ternary(1,0) }}"
-      ttyskeepawake: "{{ power.on_charger.ttyskeepawake | ternary(1,0) }}"
-      powernap: "{{ power.on_charger.powernap | ternary(1,0) }}"
-      hibernatemode: "{{ power.on_charger.hibernatemode }}"
-      displaysleep: "{{ power.on_charger.displaysleep }}"
-      womp: "{{ power.on_charger.womp | ternary(1,0) }}"
-      sleep: "{{ power.on_charger.sleep }}"
-      tcpkeepalive: "{{ power.on_charger.tcpkeepalive | ternary(1,0) }}"
-      halfdim: "{{ power.on_charger.halfdim | ternary(1,0) }}"
-      acwake: "{{ power.on_charger.acwake | ternary(1,0) }}"
-      disksleep: "{{ power.on_charger.disksleep }}"
+      lidwake: "{{ maccfg_power_on_charger_lidwake | ternary(1,0) }}"
+      ttyskeepawake: "{{ maccfg_power_on_charger_ttyskeepawake | ternary(1,0) }}"
+      powernap: "{{ maccfg_power_on_charger_powernap | ternary(1,0) }}"
+      hibernatemode: "{{ maccfg_power_on_charger_hibernatemode }}"
+      displaysleep: "{{ maccfg_power_on_charger_displaysleep }}"
+      womp: "{{ maccfg_power_on_charger_womp | ternary(1,0) }}"
+      sleep: "{{ maccfg_power_on_charger_sleep }}"
+      tcpkeepalive: "{{ maccfg_power_on_charger_tcpkeepalive | ternary(1,0) }}"
+      halfdim: "{{ maccfg_power_on_charger_halfdim | ternary(1,0) }}"
+      acwake: "{{ maccfg_power_on_charger_acwake | ternary(1,0) }}"
+      disksleep: "{{ maccfg_power_on_charger_disksleep }}"
   become: true
+  become_user: root
 
-- name: Power - Set the power settings when device is using battery.
+- name: Power - Set the power settings when device is using battery
   pmset:
     on_battery:
-      lidwake: "{{ power.on_battery.lidwake | ternary(1,0) }}"
-      ttyskeepawake: "{{ power.on_battery.ttyskeepawake | ternary(1,0) }}"
-      powernap: "{{ power.on_battery.powernap | ternary(1,0) }}"
-      hibernatemode: "{{ power.on_battery.hibernatemode }}"
-      displaysleep: "{{ power.on_battery.displaysleep }}"
-      sleep: "{{ power.on_battery.sleep }}"
-      tcpkeepalive: "{{ power.on_battery.tcpkeepalive | ternary(1,0) }}"
-      halfdim: "{{ power.on_battery.halfdim | ternary(1,0) }}"
-      acwake: "{{ power.on_battery.acwake | ternary(1,0) }}"
-      disksleep: "{{ power.on_battery.disksleep }}"
+      lidwake: "{{ maccfg_power_on_battery_lidwake | ternary(1,0) }}"
+      ttyskeepawake: "{{ maccfg_power_on_battery_ttyskeepawake | ternary(1,0) }}"
+      powernap: "{{ maccfg_power_on_battery_powernap | ternary(1,0) }}"
+      hibernatemode: "{{ maccfg_power_on_battery_hibernatemode }}"
+      displaysleep: "{{ maccfg_power_on_battery_displaysleep }}"
+      sleep: "{{ maccfg_power_on_battery_sleep }}"
+      tcpkeepalive: "{{ maccfg_power_on_battery_tcpkeepalive | ternary(1,0) }}"
+      halfdim: "{{ maccfg_power_on_battery_halfdim | ternary(1,0) }}"
+      acwake: "{{ maccfg_power_on_battery_acwake | ternary(1,0) }}"
+      disksleep: "{{ maccfg_power_on_battery_disksleep }}"
   become: true
-  when: is_laptop != ''
+  become_user: root
+  when: is_laptop | length > 0
 
-- name: Power - Register current system setup settings (after).
+- name: Power - Register current system setup settings (after)
   ansible.builtin.command: pmset -g custom
   register: pmset_output_after
   changed_when: false
   become: true
+  become_user: root
 
-- name: Power - Print out current system setup settings (after).
+- name: Power - Print out current system setup settings (after)
   ansible.builtin.debug:
     var: pmset_output_after.stdout_lines
+
+...

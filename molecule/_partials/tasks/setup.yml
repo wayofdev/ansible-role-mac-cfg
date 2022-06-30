@@ -1,0 +1,28 @@
+---
+
+- name: Molecule | Setup | Load default variables
+  ansible.builtin.include_vars: "defaults/main.yml"
+  tags:
+    - always
+
+- name: Molecule | Setup | Include elliotweiser.osx-command-line-tools (macOS only)
+  ansible.builtin.include_role:
+    name: elliotweiser.osx-command-line-tools
+  when: ansible_os_family == 'Darwin'
+  tags:
+    - always
+
+- name: Molecule | Setup | Include geerlingguy.git (Linux only)
+  ansible.builtin.include_role:
+    name: geerlingguy.git
+  when: ansible_system == 'Linux'
+  tags:
+    - always
+
+- name: Molecule | Setup | Include ansible-role-tpl
+  ansible.builtin.include_role:
+    name: ansible-role-mac-cfg
+  tags:
+    - always
+
+...

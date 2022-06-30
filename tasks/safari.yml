@@ -1,44 +1,58 @@
 ---
 
-- name: Safari - Enable Develop Menu.
+- name: Safari - Enable Develop Menu
   block:
-    - name: Safari - Enable Develop Menu and the Web Inspector in Safari 14+ - Inspect Menu.
+    - name: Safari - Enable Develop Menu and the Web Inspector in Safari 14+ - Inspect Menu
       community.general.osx_defaults:
         domain: com.apple.Safari
         key: WebKitDeveloperExtrasEnabledPreferenceKey
         type: bool
         value: true
         state: present
+      tags:
+        - maccfg-safari
 
-    - name: Safari - Enable Develop Menu and the Web Inspector in Safari 14+.
+    - name: Safari - Enable Develop Menu and the Web Inspector in Safari 14+
       community.general.osx_defaults:
         domain: com.apple.Safari
         key: WebKitPreferences.developerExtrasEnabled
         type: bool
         value: true
         state: present
-  when: safari.web_inspector
+      tags:
+        - maccfg-safari
+  when: maccfg_safari_web_inspector
+  tags:
+    - maccfg-safari
 
-- name: Safari - Change default homepage.
+- name: Safari - Change default homepage
   community.general.osx_defaults:
     domain: com.apple.Safari
     key: HomePage
     type: string
-    value: "{{ safari.homepage }}"
+    value: "{{ maccfg_safari_homepage }}"
     state: present
+  tags:
+    - maccfg-safari
 
-- name: Safari - Show homepage instead of Start Page when opening new tab.
+- name: Safari - Show homepage instead of Start Page when opening new tab
   community.general.osx_defaults:
     domain: com.apple.Safari
     key: NewTabBehavior
     type: int
-    value: "{{ safari.tab_behaviour }}"
+    value: "{{ maccfg_safari_tab_behaviour }}"
     state: present
+  tags:
+    - maccfg-safari
 
-- name: Safari - Show homepage instead of Start Page when opening new window.
+- name: Safari - Show homepage instead of Start Page when opening new window
   community.general.osx_defaults:
     domain: com.apple.Safari
     key: NewWindowBehavior
     type: int
-    value: "{{ safari.window_behaviour }}"
+    value: "{{ maccfg_safari_window_behaviour }}"
     state: present
+  tags:
+    - maccfg-safari
+
+...

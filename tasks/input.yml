@@ -1,51 +1,61 @@
 ---
 
-- name: Input - Disable natural scroll for mouse and trackpad.
+- name: Input - Disable natural scroll for mouse and trackpad
   community.general.osx_defaults:
     domain: NSGlobalDomain
     key: com.apple.swipescrolldirection
     type: bool
-    value: "{{ input.use_native_macos_scroll }}"
+    value: "{{ maccfg_input_use_native_macos_scroll }}"
     state: present
+  tags:
+    - maccfg-input
 
 ### Keyboard
 
 # Fn key is used for special features.
-- name: Keyboard - Use F1, F2, etc. keys as standard function keys on external keyboards each key.
+- name: Keyboard - Use F1, F2, etc. keys as standard function keys on external keyboards each key
   community.general.osx_defaults:
     domain: NSGlobalDomain
     key: com.apple.keyboard.fnState
     type: int
-    value: "{{ input.keyboard.fn_key_state }}"
+    value: "{{ maccfg_input_keyboard_fn_key_state }}"
     state: present
+  tags:
+    - maccfg-input
 
-- name: Keyboard - Pressing Fn key should trigger action.
+- name: Keyboard - Pressing Fn key should trigger action
   community.general.osx_defaults:
     domain: com.apple.HIToolbox
     key: AppleFnUsageType
     type: int
-    value: "{{ input.keyboard.fn_usage_type }}"
+    value: "{{ maccfg_input_keyboard_fn_usage_type }}"
     state: present
+  tags:
+    - maccfg-input
 
 ### Text
 
-- name: Text - Disable text auto-correction in native apps.
+- name: Text - Disable text auto-correction in native apps
   community.general.osx_defaults:
     domain: NSGlobalDomain
     key: NSAutomaticSpellingCorrectionEnabled
     type: bool
-    value: "{{ input.text.disable_auto_correction | ternary(false,true) }}"
+    value: "{{ maccfg_input_text_disable_auto_correction | ternary(false,true) }}"
     state: present
+  tags:
+    - maccfg-input
 
-- name: Text - Disable auto-correction in web.
+- name: Text - Disable auto-correction in web
   community.general.osx_defaults:
     domain: NSGlobalDomain
     key: WebAutomaticSpellingCorrectionEnabled
     type: bool
-    value: "{{ input.text.disable_web_auto_correction | ternary(false,true) }}"
+    value: "{{ maccfg_input_text_disable_web_auto_correction | ternary(false,true) }}"
     state: present
+  tags:
+    - maccfg-input
 
-- name: Text - Do not disable smart quotes, but set them as simple one's, instead of smart.
+- name: Text - Do not disable smart quotes, but set them as simple one's, instead of smart
   community.general.osx_defaults:
     domain: NSGlobalDomain
     key: NSUserQuotesArray
@@ -56,99 +66,127 @@
       - '\U0027'
       - '\U0027'
   changed_when: false
-  when: input.text.use_simple_quotes
+  when: maccfg_input_text_use_simple_quotes
+  tags:
+    - maccfg-input
 
 ### Mouse
 
-- name: Mouse - Run in two button mode.
+- name: Mouse - Run in two button mode
   block:
-    - name: Mouse - Run in two button mode.
+    - name: Mouse - Run in two button mode
       community.general.osx_defaults:
         domain: com.apple.AppleMultitouchMouse
         key: MouseButtonMode
         type: string
         value: TwoButton
         state: present
+      tags:
+        - maccfg-input
 
-    - name: Bluetooth Mouse - Run in two button mode.
+    - name: Bluetooth Mouse - Run in two button mode
       community.general.osx_defaults:
         domain: com.apple.driver.AppleBluetoothMultitouch.mouse
         key: MouseButtonMode
         type: string
         value: TwoButton
         state: present
-  when: input.mouse.two_button_mode
+      tags:
+        - maccfg-input
+  when: maccfg_input_mouse_two_button_mode
+  tags:
+    - maccfg-input
 
-- name: Mouse - Enable double tap gesture for zoom.
+- name: Mouse - Enable double tap gesture for zoom
   block:
-    - name: Мouse - Enable double tap gesture for zoom.
+    - name: Мouse - Enable double tap gesture for zoom
       community.general.osx_defaults:
         domain: com.apple.AppleMultitouchMouse
         key: MouseOneFingerDoubleTapGesture
         type: int
         value: 1
         state: present
+      tags:
+        - maccfg-input
 
-    - name: Bluetooth Mouse - Enable double tap gesture for zoom.
+    - name: Bluetooth Mouse - Enable double tap gesture for zoom
       community.general.osx_defaults:
         domain: com.apple.driver.AppleBluetoothMultitouch.mouse
         key: MouseOneFingerDoubleTapGesture
         type: int
         value: 1
         state: present
-  when: input.mouse.double_tap_gesture
+      tags:
+        - maccfg-input
+  when: maccfg_input_mouse_double_tap_gesture
+  tags:
+    - maccfg-input
 
 ### Trackpad
 
-- name: Trackpad - Enabling trackpad controls.
+- name: Trackpad - Enabling trackpad controls
   community.general.osx_defaults:
     domain: NSGlobalDomain
     key: ContextMenuGesture
     type: int
     value: 1
     state: present
+  tags:
+    - maccfg-input
 
-- name: Trackpad - Map bottom right corner to right-click for integrated trackpad.
+- name: Trackpad - Map bottom right corner to right-click for integrated trackpad
   block:
-    - name: Apply rule 1.
+    - name: Trackpad - Map bottom right corner to right-click for integrated trackpad - Rule 1
       community.general.osx_defaults:
         domain: NSGlobalDomain
         key: com.apple.trackpad.trackpadCornerClickBehavior
         type: int
         value: 1
         state: present
+      tags:
+        - maccfg-input
 
-    - name: Apply rule 2.
+    - name: Trackpad - Map bottom right corner to right-click for integrated trackpad - Rule 2
       community.general.osx_defaults:
         domain: NSGlobalDomain
         key: com.apple.trackpad.enableSecondaryClick
         type: bool
         value: true
         state: present
-  when: input.trackpad.bottom_right_click_trackpad
+      tags:
+        - maccfg-input
+  when: maccfg_input_trackpad_bottom_right_click_trackpad
+  tags:
+    - maccfg-input
 
-- name: Trackpad - Map bottom right corner to right-click for bluetooth.
+- name: Trackpad - Map bottom right corner to right-click for bluetooth
   block:
-    - name: Apply rule 1.
+    - name: Apply rule 1
       community.general.osx_defaults:
         domain: com.apple.driver.AppleBluetoothMultitouch.trackpad
         key: TrackpadCornerSecondaryClick
         type: int
         value: 2
         state: present
+      tags:
+        - maccfg-input
 
-    - name: Apply rule 2.
+    - name: Apply rule 2
       community.general.osx_defaults:
         domain: com.apple.driver.AppleBluetoothMultitouch.trackpad
         key: TrackpadRightClick
         type: bool
         value: true
         state: present
-  when: input.trackpad.bottom_right_click_bt_trackpad
+      tags:
+        - maccfg-input
+  when: maccfg_input_trackpad_bottom_right_click_bt_trackpad
+  tags:
+    - maccfg-input
 
 ### Shortcuts
 
-- name: Shortcuts - Allow global app shortcuts.
+- name: Shortcuts - Allow global app shortcuts
   community.general.osx_defaults:
     domain: com.apple.universalaccess
     key: com.apple.custommenu.apps
@@ -156,17 +194,25 @@
     value:
       - NSGlobalDomain
     state: present
-  when: input.shortcuts.allow
+  when: maccfg_input_shortcuts_allow
+  tags:
+    - maccfg-input
 
-- name: Shortcuts - Get ⌥ ⌘ , shortcut status.
+- name: Shortcuts - Get ⌥ ⌘ , shortcut status
   ansible.builtin.shell: >
     defaults read | grep 'System\ Preferences\\\\U2026'
   register: opt_cmd_comma_current
   failed_when: "opt_cmd_comma_current.rc == 2"
   changed_when: false
   check_mode: false
+  tags:
+    - maccfg-input
 
-- name: Shortcuts - ⌥ ⌘ , brings up System Preferences dialog (opt + cmd + comma).
+- name: Shortcuts - ⌥ ⌘ , brings up System Preferences dialog (opt + cmd + comma)
   ansible.builtin.shell: >
     defaults write "Apple Global Domain" NSUserKeyEquivalents -dict-add "System Preferences\\U2026" "@~,"
-  when: input.shortcuts.opt_cmd_comma and opt_cmd_comma_current.stdout == ''
+  when: maccfg_input_shortcuts_opt_cmd_comma and opt_cmd_comma_current.stdout | length == 0
+  tags:
+    - maccfg-input
+
+...
