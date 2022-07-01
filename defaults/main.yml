@@ -254,6 +254,7 @@ maccfg_lang_input_sources:
 ### Network
 ########################################################################################
 
+# Perform hostname change? On remote machines can cause connection lose.
 maccfg_network_change_hostname: true
 
 # This mac-book's hostname
@@ -452,6 +453,8 @@ maccfg_firewall_mode: 0
 # Default: 7 (in days)
 maccfg_updates_delay_days: 7
 
+# FileVault full-disk encryption encryption with a 256-bit key to help prevent unauthorized access to the information on startup disk.
+# Can be risky to enable it on remote machines!
 maccfg_firevault_enabled: true
 
 ########################################################################################
