@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/wayofdev/ansible-role-mac-cfg/compare/v1.0.0...v1.1.0) (2022-07-02)
+
+
+### Miscellaneous Chores
+
+* release 1.1.0 ([84d8b57](https://github.com/wayofdev/ansible-role-mac-cfg/commit/84d8b572e2d48697304041a1fd745ce82efdbcee))
+
 ## 1.0.0 (2022-06-30)
 
 
