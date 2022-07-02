@@ -41,10 +41,20 @@ If you **like/use** this role, please consider **starring** it. Thanks!
 
 ## 🗂 Table of contents
 
-* [Benefits of this role](#-benefits-of-this-role)
 * [Requirements](#-requirements)
 * [Role Variables](#-role-variables)
-  * [Structure](#-structure)
+  * [Applications](#-applications)
+  * [Dock](#-dock)
+  * [Finder](#-finder)
+  * [Input](#-input)
+  * [Language & Region](#-language--region)
+  * [Network](#-network)
+  * [Power](#-power)
+  * [Safari](#-safari)
+  * [Screensaver](#-screensaver)
+  * [Screenshots](#-screenshots)
+  * [Security](#-security)
+  * [UI](#-ui)
 * [Example Playbook](#-example-playbook)
 * [Development](#-development)
 * [Testing](#-testing)
@@ -153,7 +163,7 @@ maccfg_dock_bottom_right_corner: 11
 maccfg_dock_bottom_right_modifier: 0
 ```
 
-Mission Control
+* Mission Control
 
 ```yaml
 # Mission Control - Speed up animations
@@ -590,7 +600,7 @@ maccfg_updates_delay_days: 7
 * Firevault
 
 ```yaml
-# FileVault full-disk encryption encryption with a 256-bit key to help prevent unauthorized access to the information on startup disk.
+# FileVault full-disk encryption with a 256-bit key to help prevent unauthorized access to the information on startup disk.
 # Can be risky to enable it on remote machines!
 maccfg_firevault_enabled: true
 ```
@@ -629,8 +639,7 @@ maccfg_ui_menu_bar_bluetooth_icon: true
     - PATH: "/usr/local/bin:/usr/local/sbin:/opt/homebrew/bin:{{ ansible_env.PATH }}"
 
   vars:
-
-		maccfg_firevault_enabled: false
+    maccfg_firevault_enabled: false
 
   roles:
     - wayofdev.homebrew
