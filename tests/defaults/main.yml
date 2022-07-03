@@ -1,7 +1,7 @@
 ---
 
-# Do not enable firevault on github runners
-maccfg_firevault_enabled: false
+# Do not enable filevault on github runners
+maccfg_filevault_enabled: false
 
 # Do not change hostname on remote runner
 maccfg_network_change_hostname: false

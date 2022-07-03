@@ -86,6 +86,8 @@ Section shows all possible variants of adding, moving, replacing and removing of
 
 ### → Applications
 
+Configures some of built-in macOS applications.
+
 * Activity Monitor
 
 ```yaml
@@ -560,6 +562,8 @@ maccfg_screenshots_use_prefix: "src"
 
 ### → Security
 
+Section of  macOS's **System Preferences** → **Security & Privacy** and **Software Update**.
+
 ```yaml
 # Require password when screen awakes.
 maccfg_security_require_pass_after_awake: true
@@ -575,7 +579,7 @@ maccfg_privacy_apple_feedback_assistant: false
 maccfg_privacy_disable_personalized_ads: true
 ```
 
-* Firewall
+* **Firewall**
 
 ```yaml
 # Turn on system firewall.
@@ -589,7 +593,7 @@ maccfg_privacy_disable_personalized_ads: true
 maccfg_firewall_mode: 0
 ```
 
-* Updates
+* **Updates**
 
 ```yaml
 # Check for software updates once per week
@@ -597,12 +601,12 @@ maccfg_firewall_mode: 0
 maccfg_updates_delay_days: 7
 ```
 
-* Firevault
+* **Filevault**
 
 ```yaml
 # FileVault full-disk encryption with a 256-bit key to help prevent unauthorized access to the information on startup disk.
 # Can be risky to enable it on remote machines!
-maccfg_firevault_enabled: true
+maccfg_filevault_enabled: true
 ```
 
 <br>
@@ -639,7 +643,7 @@ maccfg_ui_menu_bar_bluetooth_icon: true
     - PATH: "/usr/local/bin:/usr/local/sbin:/opt/homebrew/bin:{{ ansible_env.PATH }}"
 
   vars:
-    maccfg_firevault_enabled: false
+    maccfg_filevault_enabled: false
 
   roles:
     - wayofdev.homebrew

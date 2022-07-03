@@ -455,7 +455,7 @@ maccfg_updates_delay_days: 7
 
 # FileVault full-disk encryption encryption with a 256-bit key to help prevent unauthorized access to the information on startup disk.
 # Can be risky to enable it on remote machines!
-maccfg_firevault_enabled: true
+maccfg_filevault_enabled: true
 
 ########################################################################################
 ### UI

@@ -67,11 +67,11 @@
     value: "{{ maccfg_updates_delay_days }}"
     state: present
 
-### Firevault
+### Filevault
 
-- name: Security - Ensure Firevault is enabled
-  firevault:
-    enabled: "{{ maccfg_firevault_enabled }}"
-  when: maccfg_firevault_enabled
+- name: Security - Ensure Filevault is enabled
+  filevault:
+    enabled: "{{ maccfg_filevault_enabled }}"
+  when: maccfg_filevault_enabled
 
 ...
