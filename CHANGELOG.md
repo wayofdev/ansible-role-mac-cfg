@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.1.1](https://github.com/wayofdev/ansible-role-mac-cfg/compare/v1.1.0...v1.1.1) (2022-07-04)
+
+
+### Bug Fixes
+
+* minor settings tune ([0516b09](https://github.com/wayofdev/ansible-role-mac-cfg/commit/0516b09fc1537e8bbeaca65cbcb8bf0e1b510adc))
+* typo in variable ([bb884f5](https://github.com/wayofdev/ansible-role-mac-cfg/commit/bb884f5c7d4d215c650617aa2dde7b5bc80ec6ed))
+
 ## [1.1.0](https://github.com/wayofdev/ansible-role-mac-cfg/compare/v1.0.0...v1.1.0) (2022-07-02)
 
 
