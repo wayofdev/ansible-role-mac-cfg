@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.2](https://github.com/wayofdev/ansible-role-mac-cfg/compare/v1.1.1...v1.1.2) (2022-07-04)
+
+
+### Bug Fixes
+
+* fatal error when trying to add global shortcuts ([698a2d9](https://github.com/wayofdev/ansible-role-mac-cfg/commit/698a2d9d1ce8317d23328fa44f599f802b7cc3fb))
+
 ## [1.1.1](https://github.com/wayofdev/ansible-role-mac-cfg/compare/v1.1.0...v1.1.1) (2022-07-04)
 
 
