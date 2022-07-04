@@ -123,7 +123,7 @@ maccfg_photos_disable_hotplug: true
 
 ```YAML
 # Add iOS Simulator to Launchpad.
-maccfg_other_create_simulator_symlink: true
+maccfg_other_create_simulator_symlink: false
 ```
 
 <br>

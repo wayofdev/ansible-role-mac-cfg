@@ -195,6 +195,8 @@
       - NSGlobalDomain
     state: present
   when: maccfg_input_shortcuts_allow
+  become: true
+  become_user: root
   tags:
     - maccfg-input
 
