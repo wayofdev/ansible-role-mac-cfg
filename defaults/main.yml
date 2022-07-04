@@ -106,7 +106,7 @@ maccfg_finder_search_scope: "SCcf"
 # Column View : `clmv`
 # Cover Flow  : `Flwv`
 # Use column view in all Finder windows by default
-maccfg_finder_view_mode: "clmv"
+maccfg_finder_view_mode: "icnv"
 
 # Show path bar in Finder (Example: 751 items ... 351 GB left ...)
 maccfg_finder_show_path_bar: true
@@ -124,10 +124,10 @@ maccfg_finder_show_status_bar: true
 maccfg_finder_show_bottom_path_bar: true
 
 # Avoid creating .DS_Store files on network volumes
-maccfg_finder_avoid_dsstore_on_network_volumes: true
+maccfg_finder_avoid_dsstore_on_network_volumes: false
 
 # Avoid creating .DS_Store files on USB volumes
-maccfg_finder_avoid_dsstore_on_usb_volumes: true
+maccfg_finder_avoid_dsstore_on_usb_volumes: false
 
 # Disable the warning before emptying the Trash
 maccfg_finder_disable_trash_warning: true
@@ -453,8 +453,8 @@ maccfg_firewall_mode: 0
 # Default: 7 (in days)
 maccfg_updates_delay_days: 7
 
-# FileVault full-disk encryption encryption with a 256-bit key to help prevent unauthorized access to the information on startup disk.
-# Can be risky to enable it on remote machines!
+# FileVault full-disk encryption with a 256-bit key to help prevent unauthorized access to the information on startup disk.
+# Can be risky to enable it on remote machines
 maccfg_filevault_enabled: true
 
 ########################################################################################
